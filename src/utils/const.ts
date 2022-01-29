@@ -41,4 +41,9 @@ export const serverPath = {
   logout: 'logout',
 };
 
+export const httpMethods = {
+  post: 'POST',
+  delete: 'DELETE',
+};
+
 
