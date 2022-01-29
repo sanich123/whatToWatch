@@ -1,0 +1,36 @@
+.catalog {
+  margin-bottom: 115px;
+  max-width: 1300px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 75px
+}
+
+.catalog--like-this {
+  padding-top: 30px;
+  margin-bottom: 160px
+}
+
+.catalog__title {
+  margin: 0 0 12px;
+  font-size: 22px;
+  line-height: 26px;
+  color: #dfcf77;
+  font-weight: 400
+}
+.catalog__films-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  margin-bottom: 60px
+}
+
+.catalog__films-list:last-child {
+  margin-bottom: 0
+}

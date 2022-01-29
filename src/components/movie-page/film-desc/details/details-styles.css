@@ -1,0 +1,73 @@
+.film-card__text {
+  color: #252525;
+  width: 635px;
+  font-size: 19px;
+  line-height: 27px
+}
+
+.film-card__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start
+}
+
+.film-card__text-col {
+  width: 155px;
+  margin-right: 35px
+}
+
+.film-card__text-col:last-child {
+  margin-right: 0
+}
+
+.film-card__details-item {
+  font-size: 19px;
+  line-height: 30px
+}
+
+.film-card__details-name {
+  display: block;
+  color: #252525;
+  font-weight: 700
+}
+
+.film-card__details-name {
+  display: block;
+  color: #252525;
+  font-weight: 700
+}
+.film-card__details-value {
+  color: #131313
+}
+
+.film-card__reviews {
+  padding-top: 20px
+}
+
+.film-card__text-col {
+  width: 155px;
+  margin-right: 35px
+}
+
+.film-card__text-col:last-child {
+  margin-right: 0
+}
+
+.film-card__details-item {
+  font-size: 19px;
+  line-height: 30px
+}
+
+.film-card__details-name {
+  display: block;
+  color: #252525;
+  font-weight: 700
+}
+
+.film-card__details-value {
+  color: #131313
+}
+

@@ -1,0 +1,60 @@
+.logo__letter {
+  font-size: 26px
+}
+
+.logo__letter--1 {
+  -webkit-transform: rotate(-9deg) translateY(5px);
+  transform: rotate(-9deg) translateY(5px)
+}
+
+.logo__letter--2 {
+  font-size: 30px
+}
+
+.logo__letter--3 {
+  -webkit-transform: rotate(8deg) translateY(5px);
+  transform: rotate(8deg) translateY(5px)
+}
+.logo__link {
+  border: 1px solid rgba(223, 207, 119, .36);
+  border-radius: 8px;
+  width: 93px;
+  height: 54px;
+  color: #d9cd8d;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-weight: 700;
+  text-decoration: none;
+  -webkit-transition: color .2s, border-color .2s;
+  transition: color .2s, border-color .2s
+}
+
+.logo__link[href]:focus,
+.logo__link[href]:hover {
+  border-color: rgba(84, 80, 62, .36);
+  color: #54503e
+}
+
+.logo__link--light {
+  border: 1px solid rgba(84, 80, 62, .36);
+  margin: 0 auto 24px;
+  color: #54503e
+}
+
+.logo__link--light[href]:focus,
+.logo__link--light[href]:hover {
+  border-color: rgba(223, 207, 119, .36);
+  color: #d9cd8d
+}
+
+.logo__letter {
+  font-size: 26px
+}

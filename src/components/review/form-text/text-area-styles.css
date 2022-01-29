@@ -1,0 +1,72 @@
+.add-review__text {
+  background: #e8c3c4;
+  border-radius: 8px
+}
+
+.add-review__textarea {
+  display: block;
+  width: 100%;
+  border: none;
+  background: 0 0;
+  resize: vertical;
+  height: 150px;
+  min-height: 150px;
+  padding: 25px;
+  font-size: 17px;
+  color: #252525;
+  line-height: 24px
+}
+
+.add-review__textarea::-webkit-input-placeholder {
+  opacity: 1;
+  color: #252525
+}
+
+.add-review__textarea:-ms-input-placeholder {
+  opacity: 1;
+  color: #252525
+}
+
+.add-review__textarea::-ms-input-placeholder {
+  opacity: 1;
+  color: #252525
+}
+
+.add-review__textarea::placeholder {
+  opacity: 1;
+  color: #252525
+}
+
+.add-review__submit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 10px 20px
+}
+
+.add-review__btn {
+  display: block;
+  padding: 0;
+  border: none;
+  background: 0 0;
+  font-size: 17px;
+  color: #866866;
+  letter-spacing: 0;
+  line-height: 27px;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s
+}
+
+.add-review__btn:disabled,
+.add-review__btn:hover {
+  opacity: .5
+}
+
+.add-review__btn:disabled {
+  cursor: default
+}

@@ -1,0 +1,175 @@
+.player {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1
+}
+
+.player__video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  font-family: "object-fit:cover";
+  object-fit: cover
+}
+
+.player__exit {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  background: rgba(255, 249, 217, .12);
+  border-radius: 8px;
+  top: 37px;
+  right: 32px;
+  border: none;
+  font-size: 17px;
+  line-height: 26px;
+  color: #eee5b5;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 93px;
+  text-align: center;
+  cursor: pointer
+}
+
+.player__controls {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 25px
+}
+
+.player__controls-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 15px
+}
+
+.player__controls-row:last-child {
+  margin-bottom: 0
+}
+
+.player__time {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin-right: 20px;
+  position: relative
+}
+
+.player__progress {
+  -webkit-appearance: none;
+  width: 100%;
+  background: rgba(255, 251, 231, .35);
+  border-radius: 1px;
+  border: none;
+  height: 4px;
+  display: block
+}
+
+.player__progress::-moz-progress-bar {
+  background: #d9cd8d
+}
+
+.player__progress::-webkit-progress-bar {
+  background: rgba(255, 251, 231, .35)
+}
+
+.player__progress::-webkit-progress-value {
+  background: #d9cd8d
+}
+
+.player__time-value {
+  width: 60px;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  text-align: right;
+  font-size: 14px;
+  color: #fff9d9
+}
+
+.player__full-screen {
+  margin-left: auto
+}
+
+.player__toggler {
+  display: block;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #d9cd8d;
+  font-size: 0;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%)
+}
+
+.player__play {
+  display: block;
+  width: 26px;
+  height: 26px;
+  font-size: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  -webkit-transition: .2s -webkit-transform;
+  transition: .2s -webkit-transform;
+  transition: .2s transform;
+  transition: .2s transform, .2s -webkit-transform
+}
+
+.player__play img,
+.player__play svg {
+  vertical-align: top
+}
+
+.player__play:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1)
+}
+
+.player__name {
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #b3ae98;
+  margin: 0 30px
+}
+
+.player__full-screen {
+  font-size: 0;
+  display: block;
+  border: none;
+  padding: 0;
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+  background: 0 0;
+  -webkit-transition: .2s -webkit-transform;
+  transition: .2s -webkit-transform;
+  transition: .2s transform;
+  transition: .2s transform, .2s -webkit-transform
+}
+
+.player__full-screen img,
+.player__full-screen svg {
+  vertical-align: top
+}
+
+.player__full-screen:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1)
+}

@@ -1,0 +1,114 @@
+.film-card {
+  position: relative;
+  z-index: 1;
+  color: #eee5b5;
+  padding-bottom: 78px;
+  background: #e1b0b2
+}
+.film-card__bg {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0
+}
+
+.film-card__bg::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .4)
+}
+
+.film-card__bg img {
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  font-family: "object-fit:cover;object-position:center top";
+  object-fit: cover;
+  -o-object-position: center top;
+  object-position: center top
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%)
+}
+
+.page-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 22px 75px
+}
+
+.film-card__head {
+  margin-bottom: 40px
+}
+
+.page-content {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#180202), to(#000));
+  background-image: linear-gradient(-180deg, #180202 0, #000 100%);
+  color: #c9b37e;
+  padding: 15px;
+  padding-bottom: 70px
+}
+.catalog {
+  margin-bottom: 115px;
+  max-width: 1300px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 75px
+}
+
+.catalog__title {
+  margin: 0 0 12px;
+  font-size: 22px;
+  line-height: 26px;
+  color: #dfcf77;
+  font-weight: 400
+}
+
+.catalog__genres-list {
+  padding: 25px 0;
+  margin: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap
+}
+
+.copyright {
+  text-align: center;
+  font-size: 14px;
+  line-height: 16px;
+  color: #54503e
+}
+
+.copyright p {
+  margin: 0
+}

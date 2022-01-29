@@ -1,0 +1,47 @@
+.btn {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0;
+  text-decoration: none;
+  border: 0;
+  background: 0 0;
+  cursor: pointer;
+  background: rgba(0, 0, 0, .26);
+  border-radius: 8px;
+  color: #eee5b5;
+  font-size: 17px;
+  line-height: 20px;
+  padding: 13px 30px;
+  -webkit-transition: .2s background-color, .2s -webkit-transform;
+  transition: .2s background-color, .2s -webkit-transform;
+  transition: .2s background-color, .2s transform;
+  transition: .2s background-color, .2s transform, .2s -webkit-transform;
+  will-change: transform;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-width: 128px
+}
+
+.btn:hover {
+  background: rgba(0, 0, 0, .51);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1)
+}
+
+.btn img,
+.btn svg {
+  vertical-align: top;
+  margin-right: 9px
+}
+
+.film-card__button {
+  margin-right: 14px
+}
+
+.film-card__button:last-child {
+  margin-right: 0
+}

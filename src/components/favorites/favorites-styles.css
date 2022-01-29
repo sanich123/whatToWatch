@@ -1,0 +1,111 @@
+.user-page {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#170202), to(#0c0101));
+  background-image: linear-gradient(-180deg, #170202 0, #0c0101 100%);
+  color: #c9b37e;
+  padding: 15px;
+  padding-bottom: 70px;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column
+}
+
+.user-page__head {
+  margin-bottom: 40px;
+  width: 100%;
+  position: relative
+}
+
+.page-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 22px 75px
+}
+
+.page-title {
+  margin: 0;
+  font-size: 30px;
+  line-height: 36px;
+  color: #dfcf77;
+  font-weight: 300;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.user-page__title {
+  position: absolute;
+  left: 200px;
+  right: 200px;
+  text-align: center;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%)
+}
+.catalog {
+  margin-bottom: 115px;
+  max-width: 1300px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 75px
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%)
+}
+
+.catalog__films-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+
+.catalog__films-list:last-child {
+  margin-bottom: 0;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 14px;
+  line-height: 16px;
+  color: #54503e
+}
+
+.copyright p {
+  margin: 0
+}
+
+.catalog__title {
+  margin: 0 0 12px;
+  font-size: 22px;
+  line-height: 26px;
+  color: #dfcf77;
+  font-weight: 400
+}

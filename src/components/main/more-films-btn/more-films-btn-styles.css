@@ -1,0 +1,19 @@
+.catalog__button {
+  display: block;
+  width: 100%;
+  padding: 29px 40px;
+  background: 0 0;
+  border: 1px solid rgba(217, 202, 116, .2);
+  border-radius: 8px;
+  -webkit-transition: border-color .2s;
+  transition: border-color .2s;
+  font-size: 22px;
+  line-height: 26px;
+  text-align: center;
+  color: #d9ca74;
+  cursor: pointer
+}
+
+.catalog__button:hover {
+  border-color: rgba(217, 202, 116, .5)
+}

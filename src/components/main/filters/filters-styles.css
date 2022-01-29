@@ -1,0 +1,42 @@
+.catalog__genres-item {
+  margin-right: 20px;
+  margin-bottom: 20px
+}
+
+.catalog__genres-item--active .catalog__genres-link {
+  font-weight: 700
+}
+
+.catalog__genres-item--active .catalog__genres-link::after {
+  display: block
+}
+
+.catalog__genres-item:last-child {
+  margin-right: 0
+}
+
+.catalog__genres-link {
+  display: block;
+  color: #dfcf77;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 15px;
+  -webkit-transition: font-weight;
+  transition: font-weight
+}
+
+.catalog__genres-link::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  height: 1px;
+  bottom: 0;
+  background: #d9cd8d;
+  display: none
+}
+
+.catalog__genres-link:hover::after {
+  display: block
+}

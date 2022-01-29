@@ -1,0 +1,59 @@
+.film-rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 35px;
+  padding-bottom: 25px
+}
+
+.film-rating__score {
+  background: rgba(255, 255, 255, .24);
+  border-radius: 8px;
+  font-size: 30px;
+  line-height: 36px;
+  color: rgba(0, 0, 0, .5);
+  padding: 8px 12px;
+  margin-right: 9px
+}
+.film-rating__meta {
+  margin: 0;
+  font-size: 19px;
+  color: rgba(0, 0, 0, .5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex
+}
+
+.film-rating__level {
+  font-weight: 700
+}
+
+.film-rating__level::after {
+  content: '·';
+  margin-left: 4px;
+  margin-right: 4px;
+  font-weight: 400
+}
+
+.film-rating__count {
+  color: #382c2a
+}
+.film-card__text {
+  color: #252525;
+  width: 635px;
+  font-size: 19px;
+  line-height: 27px
+}
+
+.film-card__director {
+  line-height: 21px;
+  color: rgba(0, 0, 0, .4)
+}
+
+.film-card__starring {
+  line-height: 24px;
+  color: rgba(0, 0, 0, .4)
+}

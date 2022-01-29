@@ -1,0 +1,92 @@
+.film-card__reviews {
+  padding-top: 20px
+}
+
+.film-card__reviews-col {
+  width: calc((100% - 60px)/ 2);
+  margin-right: 60px;
+  max-width: 380px
+}
+
+.film-card__reviews-col:last-child {
+  margin-right: 0
+}
+
+.film-card__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start
+}
+
+.review {
+  border-bottom: 2px solid #e8c3c4;
+  font-size: 17px;
+  color: #252525;
+  line-height: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 75px;
+  position: relative;
+  margin-bottom: 10px
+}
+
+.review:last-child {
+  margin-bottom: 0;
+  border-bottom: none
+}
+
+.review__quote {
+  margin: 0;
+  font-size: 17px;
+  line-height: 24px
+}
+
+.review__text {
+  margin: 0;
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.review__details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 16px;
+  line-height: 27px;
+  color: rgba(0, 0, 0, .4)
+}
+
+.review__author {
+  font-style: normal;
+  font-weight: 700
+}
+
+.review__date {
+  -ms-flex-negative: 0;
+  flex-shrink: 0
+}
+
+.review__date::before {
+  content: '·';
+  margin-left: 4px;
+  margin-right: 4px
+}
+
+.review__rating {
+  position: absolute;
+  right: 0;
+  top: 22px;
+  background: rgba(255, 255, 255, .24);
+  border-radius: 8px;
+  width: 55px;
+  text-align: center;
+  font-size: 19px;
+  color: #353535;
+  font-weight: 500;
+  line-height: 25px;
+  padding: 5px
+}
