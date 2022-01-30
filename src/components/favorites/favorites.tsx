@@ -1,6 +1,11 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../../types/types';
+
+import { useEffect, useState } from 'react';
+import { getToken } from '../../store/api/token';
+import { FilmDTO } from '../../types/types';
+import { rootUrl, serverPath } from '../../utils/const';
+import { adaptFilm } from '../../utils/utils';
 import Card from '../card/card';
+import Loader from '../common/loader/loader';
 import LogoFooter from '../main/logo-footer/footer';
 import Logo from '../main/logo-footer/logo';
 import UserMenu from '../main/user-menu/user';
@@ -8,7 +13,22 @@ import Svg from '../svg/svg';
 import './favorites-styles.css';
 
 export default function Favorites(): JSX.Element {
-  const films = useSelector(({movies}: RootState) => movies.films);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    fetch(`${rootUrl}${serverPath.favorite}`, {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'x-token': getToken(),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setFavorites(data.map((film: FilmDTO) => adaptFilm(film))));
+  }, []);
+
+  if (favorites.length === 0) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -26,7 +46,7 @@ export default function Favorites(): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <div className="catalog__films-list">
-            {films.filter(({isFavorite}) => isFavorite).map(({id, name, previewImage}) => <Card name={name} previewImage={previewImage} id={id} key={id} />)}
+            {favorites.map(({id, name, previewImage}) => <Card name={name} previewImage={previewImage} id={id} key={id} />)}
           </div>
         </section>
 

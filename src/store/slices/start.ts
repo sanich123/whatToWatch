@@ -6,6 +6,7 @@ export const start = createSlice({
     filter: 'All genres',
     films: [],
     promoFilm: {},
+    favorites: [],
   },
   reducers: {
     changer: (state, action) => {
@@ -17,9 +18,12 @@ export const start = createSlice({
     setPromo: (state, action) => {
       state.promoFilm = action.payload;
     },
+    setFavorites: (state, action) => {
+      state.favorites = action.payload;
+    },
   },
 });
 
-export const { changer, fetchFilms, setPromo } = start.actions;
+export const { changer, fetchFilms, setPromo, setFavorites } = start.actions;
 
 export default start.reducer;

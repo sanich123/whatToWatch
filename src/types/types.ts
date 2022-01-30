@@ -58,6 +58,7 @@ export interface RootState {
     filter: string,
     films: Film[];
     promoFilm: Film;
+    favorites: Film[],
   }
 }
 

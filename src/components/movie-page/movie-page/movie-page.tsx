@@ -1,8 +1,12 @@
+/* eslint-disable no-console */
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { loadComments } from '../../../store/api/api-thunk';
+import { getToken } from '../../../store/api/token';
 import { RootState } from '../../../types/types';
+import { rootUrl, serverPath } from '../../../utils/const';
+import { adaptFilm } from '../../../utils/utils';
 import Loader from '../../common/loader/loader';
 import PlayButton from '../../common/play-btn/play-btn';
 import LogoFooter from '../../main/logo-footer/footer';
@@ -15,6 +19,7 @@ import './movie-page-styles.css';
 
 export default function MoviePage(): JSX.Element {
   const films = useSelector(({movies}: RootState) => movies.films);
+  const favorites = useSelector(({movies}: RootState) => movies.favorites);
   const dispatch = useDispatch();
   const selected: {id: string} = useParams();
 
@@ -25,8 +30,13 @@ export default function MoviePage(): JSX.Element {
   if (films.length === 0) {
     return <Loader />;
   }
-
+  let isFavorite = false;
   const [{backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id}] = films.filter((film) => film.id === +selected.id);
+
+  const [selectedMovie] = films.filter((film) => film.id === +selected.id);
+  if (favorites.find((favorite) => favorite.id === selectedMovie.id)) {
+    isFavorite = true;
+  }
 
   return (
     <>
@@ -61,9 +71,18 @@ export default function MoviePage(): JSX.Element {
               <div className="film-card__buttons">
                 <PlayButton id={id} />
 
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button" onClick={() => {
+                  fetch(`${rootUrl}${serverPath.favorite}/${id}/${isFavorite ? 0 : 1}`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-type': 'application/json; charset=UTF-8',
+                      'x-token': getToken(),
+                    },
+                    // eslint-disable-next-line no-console
+                  }).then((response) => response.json()).then((data) => console.log(adaptFilm(data)));}}
+                >
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add" />
+                    <use xlinkHref={isFavorite ? '#in-list' : '#add'} />
                   </svg>
                   <span>My list</span>
                 </button>

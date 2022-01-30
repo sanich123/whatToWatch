@@ -39,6 +39,7 @@ export const serverPath = {
   similar: 'similar',
   login: 'login',
   logout: 'logout',
+  favorite: 'favorite',
 };
 
 export const httpMethods = {
