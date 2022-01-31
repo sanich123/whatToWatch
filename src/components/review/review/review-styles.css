@@ -24,8 +24,6 @@
   right: 0
 }
 
-
-
 .film-card__bg::after {
   content: '';
   position: absolute;
@@ -75,25 +73,22 @@
   padding: 22px 75px
 }
 
-.film-card__poster {
-  border-radius: 5px;
-  overflow: hidden;
-  -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, .4);
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, .4);
-  width: 218px;
-  height: 327px;
-  margin-right: 40px;
-  -ms-flex-negative: 0;
-  flex-shrink: 0
-}
 
 .film-card__poster--small {
+  border-radius: 5px;
   width: 132px;
   height: 198px;
   margin-left: auto;
   margin-right: auto;
   -webkit-transform: translateY(40px);
-  transform: translateY(40px)
+  transform: translateY(40px);
+  object-fit: fill;
+}
+
+.film-card__poster--small img {
+  height: 100%;
+  width:100%;
+  object-fit: contain;
 }
 
 .film-card__poster img {
