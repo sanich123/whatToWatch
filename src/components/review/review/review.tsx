@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 import React, { FormEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { postComment } from '../../../store/async/async-thunks';
 import { RootState } from '../../../types/types';
 import Loader from '../../common/loader/loader';
 import Logo from '../../main/logo-footer/logo';
@@ -11,19 +13,20 @@ import TextArea from '../form-text/text-area';
 import './review-styles.css';
 
 export default function AddReview(): JSX.Element {
-  const films = useSelector((state: RootState) => state.movies.films);
   const selected: {id: string} = useParams();
-  const [film] = films.filter(({id}) => id === +selected.id);
-  const [, setText] = useState('');
-  const [, setRating] = useState('');
+  const [film] = useSelector(({movies}: RootState) => movies.films).filter(({id}) => id === +selected.id);
 
-  if (films.length === 0 || !film) {
+  const [text, setText] = useState('');
+  const [rating, setRating] = useState('');
+
+  if (!film) {
     return <Loader />;
   }
   const {backgroundImage, name, posterImage, id} = film;
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    postComment(selected.id, +rating, text);
 
   };
 

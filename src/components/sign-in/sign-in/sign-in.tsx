@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { postAuthInfo } from '../../../store/api/api-thunk';
+import { postAuthInfo } from '../../../store/async/async-thunks';
 import { AppRoute } from '../../../utils/const';
 import LogoFooter from '../../main/logo-footer/footer';
 import Logo from '../../main/logo-footer/logo';

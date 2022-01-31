@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadFavorites, setFavorite } from '../../../../store/api/api-thunk';
+import { loadFavorites, setFavorite } from '../../../../store/async/async-thunks';
 import { RootState } from '../../../../types/types';
 
 export default function FavoriteBtn({id}: {id: number}): JSX.Element {
@@ -9,6 +9,9 @@ export default function FavoriteBtn({id}: {id: number}): JSX.Element {
   const [isFavorite, setIsFavorite] = useState(0);
 
   useEffect(() => {
+    // if (!favorites) {
+    //   return;
+    // }
     if (favorites.some((favorite) => favorite.id === id)) {
       setIsFavorite(1);
     }
@@ -24,7 +27,6 @@ export default function FavoriteBtn({id}: {id: number}): JSX.Element {
       type="button"
       onClick={() => {
         dispatch(setFavorite(id, (1 - isFavorite)));
-        dispatch(loadFavorites());
       }}
     >
       <svg viewBox="0 0 19 20" width="19" height="20">

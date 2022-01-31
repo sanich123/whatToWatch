@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { fetchFilms, setFavorites, setPromo } from '../slices/start';
 import { AuthInfoDTO, Film } from '../../types/types';
 import { fetchComments } from '../slices/film';
@@ -58,6 +59,20 @@ export const postAuthInfo = (email: string, password: string) =>
       dispatch(getAvatar(data['avatar_url']));
     });
   };
+
+export const postComment = (id: string, rating: number, comment: string) => {
+  fetch(`${rootUrl}${serverPath.comments}/${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+      'x-token': getToken(),
+    },
+    body: JSON.stringify({
+      rating: rating,
+      comment: comment,
+    }),
+  }).then((response) => response.json()).then((data) => console.log(data));
+};
 
 export const logOut = () =>
   (dispatch: (arg: { payload: string; type: string; }) => void) => {

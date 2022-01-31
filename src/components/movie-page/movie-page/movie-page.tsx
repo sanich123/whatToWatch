@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useFilm } from '../../../hooks/useFetch';
-import { loadComments, loadFavorites } from '../../../store/api/api-thunk';
+import { loadComments } from '../../../store/async/async-thunks';
 import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
@@ -25,7 +25,6 @@ export default function MoviePage(): JSX.Element {
 
   useEffect(() => {
     dispatch(loadComments(selected.id));
-    dispatch(loadFavorites());
   }, [selected.id, dispatch]);
 
   if (!selectedFilm) {

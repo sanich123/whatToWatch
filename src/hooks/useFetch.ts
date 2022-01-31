@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getToken } from '../store/api/token';
+import { getToken } from '../store/async/token';
 import { Film, FilmDTO } from '../types/types';
 import { rootUrl, serverPath } from '../utils/const';
 import { adaptFilm } from '../utils/utils';

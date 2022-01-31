@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { logOut } from '../../../store/api/api-thunk';
+import { logOut } from '../../../store/async/async-thunks';
 import { AppRoute } from '../../../utils/const';
 
 export default function UserAuth({userAvatar}: {userAvatar: string}): JSX.Element {
