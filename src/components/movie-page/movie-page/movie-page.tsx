@@ -20,16 +20,15 @@ export default function MoviePage(): JSX.Element {
   const dispatch = useDispatch();
   const selected: {id: string} = useParams();
   const selectedFilm = useFilm(selected.id);
-  const favorites = useSelector(({movies}: RootState) => movies.favorites);
+  const isInFavorites = useSelector(({movies}: RootState) => movies.favorites).some((favorite) => favorite.id === +selected.id);
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
-  const isInFavorites = favorites.some((favorite) => favorite.id === selectedFilm?.id);
-
-  const [isFavorite, setInFavorites] = useState(isInFavorites);
 
   useEffect(() => {
     dispatch(loadFavorites());
     dispatch(loadComments(selected.id));
   }, [selected.id, dispatch]);
+
+  const [isFavorite, setInFavorites] = useState(isInFavorites);
 
   if (!selectedFilm) {
     return <Loader />;
@@ -84,7 +83,8 @@ export default function MoviePage(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                {authStatus === AuthorizationStatus.Auth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
+                {authStatus === AuthorizationStatus.Auth
+                && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { getToken } from '../store/api/token';
-import { Film, FilmDTO } from '../types/types';
+import { Film, FilmDTO, RootState } from '../types/types';
 import { rootUrl, serverPath } from '../utils/const';
 import { adaptFilm } from '../utils/utils';
 
@@ -34,3 +35,15 @@ export const useFavorites = () => {
 
   return favorites;
 };
+
+export const useStates = (id: string) => {
+  const [isFavorite, setInFavorites] = useState<boolean>();
+  const favorites = useSelector(({movies}: RootState) => movies.favorites);
+  useEffect(() => {
+    setInFavorites(favorites.some((favorite) => favorite.id === +id));
+
+  }, [favorites, id]);
+
+  return isFavorite;
+};
+
