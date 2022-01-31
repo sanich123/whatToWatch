@@ -1,7 +1,7 @@
 import { fetchFilms, setFavorites, setPromo } from '../slices/start';
-import { AuthInfoDTO, Film, FilmDTO } from '../../types/types';
+import { AuthInfoDTO, Film } from '../../types/types';
 import { fetchComments } from '../slices/film';
-import { adaptFilm } from '../../utils/utils';
+import { adaptFilm, getAdaptedFilms } from '../../utils/utils';
 import { AuthorizationStatus, rootUrl, serverPath } from '../../utils/const';
 import { checkStatus, getAvatar } from '../slices/authorization';
 import { deleteToken, getToken, saveToken } from './token';
@@ -10,7 +10,7 @@ export const loadFilms = () =>
   (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
     fetch(`${rootUrl}${serverPath.films}`)
       .then((response) => response.json())
-      .then((data) => dispatch(fetchFilms(data.map((film: FilmDTO) => adaptFilm(film)))));
+      .then((films) => dispatch(fetchFilms(getAdaptedFilms(films))));
   };
 
 
@@ -18,7 +18,7 @@ export const loadPromoFilm = () =>
   (dispatch: (arg: { payload: Film; type: string; }) => void) => {
     (fetch(`https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`)
       .then((response) => response.json())
-      .then((data) => dispatch(setPromo(adaptFilm(data)))));
+      .then((film) => dispatch(setPromo(adaptFilm(film)))));
   };
 
 export const loadComments = (id: string) =>
@@ -69,9 +69,9 @@ export const logOut = () =>
     });
   };
 
-export const setFavorite = (id: number, isFavorite: boolean) =>
+export const setFavorite = (id: number, isFavorite: number) =>
   (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
-    fetch(`${rootUrl}${serverPath.favorite}/${id}/${isFavorite ? 0 : 1}`, {
+    fetch(`${rootUrl}${serverPath.favorite}/${id}/${isFavorite}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -89,5 +89,5 @@ export const loadFavorites = () =>
       },
     })
       .then((response) => response.json())
-      .then((data) => dispatch(setFavorites((data.map((film: FilmDTO) => adaptFilm(film))))));
+      .then((data) => dispatch(setFavorites(getAdaptedFilms(data))));
   };

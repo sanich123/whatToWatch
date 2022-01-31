@@ -56,3 +56,5 @@ export const commentLayoutMaker = (arr: Comment[]) => {
   }
   return result.map((e) => e.filter(Boolean));
 };
+
+export const getAdaptedFilms = (films: FilmDTO[]) => films.map((film) => adaptFilm(film));

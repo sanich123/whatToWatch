@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useFilm } from '../../../hooks/useFetch';
-import { loadComments, loadFavorites, setFavorite } from '../../../store/api/api-thunk';
+import { loadComments, loadFavorites } from '../../../store/api/api-thunk';
 import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
@@ -14,21 +14,19 @@ import UserMenu from '../../main/user-menu/user';
 import Svg from '../../svg/svg';
 import FilmDesc from '../film-desc/film-desc';
 import SimilarFilms from '../similar-films/similar-films';
+import FavoriteBtn from './favorite-btn/favorite-btn';
 import './movie-page-styles.css';
 
 export default function MoviePage(): JSX.Element {
   const dispatch = useDispatch();
   const selected: {id: string} = useParams();
-  const selectedFilm = useFilm(selected.id);
-  const isInFavorites = useSelector(({movies}: RootState) => movies.favorites).some((favorite) => favorite.id === +selected.id);
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
+  const selectedFilm = useFilm(selected.id);
 
   useEffect(() => {
-    dispatch(loadFavorites());
     dispatch(loadComments(selected.id));
+    dispatch(loadFavorites());
   }, [selected.id, dispatch]);
-
-  const [isFavorite, setInFavorites] = useState(isInFavorites);
 
   if (!selectedFilm) {
     return <Loader />;
@@ -69,20 +67,8 @@ export default function MoviePage(): JSX.Element {
               <div className="film-card__buttons">
                 <PlayButton id={id} />
 
-                <button
-                  className="btn btn--list film-card__button"
-                  type="button"
-                  disabled={authStatus === AuthorizationStatus.NoAuth}
-                  onClick={() => {
-                    dispatch(setFavorite(id, isFavorite));
-                    setInFavorites(!isFavorite);
-                  }}
-                >
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref={isFavorite ? '#in-list' : '#add'} />
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <FavoriteBtn id={+selected.id} />
+
                 {authStatus === AuthorizationStatus.Auth
                 && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
