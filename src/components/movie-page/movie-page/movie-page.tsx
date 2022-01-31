@@ -1,12 +1,11 @@
 /* eslint-disable no-console */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { loadComments } from '../../../store/api/api-thunk';
-import { getToken } from '../../../store/api/token';
+import { useFilm } from '../../../hooks/useFetch';
+import { loadComments, loadFavorites, setFavorite } from '../../../store/api/api-thunk';
 import { RootState } from '../../../types/types';
-import { rootUrl, serverPath } from '../../../utils/const';
-import { adaptFilm } from '../../../utils/utils';
+import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
 import PlayButton from '../../common/play-btn/play-btn';
 import LogoFooter from '../../main/logo-footer/footer';
@@ -18,25 +17,25 @@ import SimilarFilms from '../similar-films/similar-films';
 import './movie-page-styles.css';
 
 export default function MoviePage(): JSX.Element {
-  const films = useSelector(({movies}: RootState) => movies.films);
-  const favorites = useSelector(({movies}: RootState) => movies.favorites);
   const dispatch = useDispatch();
   const selected: {id: string} = useParams();
+  const selectedFilm = useFilm(selected.id);
+  const favorites = useSelector(({movies}: RootState) => movies.favorites);
+  const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
+  const isInFavorites = favorites.some((favorite) => favorite.id === selectedFilm?.id);
+
+  const [isFavorite, setInFavorites] = useState(isInFavorites);
 
   useEffect(() => {
+    dispatch(loadFavorites());
     dispatch(loadComments(selected.id));
-  }, [selected, dispatch]);
+  }, [selected.id, dispatch]);
 
-  if (films.length === 0) {
+  if (!selectedFilm) {
     return <Loader />;
   }
-  let isFavorite = false;
-  const [{backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id}] = films.filter((film) => film.id === +selected.id);
 
-  const [selectedMovie] = films.filter((film) => film.id === +selected.id);
-  if (favorites.find((favorite) => favorite.id === selectedMovie.id)) {
-    isFavorite = true;
-  }
+  const {backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id} = selectedFilm;
 
   return (
     <>
@@ -71,22 +70,21 @@ export default function MoviePage(): JSX.Element {
               <div className="film-card__buttons">
                 <PlayButton id={id} />
 
-                <button className="btn btn--list film-card__button" type="button" onClick={() => {
-                  fetch(`${rootUrl}${serverPath.favorite}/${id}/${isFavorite ? 0 : 1}`, {
-                    method: 'POST',
-                    headers: {
-                      'Content-type': 'application/json; charset=UTF-8',
-                      'x-token': getToken(),
-                    },
-                    // eslint-disable-next-line no-console
-                  }).then((response) => response.json()).then((data) => console.log(adaptFilm(data)));}}
+                <button
+                  className="btn btn--list film-card__button"
+                  type="button"
+                  disabled={authStatus === AuthorizationStatus.NoAuth}
+                  onClick={() => {
+                    dispatch(setFavorite(id, isFavorite));
+                    setInFavorites(!isFavorite);
+                  }}
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref={isFavorite ? '#in-list' : '#add'} />
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+                {authStatus === AuthorizationStatus.Auth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>

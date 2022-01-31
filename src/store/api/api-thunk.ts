@@ -13,6 +13,7 @@ export const loadFilms = () =>
       .then((data) => dispatch(fetchFilms(data.map((film: FilmDTO) => adaptFilm(film)))));
   };
 
+
 export const loadPromoFilm = () =>
   (dispatch: (arg: { payload: Film; type: string; }) => void) => {
     (fetch(`https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`)
@@ -68,6 +69,17 @@ export const logOut = () =>
     });
   };
 
+export const setFavorite = (id: number, isFavorite: boolean) =>
+  (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
+    fetch(`${rootUrl}${serverPath.favorite}/${id}/${isFavorite ? 0 : 1}`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'x-token': getToken(),
+      },
+    }).then((response) => response.json()).then((data) => data);
+  };
+
 export const loadFavorites = () =>
   (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
     fetch(`${rootUrl}${serverPath.favorite}`, {
@@ -77,21 +89,5 @@ export const loadFavorites = () =>
       },
     })
       .then((response) => response.json())
-      // eslint-disable-next-line no-console
       .then((data) => dispatch(setFavorites((data.map((film: FilmDTO) => adaptFilm(film))))));
   };
-
-export const setFavorite = (id: number, isFavorite: boolean) =>
-  (dispatch: (art: {payload: string, type: string}) => void) => {
-    fetch(`${rootUrl}${serverPath.favorite}/${id}/${isFavorite ? 0 : 1}`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'x-token': getToken(),
-      },
-    // eslint-disable-next-line no-console
-    }).then((response) => console.log(response.status))
-    // eslint-disable-next-line no-console
-      .then((data) => console.log(data));
-  };
-
