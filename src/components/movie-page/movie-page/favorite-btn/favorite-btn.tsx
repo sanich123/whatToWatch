@@ -1,26 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  // loadFavorites,
-  setFavorite } from '../../../../store/async/async-thunks';
+import { loadFavorites, setFavorite } from '../../../../store/async/async-thunks';
 import { RootState } from '../../../../types/types';
 
 export default function FavoriteBtn({id}: {id: number}): JSX.Element {
   const dispatch = useDispatch();
   const favorites = useSelector(({movies}: RootState) => movies.favorites);
-  const [isFavorite, setIsFavorite] = useState(0);
-  // eslint-disable-next-line no-console
-  console.log(favorites);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [click, setClick] = useState(false);
 
   useEffect(() => {
-    // dispatch(loadFavorites());
+    if (click) {
+      dispatch(loadFavorites());
+    }
+    return () => setClick(false);
+  }, [click, dispatch]);
+
+  useEffect(() => {
     if (favorites.some((favorite) => favorite.id === id)) {
-      setIsFavorite(1);
+      setIsFavorite(true);
     }
     else {
-      setIsFavorite(0);
+      setIsFavorite(false);
     }
-    // dispatch(loadFavorites());
   }, [dispatch, favorites, id]);
 
   return (
@@ -28,12 +30,13 @@ export default function FavoriteBtn({id}: {id: number}): JSX.Element {
       className="btn btn--list film-card__button"
       type="button"
       onClick={() => {
-        setFavorite(id, (1 - isFavorite));
-        // dispatch(loadFavorites());
+        dispatch(setFavorite(id, isFavorite));
+        dispatch(loadFavorites());
+        setClick(true);
       }}
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
-        <use xlinkHref={isFavorite === 1 ? '#in-list' : '#add'} />
+        <use xlinkHref={isFavorite ? '#in-list' : '#add'} />
       </svg>
       <span>My list</span>
     </button>

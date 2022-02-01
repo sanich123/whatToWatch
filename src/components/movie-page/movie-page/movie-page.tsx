@@ -1,9 +1,6 @@
-/* eslint-disable no-console */
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useFilm } from '../../../hooks/useFetch';
-import { loadComments } from '../../../store/async/async-thunks';
 import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
@@ -18,14 +15,9 @@ import FavoriteBtn from './favorite-btn/favorite-btn';
 import './movie-page-styles.css';
 
 export default function MoviePage(): JSX.Element {
-  const dispatch = useDispatch();
   const selected: {id: string} = useParams();
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
   const selectedFilm = useFilm(selected.id);
-
-  useEffect(() => {
-    dispatch(loadComments(selected.id));
-  }, [selected.id, dispatch]);
 
   if (!selectedFilm) {
     return <Loader />;
@@ -49,9 +41,7 @@ export default function MoviePage(): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-
             <Logo />
-
             <UserMenu />
           </header>
 
@@ -65,9 +55,7 @@ export default function MoviePage(): JSX.Element {
 
               <div className="film-card__buttons">
                 <PlayButton id={id} />
-
                 <FavoriteBtn id={+selected.id} />
-
                 {authStatus === AuthorizationStatus.Auth
                 && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
               </div>

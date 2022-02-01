@@ -13,7 +13,11 @@ export const AuthorizationStatus = {
   Unknown: 'Unknown',
 };
 
-export const descParts = ['Overview', 'Details', 'Reviews'];
+export const tabs = {
+  overView: 'Overview',
+  details: 'Details',
+  reviews: 'Reviews',
+};
 
 export const genres = {
   'All genres': 'All genres',
@@ -46,5 +50,3 @@ export const httpMethods = {
   post: 'POST',
   delete: 'DELETE',
 };
-
-

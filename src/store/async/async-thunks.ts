@@ -32,7 +32,7 @@ export const loadComments = (id: string) =>
     fetch(`${rootUrl}${serverPath.comments}/${id}`)
       .then((response) => response.json())
       .then((reviews) => {
-        console.log(reviews);
+        // console.log(reviews);
         dispatch(fetchComments(reviews));
       });
   };
@@ -69,46 +69,45 @@ export const postAuthInfo = (email: string, password: string) =>
   };
 
 export const postComment = (id: string, rating: number, comment: string) =>
-  // (dispatch: (arg: { payload: Comment[]; type: string; }) => void) => {
-  fetch(`${rootUrl}${serverPath.comments}/${id}`, {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-      'x-token': getToken(),
-    },
-    body: JSON.stringify({
-      rating: rating,
-      comment: comment,
-    }),
-  }).then((response) => {
-    console.log(response.status);
-    response.json();
-  }).then((data) =>
-    console.log(data),
-    // dispatch(fetchComments(data));
-  );
-  // };
-
-export const logOut = () =>
-  (dispatch: (arg: { payload: string; type: string; }) => void) => {
-    fetch(`${rootUrl}${serverPath.logout}`, {
-      method: 'DELETE',
-    }).then((response) => {
-      deleteToken();
-      dispatch(checkStatus(AuthorizationStatus.NoAuth));
-    });
-  };
-
-export const setFavorite = (id: number, isFavorite: number) =>
-  (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
-    fetch(`${rootUrl}${serverPath.favorite}/${id}/${isFavorite}`, {
+  (dispatch: (arg: { payload: Comment[]; type: string; }) => void) => {
+    fetch(`${rootUrl}${serverPath.comments}/${id}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
         'x-token': getToken(),
       },
-    }).then((response) => response.json()).then((data) => data);
+      body: JSON.stringify({
+        rating: rating,
+        comment: comment,
+      }),
+    }).then((response) => {
+      // console.log(response.status);
+      response.json();
+    }).then((data) =>
+    // console.log(data),
+      dispatch(fetchComments(data)));
   };
+
+export const logOut = () =>
+  (dispatch: (arg: { payload: string; type: string; }) => void) => {
+    fetch(`${rootUrl}${serverPath.logout}`, {
+      method: 'DELETE',
+    }).then(() => {
+      deleteToken();
+      dispatch(checkStatus(AuthorizationStatus.NoAuth));
+    });
+  };
+
+export const setFavorite = (id: number, isFavorite: boolean) =>
+  fetch(`${rootUrl}${serverPath.favorite}/${id}/${isFavorite ? 0 : 1}`, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+      'x-token': getToken(),
+    },
+  }).then((response) => {
+    response.json();
+  }).then((data) => data);
 
 export const loadFavorites = () =>
   (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
