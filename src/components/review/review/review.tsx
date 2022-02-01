@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import React, { FormEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { postComment } from '../../../store/async/async-thunks';
+import { loadComments, postComment } from '../../../store/async/async-thunks';
 import { RootState } from '../../../types/types';
 import Loader from '../../common/loader/loader';
 import Logo from '../../main/logo-footer/logo';
@@ -14,6 +14,7 @@ import './review-styles.css';
 
 export default function AddReview(): JSX.Element {
   const selected: {id: string} = useParams();
+  const dispatch = useDispatch();
   const [film] = useSelector(({movies}: RootState) => movies.films).filter(({id}) => id === +selected.id);
 
   const [text, setText] = useState('');
@@ -27,6 +28,7 @@ export default function AddReview(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     postComment(selected.id, +rating, text);
+    dispatch(loadComments(selected.id));
 
   };
 

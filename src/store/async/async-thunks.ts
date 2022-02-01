@@ -6,12 +6,17 @@ import { adaptFilm, getAdaptedFilms } from '../../utils/utils';
 import { AuthorizationStatus, rootUrl, serverPath } from '../../utils/const';
 import { checkStatus, getAvatar } from '../slices/authorization';
 import { deleteToken, getToken, saveToken } from './token';
+import { toast } from 'react-toastify';
 
 export const loadFilms = () =>
-  (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
-    fetch(`${rootUrl}${serverPath.films}`)
-      .then((response) => response.json())
-      .then((films) => dispatch(fetchFilms(getAdaptedFilms(films))));
+  async (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
+    try {
+      const films = await (await fetch(`${rootUrl}${serverPath.films}`)).json();
+      dispatch(fetchFilms(getAdaptedFilms(films)));
+    }
+    catch {
+      toast.warn('Неполадки с сетью или вы неправильно ввели адрес');
+    }
   };
 
 
@@ -26,7 +31,10 @@ export const loadComments = (id: string) =>
   (dispatch: (arg: { payload: Comment[]; type: string; }) => void) => {
     fetch(`${rootUrl}${serverPath.comments}/${id}`)
       .then((response) => response.json())
-      .then((reviews) => dispatch(fetchComments(reviews)));
+      .then((reviews) => {
+        console.log(reviews);
+        dispatch(fetchComments(reviews));
+      });
   };
 
 export const getAuth = () =>
@@ -60,7 +68,8 @@ export const postAuthInfo = (email: string, password: string) =>
     });
   };
 
-export const postComment = (id: string, rating: number, comment: string) => {
+export const postComment = (id: string, rating: number, comment: string) =>
+  // (dispatch: (arg: { payload: Comment[]; type: string; }) => void) => {
   fetch(`${rootUrl}${serverPath.comments}/${id}`, {
     method: 'POST',
     headers: {
@@ -71,8 +80,14 @@ export const postComment = (id: string, rating: number, comment: string) => {
       rating: rating,
       comment: comment,
     }),
-  }).then((response) => response.json()).then((data) => console.log(data));
-};
+  }).then((response) => {
+    console.log(response.status);
+    response.json();
+  }).then((data) =>
+    console.log(data),
+    // dispatch(fetchComments(data));
+  );
+  // };
 
 export const logOut = () =>
   (dispatch: (arg: { payload: string; type: string; }) => void) => {

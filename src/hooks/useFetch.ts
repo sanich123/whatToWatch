@@ -35,3 +35,15 @@ export const useFavorites = () => {
   return favorites;
 };
 
+export const useComments = (id: number) => {
+  const [comments, getComments] = useState([]);
+
+  useEffect(() => {
+    fetch(`${rootUrl}${serverPath.comments}/${id}`)
+      .then((response) => response.json())
+      .then((reviews) => getComments(reviews));
+  }, [id]);
+
+  return comments;
+};
+
