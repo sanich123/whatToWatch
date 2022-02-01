@@ -60,6 +60,9 @@ export interface RootState {
     promoFilm: Film;
     favorites: Film[],
   }
+  film: {
+    comments: Comment[]
+  }
 }
 
 export interface FilmDescProps {

@@ -2,7 +2,7 @@
 import React, { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { loadComments, postComment } from '../../../store/async/async-thunks';
+import { postComment } from '../../../store/async/async-thunks';
 import { RootState } from '../../../types/types';
 import Loader from '../../common/loader/loader';
 import Logo from '../../main/logo-footer/logo';
@@ -27,9 +27,7 @@ export default function AddReview(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    postComment(selected.id, +rating, text);
-    dispatch(loadComments(selected.id));
-
+    dispatch(postComment(selected.id, +rating, text));
   };
 
   return (

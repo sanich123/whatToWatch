@@ -19,7 +19,6 @@ export const loadFilms = () =>
     }
   };
 
-
 export const loadPromoFilm = () =>
   (dispatch: (arg: { payload: Film; type: string; }) => void) => {
     (fetch(`https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`)
@@ -80,12 +79,8 @@ export const postComment = (id: string, rating: number, comment: string) =>
         rating: rating,
         comment: comment,
       }),
-    }).then((response) => {
-      // console.log(response.status);
-      response.json();
-    }).then((data) =>
-    // console.log(data),
-      dispatch(fetchComments(data)));
+    }).then((response) => response.json())
+      .then((data) =>  dispatch(fetchComments(data)));
   };
 
 export const logOut = () =>
