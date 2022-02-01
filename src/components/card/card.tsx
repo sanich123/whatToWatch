@@ -20,7 +20,7 @@ export default function Card({name, previewImage, id, videoLink, posterImage}: C
     if (mouseEnter) {
       setPreview(true);
     }
-    setPreview(false);
+    return () => setPreview(false);
   }, [mouseEnter]);
 
   const debounced = debounce(() => setIsMouseEnter(true), 1000);
@@ -32,6 +32,7 @@ export default function Card({name, previewImage, id, videoLink, posterImage}: C
         setIsMouseEnter(false);
         debounced.cancel();
       }}
+      onMouseEnter={debounced}
     >
       <div className="small-film-card__image">
         {preview ?

@@ -7,7 +7,7 @@ import './comments-styles.css';
 
 export default function Reviews({id}: {id: number}):JSX.Element {
   const reviews = useSelector(({film}: RootState) => film.comments);
-  const slicedReviews = reviews.slice(reviews.length / 2);
+  const slicedReviews = reviews.slice(23, reviews.length);
   const comments = useComments(id);
 
   if (comments.length === 0) {

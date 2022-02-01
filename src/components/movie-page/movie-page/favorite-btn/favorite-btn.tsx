@@ -30,9 +30,9 @@ export default function FavoriteBtn({id}: {id: number}): JSX.Element {
       className="btn btn--list film-card__button"
       type="button"
       onClick={() => {
-        dispatch(setFavorite(id, isFavorite));
-        dispatch(loadFavorites());
+        setFavorite(id, isFavorite);
         setClick(true);
+        dispatch(loadFavorites());
       }}
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
