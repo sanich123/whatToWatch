@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { fetchFilms, setFavorites, setPromo } from '../slices/start';
 import { AuthInfoDTO, Film } from '../../types/types';
-import { fetchComments } from '../slices/film';
+import { fetchComments, sendingFailed } from '../slices/film';
 import { adaptFilm, getAdaptedFilms } from '../../utils/utils';
 import { AuthorizationStatus, rootUrl, serverPath } from '../../utils/const';
 import { checkStatus, getAvatar } from '../slices/authorization';
@@ -68,19 +68,38 @@ export const postAuthInfo = (email: string, password: string) =>
   };
 
 export const postComment = (id: string, rating: number, comment: string) =>
-  (dispatch: (arg: { payload: Comment[]; type: string; }) => void) => {
-    fetch(`${rootUrl}${serverPath.comments}/${id}`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'x-token': getToken(),
-      },
-      body: JSON.stringify({
-        rating: rating,
-        comment: comment,
-      }),
-    }).then((response) => response.json())
-      .then((data) =>  dispatch(fetchComments(data)));
+  async (dispatch: (arg: { payload?: Comment[]; type: string; }) => void) => {
+    try {
+      const response = await (await fetch(`${rootUrl}${serverPath.comments}ef/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          'x-token': getToken(),
+        },
+        body: JSON.stringify({
+          rating: rating,
+          comment: comment,
+        }),
+      }));
+
+      if (response.status === 404) {
+        toast.warn('Запрашиваемая страница не найдена. Проверьте правильность написанного адреса');
+        dispatch(sendingFailed());
+      }
+
+      if (response.status === 400) {
+        toast.error('Поле рейтинга должно быть значением не меньше 1, отзыв должен состоять из не менее 40 символов и не более 500 символов');
+      }
+      else {
+        const comments = await response.json();
+        dispatch(fetchComments(comments));
+      }
+    }
+
+    catch {
+      toast.warn('Нет соединения с сетью интернет');
+      dispatch(sendingFailed());
+    }
   };
 
 export const logOut = () =>

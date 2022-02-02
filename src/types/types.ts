@@ -61,7 +61,10 @@ export interface RootState {
     favorites: Film[],
   }
   film: {
-    comments: Comment[]
+    comments: Comment[],
+    beginSending: boolean,
+    isSending: boolean,
+    successSending: boolean,
   }
 }
 
