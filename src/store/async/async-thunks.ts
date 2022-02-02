@@ -8,6 +8,13 @@ import { checkStatus, getAvatar } from '../slices/authorization';
 import { deleteToken, getToken, saveToken } from './token';
 import { toast } from 'react-toastify';
 
+const warnings = {
+  network: 'Неполадки с сетью или вы неправильно ввели адрес',
+  server404: 'Запрашиваемая страница не найдена. Проверьте правильность написанного адреса',
+  serverReview400: 'Поле рейтинга должно быть значением не меньше 1, отзыв должен состоять из не менее 40 символов и не более 500 символов',
+};
+
+
 export const loadFilms = () =>
   async (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
     try {
@@ -15,25 +22,30 @@ export const loadFilms = () =>
       dispatch(fetchFilms(getAdaptedFilms(films)));
     }
     catch {
-      toast.warn('Неполадки с сетью или вы неправильно ввели адрес');
+      toast.warn(warnings.network);
     }
   };
 
 export const loadPromoFilm = () =>
-  (dispatch: (arg: { payload: Film; type: string; }) => void) => {
-    (fetch(`https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`)
-      .then((response) => response.json())
-      .then((film) => dispatch(setPromo(adaptFilm(film)))));
+  async (dispatch: (arg: { payload: Film; type: string; }) => void) => {
+    try {
+      const film = await (await fetch(`https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`)).json();
+      dispatch(setPromo(adaptFilm(film)));
+    }
+    catch {
+      toast.warn(warnings.network);
+    }
   };
 
 export const loadComments = (id: string) =>
-  (dispatch: (arg: { payload: Comment[]; type: string; }) => void) => {
-    fetch(`${rootUrl}${serverPath.comments}/${id}`)
-      .then((response) => response.json())
-      .then((reviews) => {
-        // console.log(reviews);
-        dispatch(fetchComments(reviews));
-      });
+  async (dispatch: (arg: { payload: Comment[]; type: string; }) => void) => {
+    try {
+      const comments = await (await fetch(`${rootUrl}${serverPath.comments}/${id}`)).json();
+      dispatch(fetchComments(comments));
+    }
+    catch {
+      toast.warn(warnings.network);
+    }
   };
 
 export const getAuth = () =>
@@ -83,12 +95,12 @@ export const postComment = (id: string, rating: number, comment: string) =>
       }));
 
       if (response.status === 404) {
-        toast.warn('Запрашиваемая страница не найдена. Проверьте правильность написанного адреса');
+        toast.warn(warnings.server404);
         dispatch(sendingFailed());
       }
 
       if (response.status === 400) {
-        toast.error('Поле рейтинга должно быть значением не меньше 1, отзыв должен состоять из не менее 40 символов и не более 500 символов');
+        toast.error(warnings.serverReview400);
       }
       else {
         const comments = await response.json();
@@ -97,7 +109,7 @@ export const postComment = (id: string, rating: number, comment: string) =>
     }
 
     catch {
-      toast.warn('Нет соединения с сетью интернет');
+      toast.warn(warnings.network);
       dispatch(sendingFailed());
     }
   };
