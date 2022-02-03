@@ -15,7 +15,6 @@ import './main-styles.css';
 import Loader from '../common/loader/loader';
 
 export default function Main(): JSX.Element {
-
   const chosenFilter = useSelector(({movies}: RootState) => movies.filter);
   const movies = useSelector((state: RootState) => state.movies.films);
   const movie = useSelector((state: RootState) => state.movies.promoFilm);

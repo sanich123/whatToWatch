@@ -6,6 +6,7 @@ export const auth = createSlice({
   initialState: {
     authStatus: AuthorizationStatus.Unknown,
     avatarUrl: '',
+    successAuth: false,
   },
   reducers: {
     checkStatus: (state, action) => {
@@ -15,9 +16,12 @@ export const auth = createSlice({
       state.avatarUrl = action.payload;
       state.authStatus = AuthorizationStatus.Auth;
     },
+    successAuth: (state) => {
+      state.successAuth = true;
+    },
   },
 });
 
-export const { checkStatus, getAvatar } = auth.actions;
+export const { checkStatus, getAvatar, successAuth } = auth.actions;
 
 export default auth.reducer;

@@ -53,6 +53,7 @@ export interface RootState {
   authorization: {
     authStatus: string,
     avatarUrl: string,
+    successAuth: boolean,
   }
   movies: {
     filter: string,
@@ -62,9 +63,9 @@ export interface RootState {
   }
   film: {
     comments: Comment[],
-    beginSending: boolean,
-    isSending: boolean,
     successSending: boolean,
+    sendingFailed: boolean,
+    filmId: string,
   }
 }
 

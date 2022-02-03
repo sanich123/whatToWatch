@@ -1,6 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useFilm } from '../../../hooks/useFetch';
+import { setFilmId } from '../../../store/slices/film';
 import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
@@ -16,6 +17,8 @@ import './movie-page-styles.css';
 
 export default function MoviePage(): JSX.Element {
   const selected: {id: string} = useParams();
+  const dispatch = useDispatch();
+  dispatch(setFilmId(selected.id));
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
   const selectedFilm = useFilm(selected.id);
 

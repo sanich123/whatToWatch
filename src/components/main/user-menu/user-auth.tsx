@@ -1,10 +1,14 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { logOut } from '../../../store/async/async-thunks';
+import { RootState } from '../../../types/types';
 import { AppRoute } from '../../../utils/const';
 
 export default function UserAuth({userAvatar}: {userAvatar: string}): JSX.Element {
   const history = useHistory();
+  const id = useSelector(({film}: RootState) => film.filmId);
+  const path = history.location.pathname;
+
   const dispatch = useDispatch();
   return (
     <ul className="user-block">
@@ -14,7 +18,7 @@ export default function UserAuth({userAvatar}: {userAvatar: string}): JSX.Elemen
         </div>
       </li>
       <li className="user-block__item" onClick={() => dispatch(logOut())}>
-        <Link className="user-block__link" to={AppRoute.Main}>Sign out</Link>
+        <Link className="user-block__link" to={ path === `/films/${id}/review` ? AppRoute.Main : history.location}>Sign out</Link>
       </li>
     </ul>
   );

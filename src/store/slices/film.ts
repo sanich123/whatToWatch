@@ -6,6 +6,7 @@ export const film = createSlice({
     comments: [],
     sendingFailed: false,
     successSending: false,
+    filmId: '',
   },
   reducers: {
     fetchComments: (state, action) => {
@@ -15,9 +16,12 @@ export const film = createSlice({
     sendingFailed: (state) => {
       state.sendingFailed = true;
     },
+    setFilmId: (state, action) => {
+      state.filmId = action.payload;
+    },
   },
 });
 
-export const { fetchComments, sendingFailed } = film.actions;
+export const { fetchComments, sendingFailed, setFilmId } = film.actions;
 
 export default film.reducer;

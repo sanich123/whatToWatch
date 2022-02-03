@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { warnings } from '../store/async/async-thunks';
 import { getToken } from '../store/async/token';
 import { Film, FilmDTO } from '../types/types';
-import { rootUrl, serverPath } from '../utils/const';
+import { rootUrl, serverPath, warnings } from '../utils/const';
 import { adaptFilm } from '../utils/utils';
 
 export const useFilm = (id: string) => {
