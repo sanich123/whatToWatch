@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { warnings } from '../store/async/async-thunks';
 import { getToken } from '../store/async/token';
 import { Film, FilmDTO } from '../types/types';
 import { rootUrl, serverPath } from '../utils/const';
@@ -36,12 +38,24 @@ export const useFavorites = () => {
 };
 
 export const useComments = (id: number) => {
+
   const [comments, getComments] = useState([]);
 
   useEffect(() => {
-    fetch(`${rootUrl}${serverPath.comments}/${id}`)
-      .then((response) => response.json())
-      .then((reviews) => getComments(reviews));
+    (async () => {
+      try {
+        const response = await fetch(`${rootUrl}${serverPath.comments}/${id}`);
+        if (response.status === 400) {
+          toast.warn(warnings.serverReview400);
+        } else {
+          const reviews = await response.json();
+          getComments(reviews);
+        }
+      }
+      catch {
+        toast.error(warnings.server404);
+      }
+    })();
   }, [id]);
 
   return comments;

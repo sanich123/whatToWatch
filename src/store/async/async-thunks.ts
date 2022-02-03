@@ -8,7 +8,7 @@ import { checkStatus, getAvatar } from '../slices/authorization';
 import { deleteToken, getToken, saveToken } from './token';
 import { toast } from 'react-toastify';
 
-const warnings = {
+export const warnings = {
   network: 'Неполадки с сетью или вы неправильно ввели адрес',
   server404: 'Запрашиваемая страница не найдена. Проверьте правильность написанного адреса',
   serverReview400: 'Поле рейтинга должно быть значением не меньше 1, отзыв должен состоять из не менее 40 символов и не более 500 символов',
@@ -18,9 +18,15 @@ const warnings = {
 export const loadFilms = () =>
   async (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
     try {
-      const films = await (await fetch(`${rootUrl}${serverPath.films}`)).json();
-      dispatch(fetchFilms(getAdaptedFilms(films)));
+      const response = await fetch(`${rootUrl}${serverPath.films}`);
+      if (response.status === 404) {
+        toast.error(warnings.server404);
+      } else {
+        const films = await response.json();
+        dispatch(fetchFilms(getAdaptedFilms(films)));
+      }
     }
+
     catch {
       toast.warn(warnings.network);
     }
@@ -29,19 +35,13 @@ export const loadFilms = () =>
 export const loadPromoFilm = () =>
   async (dispatch: (arg: { payload: Film; type: string; }) => void) => {
     try {
-      const film = await (await fetch(`https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`)).json();
-      dispatch(setPromo(adaptFilm(film)));
-    }
-    catch {
-      toast.warn(warnings.network);
-    }
-  };
-
-export const loadComments = (id: string) =>
-  async (dispatch: (arg: { payload: Comment[]; type: string; }) => void) => {
-    try {
-      const comments = await (await fetch(`${rootUrl}${serverPath.comments}/${id}`)).json();
-      dispatch(fetchComments(comments));
+      const response = await fetch(`https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`);
+      if (response.status === 404) {
+        toast.error(warnings.server404);
+      } else {
+        const film = await response.json();
+        dispatch(setPromo(adaptFilm(film)));
+      }
     }
     catch {
       toast.warn(warnings.network);
