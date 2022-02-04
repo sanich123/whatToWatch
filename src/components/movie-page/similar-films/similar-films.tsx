@@ -1,21 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Film, FilmDTO } from '../../../types/types';
-import { rootUrl, serverPath } from '../../../utils/const';
-import { adaptFilm } from '../../../utils/utils';
+import { useSimilarFilms } from '../../../hooks/useFetch';
 import Card from '../../card/card';
 import './similar-films-styles.css';
 
 export default function SimilarFilms({id}: {id: number}): JSX.Element {
   const BEGIN_SLICING = 0;
   const END_SLICING = 4;
-  const [films, setFilms] = useState<Film[]>([]);
-
-  useEffect(() => {
-    (fetch(`${rootUrl}${serverPath.films}/${id}/${serverPath.similar}`)
-      .then((response) => response.json())
-      .then((data) => setFilms(data.map((film: FilmDTO) => adaptFilm(film)))));
-  }, [id]);
-
+  const films = useSimilarFilms(id.toString());
 
   return (
     <section className="catalog catalog--like-this">

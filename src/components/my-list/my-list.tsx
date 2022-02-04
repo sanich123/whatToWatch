@@ -5,7 +5,7 @@ import LogoFooter from '../main/logo-footer/footer';
 import Logo from '../main/logo-footer/logo';
 import UserMenu from '../main/user-menu/user';
 import Svg from '../svg/svg';
-import './favorites-styles.css';
+import './my-list-styles.css';
 
 export default function Favorites(): JSX.Element {
   const favorites = useFavorites();

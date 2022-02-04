@@ -17,21 +17,6 @@
   line-height: 24px
 }
 
-.add-review__textarea::-webkit-input-placeholder {
-  opacity: 1;
-  color: #252525
-}
-
-.add-review__textarea:-ms-input-placeholder {
-  opacity: 1;
-  color: #252525
-}
-
-.add-review__textarea::-ms-input-placeholder {
-  opacity: 1;
-  color: #252525
-}
-
 .add-review__textarea::placeholder {
   opacity: 1;
   color: #252525

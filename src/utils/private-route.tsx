@@ -1,5 +1,5 @@
 import { Redirect, Route, RouteProps } from 'react-router-dom';
-import Favorites from '../components/favorites/favorites';
+import Favorites from '../components/my-list/my-list';
 import { AppRoute, AuthorizationStatus } from './const';
 
 interface PrivateRouteProps extends RouteProps {

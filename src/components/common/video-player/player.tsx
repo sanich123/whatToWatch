@@ -1,4 +1,11 @@
-import './player-styles.css';
+import styled from 'styled-components';
+
+const VideoPlayer = styled.video`
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  font-family: "object-fit:cover";
+  object-fit: cover`;
 
 interface PreviewPlayerProps {
   videoLink?: string,
@@ -8,6 +15,6 @@ interface PreviewPlayerProps {
 export default function PreviewPlayer({videoLink, posterImage}: PreviewPlayerProps): JSX.Element {
 
   return (
-    <video src={videoLink} className="player__video" poster={posterImage} preload='' autoPlay muted />
+    <VideoPlayer src={videoLink} poster={posterImage} preload='' autoPlay muted />
   );
 }

@@ -84,16 +84,17 @@ export const warnings = {
 
 export const promoFilmId = 25;
 
-export const reviewsReducer = (arr: Comment[]) => {
+export const reviewsReducer = (reviews: Comment[]) => {
   const result = [];
 
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < reviews.length; i++) {
     if (result.length === 0) {
-      result.push(arr[i]);
+      result.push(reviews[i]);
     }
-    else if (!result.slice().map(({id}) => id).includes(arr[i].id)) {
-      result.push(arr[i]);
+    else if (!result.slice().map(({id}) => id).includes(reviews[i].id)) {
+      result.push(reviews[i]);
     }
   }
+
   return result;
 };

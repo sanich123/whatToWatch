@@ -1,7 +1,7 @@
 import { Film } from '../../../types/types';
 import { promoFilmId } from '../../../utils/const';
 import PlayButton from '../../common/play-btn/play-btn';
-import FavoriteBtn from '../../movie-page/movie-page/favorite-btn/favorite-btn';
+import FavoriteBtn from '../../common/favorite-btn/favorite-btn';
 import './promo-film-styles.css';
 
 export default function PromoFilm({movie}: {movie: Film}): JSX.Element {

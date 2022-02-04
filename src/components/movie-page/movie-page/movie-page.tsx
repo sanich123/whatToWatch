@@ -12,7 +12,7 @@ import UserMenu from '../../main/user-menu/user';
 import Svg from '../../svg/svg';
 import FilmDesc from '../film-desc/film-desc';
 import SimilarFilms from '../similar-films/similar-films';
-import FavoriteBtn from './favorite-btn/favorite-btn';
+import FavoriteBtn from '../../common/favorite-btn/favorite-btn';
 import './movie-page-styles.css';
 
 export default function MoviePage(): JSX.Element {

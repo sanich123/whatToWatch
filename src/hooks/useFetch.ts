@@ -3,10 +3,21 @@ import { toast } from 'react-toastify';
 import { getToken } from '../store/async/token';
 import { Film, FilmDTO } from '../types/types';
 import { rootUrl, serverPath, warnings } from '../utils/const';
-import { adaptFilm } from '../utils/utils';
+import { adaptFilm, getAdaptedFilms } from '../utils/utils';
+
+export const useSimilarFilms = (id: string) => {
+  const [films, setFilms] = useState<Film[]>([]);
+
+  useEffect(() => {
+    (fetch(`${rootUrl}${serverPath.films}/${id}/${serverPath.similar}`)
+      .then((response) => response.json())
+      .then((data) => setFilms(data.map((film: FilmDTO) => adaptFilm(film)))));
+  }, [id]);
+
+  return films;
+};
 
 export const useFilm = (id: string) => {
-
   const [selectedFilm, setSelectedMovie] = useState<Film>();
 
   useEffect(() => {
@@ -19,7 +30,6 @@ export const useFilm = (id: string) => {
 };
 
 export const useFavorites = () => {
-
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -30,14 +40,13 @@ export const useFavorites = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => setFavorites(data.map((film: FilmDTO) => adaptFilm(film))));
+      .then((data) => setFavorites(data.map(getAdaptedFilms)));
   }, []);
 
   return favorites;
 };
 
 export const useComments = (id: number) => {
-
   const [comments, getComments] = useState([]);
 
   useEffect(() => {

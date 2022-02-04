@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 import { Comment, Film, FilmDTO } from '../types/types';
+import { genres } from './const';
 
 export const adaptFilm = (film: FilmDTO): Film => ({
   backgroundColor: film['background_color'],
@@ -47,7 +47,7 @@ export const dateChanger = (date: string) => `${new Date(date).toLocaleString('e
   },
 )}`;
 
-export const filterChanger = (filter: string, array: Film[]) => array.slice().filter((film) => filter === 'All genres' ? film : film.genre === filter);
+export const filterChanger = (filter: string, array: Film[]) => array.slice().filter((film) => filter === genres['All genres'] ? film : film.genre === filter);
 
 export const commentLayoutMaker = (arr: Comment[]) => {
   const result = [];
