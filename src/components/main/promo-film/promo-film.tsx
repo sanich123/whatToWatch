@@ -1,6 +1,7 @@
 import { Film } from '../../../types/types';
+import { promoFilmId } from '../../../utils/const';
 import PlayButton from '../../common/play-btn/play-btn';
-import MyListBtn from './my-list-btn';
+import FavoriteBtn from '../../movie-page/movie-page/favorite-btn/favorite-btn';
 import './promo-film-styles.css';
 
 export default function PromoFilm({movie}: {movie: Film}): JSX.Element {
@@ -22,7 +23,7 @@ export default function PromoFilm({movie}: {movie: Film}): JSX.Element {
 
           <div className="film-card__buttons">
             <PlayButton id={id} />
-            <MyListBtn />
+            <FavoriteBtn id={promoFilmId} />
           </div>
         </div>
       </div>

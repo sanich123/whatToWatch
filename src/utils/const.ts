@@ -1,4 +1,5 @@
 import { getToken } from '../store/async/token';
+import { Comment } from '../types/types';
 
 export const AppRoute = {
   Main: '/',
@@ -79,4 +80,20 @@ export const warnings = {
   serverReview400: 'Поле рейтинга должно быть значением не меньше 1, отзыв должен состоять из не менее 40 символов и не более 500 символов',
   wrongData: 'Введенные вами логин и пароль не соответствуют требованиям',
   haveToAuth: 'Не забудьте авторизоваться',
+};
+
+export const promoFilmId = 25;
+
+export const reviewsReducer = (arr: Comment[]) => {
+  const result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (result.length === 0) {
+      result.push(arr[i]);
+    }
+    else if (!result.slice().map(({id}) => id).includes(arr[i].id)) {
+      result.push(arr[i]);
+    }
+  }
+  return result;
 };

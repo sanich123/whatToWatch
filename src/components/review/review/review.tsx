@@ -23,6 +23,7 @@ export default function AddReview(): JSX.Element {
   const [rating, setRating] = useState('');
   const [disabled, setDisabled] = useState(false);
 
+
   if (!film) {
     return <Loader />;
   }
@@ -36,6 +37,7 @@ export default function AddReview(): JSX.Element {
     if (isSuccess) {
       history.push(`/films/${id}`);
     }
+
     setDisabled(false);
   };
 

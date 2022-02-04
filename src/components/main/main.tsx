@@ -19,10 +19,8 @@ export default function Main(): JSX.Element {
   const movies = useSelector((state: RootState) => state.movies.films);
   const movie = useSelector((state: RootState) => state.movies.promoFilm);
   const [slicingNum, setSlicingNum] = useState(numberOfFilms);
-
   const films = filterChanger(chosenFilter, movies);
   const slicedFilms = films.slice(startOfSlice, slicingNum);
-
   const {name, backgroundImage} = movie;
 
   if (movies.length === 0 || !movie) {

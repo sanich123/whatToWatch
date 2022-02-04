@@ -8,8 +8,9 @@ export default function UserAuth({userAvatar}: {userAvatar: string}): JSX.Elemen
   const history = useHistory();
   const id = useSelector(({film}: RootState) => film.filmId);
   const path = history.location.pathname;
-
   const dispatch = useDispatch();
+  const pathChanger = path === `/films/${id}/review` || path === AppRoute.Favorites ? AppRoute.Main : history.location;
+
   return (
     <ul className="user-block">
       <li className="user-block__item">
@@ -18,7 +19,7 @@ export default function UserAuth({userAvatar}: {userAvatar: string}): JSX.Elemen
         </div>
       </li>
       <li className="user-block__item" onClick={() => dispatch(logOut())}>
-        <Link className="user-block__link" to={ path === `/films/${id}/review` ? AppRoute.Main : history.location}>Sign out</Link>
+        <Link className="user-block__link" to={ pathChanger }>Sign out</Link>
       </li>
     </ul>
   );
