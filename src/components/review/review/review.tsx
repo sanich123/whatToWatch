@@ -19,7 +19,7 @@ export default function AddReview(): JSX.Element {
   const [film] = useSelector(({movies}: RootState) => movies.films).filter(({id}) => id === +selected.id);
   const isSuccess = useSelector((state: RootState) => state.film.successSending);
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState('Review text');
   const [rating, setRating] = useState('');
   const [disabled, setDisabled] = useState(false);
 
