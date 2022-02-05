@@ -15,6 +15,15 @@ export default function Player():JSX.Element {
   const [duration, setDuration] = useState<number | undefined>();
   const [isPlaying, setIsPlaying] = useState(true);
   const [canPlay, setCanPlay] = useState(false);
+  const [currentTime, setCurrentTime] = useState<number | undefined>(0);
+  const [progress, setProgress] = useState(0);
+
+  setInterval(
+    ()=> {
+      setCurrentTime(videoRef.current?.currentTime);
+      setProgress((videoRef.current?.currentTime || 0 / (duration || 0)) * 100);
+    }, 1000);
+  console.log(currentTime, progress, duration);
 
   const playVideo = (): void => {
     if (!isPlaying) {
@@ -73,7 +82,7 @@ export default function Player():JSX.Element {
           <div className="player__controls">
             <div className="player__controls-row">
               <div className="player__time">
-                <progress className="player__progress" value="30" max="100"></progress>
+                <progress className="player__progress" value={currentTime} max='100'></progress>
                 <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
               </div>
               <div className="player__time-value">{duration && `${Math.floor(duration / 60)}:${Math.floor(duration % 60)}`}</div>
