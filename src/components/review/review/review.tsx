@@ -1,8 +1,7 @@
-/* eslint-disable no-console */
 import React, { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { postComment } from '../../../store/async/async-thunks';
+import { postComment } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
 import Loader from '../../common/loader/loader';
 import Logo from '../../main/logo-footer/logo';
@@ -16,13 +15,12 @@ export default function AddReview(): JSX.Element {
   const selected: {id: string} = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
+  const isSuccess = useSelector(({film}: RootState) => film.successSending);
   const [film] = useSelector(({movies}: RootState) => movies.films).filter(({id}) => id === +selected.id);
-  const isSuccess = useSelector((state: RootState) => state.film.successSending);
 
   const [text, setText] = useState('Review text');
   const [rating, setRating] = useState('');
   const [disabled, setDisabled] = useState(false);
-
 
   if (!film) {
     return <Loader />;

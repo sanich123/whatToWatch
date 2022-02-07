@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { postAuthInfo } from '../../../store/async/async-thunks';
+import { postAuthInfo } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
 import { AppRoute, testingEmail, testingPassword } from '../../../utils/const';
 import LogoFooter from '../../main/logo-footer/footer';

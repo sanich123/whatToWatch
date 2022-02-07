@@ -101,4 +101,9 @@ export interface AuthType {
   password: string,
 }
 
+export interface CommentType {
+  rating: number,
+  comment: string,
+}
+
 

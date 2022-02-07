@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useComments } from '../../../../hooks/useFetch';
 import { RootState } from '../../../../types/types';
-import { reviewsReducer } from '../../../../utils/const';
+import { reviewsReducer } from '../../../../utils/utils';
 import Loader from '../../../common/loader/loader';
 import CommentRow from './comments-row';
 import './comments-styles.css';

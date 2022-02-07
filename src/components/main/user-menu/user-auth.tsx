@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { logOut } from '../../../store/async/async-thunks';
+import { logOut } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
 import { AppRoute } from '../../../utils/const';
 

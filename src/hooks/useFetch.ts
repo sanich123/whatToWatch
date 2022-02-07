@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Film } from '../types/types';
-import { rootUrl, serverPath, warnings } from '../utils/const';
-import { adaptFilm, getAdaptedFilms, getData } from '../utils/utils';
+import { adaptFilm, getAdaptedFilms } from '../utils/adapter';
+import { serverPath, warnings } from '../utils/const';
+import { getData } from '../utils/fetch-api';
 
 export const useSimilarFilms = (id: string) => {
   const [films, setFilms] = useState<Film[]>([]);
@@ -46,7 +47,7 @@ export const useComments = (id: number) => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(`${rootUrl}${serverPath.comments}/${id}`);
+        const response = await getData(`${serverPath.comments}/${id}`);
         if (response.status === 400) {
           toast.warn(warnings.serverReview400);
         } else {

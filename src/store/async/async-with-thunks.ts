@@ -1,11 +1,12 @@
 import { fetchFilms, setFavorites, setPromo } from '../slices/start';
 import { AuthInfoDTO, Film } from '../../types/types';
-import { fetchComments, sendingFailed } from '../slices/film';
-import { adaptFilm, deleteData, getAdaptedFilms, getData, postData } from '../../utils/utils';
-import { AuthorizationStatus, errors, rootUrl, serverPath, warnings } from '../../utils/const';
+import { fetchComments, sendingFailed, sendingSuccess } from '../slices/film';
+import { deleteData, getData, postData } from '../../utils/fetch-api';
+import { AuthorizationStatus, errors, serverPath, warnings } from '../../utils/const';
 import { checkStatus, getAvatar, successAuth } from '../slices/authorization';
-import { deleteToken, getToken, saveToken } from './token';
+import { deleteToken, saveToken } from '../../utils/token';
 import { toast } from 'react-toastify';
+import { adaptFilm, getAdaptedFilms } from '../../utils/adapter';
 
 export const loadFilms = () =>
   async (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
@@ -112,10 +113,10 @@ export const setFavorite = async (id: number, isFavorite: boolean) => {
   try {
     const response = await postData(`${serverPath.favorite}/${id}/${isFavorite ? 0 : 1}`);
     if (response.status === 400) {
-      toast.warn('Не удалось добавить в избранное');
+      toast.warn(warnings.wrongAddedFavorites);
     }
     if (response.status === 401) {
-      toast.warn('Добавлять в избранное могут только авторизованные пользователи');
+      toast.warn(warnings.wrongAccess);
     }
   }
   catch {
@@ -126,33 +127,23 @@ export const setFavorite = async (id: number, isFavorite: boolean) => {
 export const postComment = (id: string, rating: number, comment: string) =>
   async (dispatch: (arg: { payload?: Comment[]; type: string; }) => void) => {
     try {
-      const response = await (await fetch(`${rootUrl}${serverPath.comments}/${id}`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-          'x-token': getToken(),
-        },
-        body: JSON.stringify({
-          rating: rating,
-          comment: comment,
-        }),
+      const response = await (await postData(`${serverPath.comments}/${id}`, {
+        rating: rating,
+        comment: comment,
       }));
-
       if (response.status === 404) {
         toast.warn(warnings.server404);
         dispatch(sendingFailed());
       }
-
       if (response.status === 400) {
         toast.error(warnings.serverReview400);
       }
-
       else {
         const comments = await response.json();
         dispatch(fetchComments(comments));
+        dispatch(sendingSuccess());
       }
     }
-
     catch {
       toast.warn(warnings.network);
       dispatch(sendingFailed());

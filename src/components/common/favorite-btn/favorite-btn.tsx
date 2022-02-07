@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadFavorites, setFavorite } from '../../../store/async/async-thunks';
+import { loadFavorites, setFavorite } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
 
 export default function FavoriteBtn({id}: {id: number}): JSX.Element {

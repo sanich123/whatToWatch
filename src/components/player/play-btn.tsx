@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { FullScreenBtnProps } from './full-screen-btn';
 import styled from 'styled-components';
 
@@ -31,21 +30,6 @@ export default function PlayBtn({isPlaying, setIsPlaying, current}: PlayBtnProps
       setIsPlaying(false);
     }
   };
-
-  useEffect(() => {
-    const onKeyDownWhiteSpace =
-    (evt: KeyboardEvent) => {
-      if (evt.key === 'Space') {
-        evt.preventDefault();
-        current?.play();
-      }
-    };
-    document.addEventListener('keydown', onKeyDownWhiteSpace);
-
-    return () => {
-      document.removeEventListener('keydown', onKeyDownWhiteSpace);
-    };
-  });
 
   return (
     <StyledBtn

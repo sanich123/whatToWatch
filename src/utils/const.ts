@@ -1,5 +1,3 @@
-import { Comment } from '../types/types';
-
 export const AppRoute = {
   Main: '/',
   SignIn: '/login',
@@ -68,21 +66,10 @@ export const warnings = {
   serverReview400: 'Поле рейтинга должно быть значением не меньше 1, отзыв должен состоять из не менее 40 символов и не более 500 символов',
   wrongData: 'Введенные вами логин и пароль не соответствуют требованиям',
   haveToAuth: 'Не забудьте авторизоваться',
+  wrongAddedFavorites: 'Не удалось добавить в избранное',
+  wrongAccess: 'Добавлять в избранное могут только авторизованные пользователи',
 };
 
 export const promoFilmId = 25;
 
-export const reviewsReducer = (reviews: Comment[]) => {
-  const result = [];
 
-  for (let i = 0; i < reviews.length; i++) {
-    if (result.length === 0) {
-      result.push(reviews[i]);
-    }
-    else if (!result.slice().map(({id}) => id).includes(reviews[i].id)) {
-      result.push(reviews[i]);
-    }
-  }
-
-  return result;
-};

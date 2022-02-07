@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { RootState } from '../../types/types';
-import { getFormattedTime } from '../../utils/utils';
+import { getFormattedTime } from '../../utils/formatters';
 import Loader from '../common/loader/loader';
 import FullScreenBtn from './full-screen-btn';
 import PlayBtn from './play-btn';
@@ -25,15 +25,26 @@ export default function Player():JSX.Element {
     }, 1000);
 
   useEffect(() => {
-    const onKeyDownEsc = (evt: KeyboardEvent) => {
+    const onKeyDownEsc =
+    (evt: KeyboardEvent) => {
       if (evt.key === 'Escape') {
         evt.preventDefault();
         history.goBack();
       }
     };
+    const onKeyDownWhiteSpace =
+    (evt: KeyboardEvent) => {
+      if (evt.key === 'Space') {
+        evt.preventDefault();
+        videoRef.current?.play();
+      }
+    };
     document.addEventListener('keydown', onKeyDownEsc);
+    document.addEventListener('keydown', onKeyDownWhiteSpace);
+
     return () => {
       document.removeEventListener('keydown', onKeyDownEsc);
+      document.removeEventListener('keydown', onKeyDownWhiteSpace);
     };
 
   }, [history]);

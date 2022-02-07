@@ -1,6 +1,6 @@
-import { dateChanger } from '../../../../utils/utils';
 import { Comment } from '../../../../types/types';
 import React from 'react';
+import { dateChanger } from '../../../../utils/formatters';
 
 export default function CommentCol({reviews}: {reviews: Comment[]}): JSX.Element {
 
@@ -11,7 +11,6 @@ export default function CommentCol({reviews}: {reviews: Comment[]}): JSX.Element
           <div className="review">
             <blockquote className="review__quote">
               <p className="review__text">{comment}</p>
-
               <footer className="review__details">
                 <cite className="review__author">{user.name}</cite>
                 <time className="review__date" dateTime={date}>{dateChanger(date)}</time>
