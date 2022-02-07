@@ -39,22 +39,43 @@ export const markChanger = (mark: number) => {
   }
 };
 
-export const dateChanger = (date: string) => `${new Date(date).toLocaleString('en-US',
-  {
-    month: 'long',
-    day: '2-digit',
-    year: 'numeric',
-  },
-)}`;
+export const dateChanger =
+(date: string) =>
+  `${new Date(date).toLocaleString('en-US',
+    {
+      month: 'long',
+      day: '2-digit',
+      year: 'numeric',
+    },
+  )}`;
 
-export const filterChanger = (filter: string, array: Film[]) => array.slice().filter((film) => filter === genres['All genres'] ? film : film.genre === filter);
+export const filterChanger =
+(filter: string, array: Film[]) =>
+  array.slice().filter((film) => filter === genres['All genres'] ? film : film.genre === filter);
 
 export const commentLayoutMaker = (arr: Comment[]) => {
   const result = [];
   for (let i = 0; i < arr.length; i=i+3) {
     result.push([arr[i], arr[i+1], arr[i+2]]);
   }
-  return result.map((e) => e.filter(Boolean));
+
+  return result.map((comments) => comments.filter(Boolean));
 };
 
 export const getAdaptedFilms = (films: FilmDTO[]) => films.map((film) => adaptFilm(film));
+
+const zeroMaker = (time: number) => time >= 10 ? time : `0${time}`;
+
+export const getFormattedTime = (duration?: number, currentTime?: number) => {
+  if (duration && currentTime) {
+    const hours = Math.floor((duration - currentTime) / 3600);
+    const minutes = Math.floor((duration - currentTime - (hours * 3600)) / 60);
+    const secs = Math.floor((duration - currentTime - (hours * 3600) - (minutes * 60)));
+
+    if (duration >= 3600) {
+      return `${zeroMaker(hours)}:${zeroMaker(minutes)}:${zeroMaker(secs)}`;
+    } else {
+      return `${zeroMaker(minutes)}:${zeroMaker(secs)}`;
+    }
+  }
+};

@@ -1,48 +1,28 @@
-/* eslint-disable no-console */
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { RootState } from '../../types/types';
+import { getFormattedTime } from '../../utils/utils';
 import Loader from '../common/loader/loader';
+import FullScreenBtn from './full-screen-btn';
+import PlayBtn from './play-btn';
 import './player-styles.css';
 
 export default function Player():JSX.Element {
   const films = useSelector((state: RootState) => state.movies.films);
   const selected: {id: string} = useParams();
   const history = useHistory();
-
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [duration, setDuration] = useState<number | undefined>();
   const [isPlaying, setIsPlaying] = useState(true);
   const [canPlay, setCanPlay] = useState(false);
   const [currentTime, setCurrentTime] = useState<number | undefined>(0);
-  const [progress, setProgress] = useState(0);
+
+  const duration = videoRef.current?.duration;
 
   setInterval(
     ()=> {
       setCurrentTime(videoRef.current?.currentTime);
-      setProgress((videoRef.current?.currentTime || 0 / (duration || 0)) * 100);
     }, 1000);
-  console.log(currentTime, progress, duration);
-
-  const playVideo = (): void => {
-    if (!isPlaying) {
-      videoRef.current?.play();
-      setIsPlaying(true);
-      setDuration(videoRef.current?.duration);
-    } else if (isPlaying) {
-      videoRef.current?.pause();
-      setIsPlaying(false);
-    }
-  };
-
-  const fullScreen = () => {
-    if (!document.fullscreenElement) {
-      videoRef.current?.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
-  };
 
   useEffect(() => {
     const onKeyDownEsc = (evt: KeyboardEvent) => {
@@ -82,28 +62,33 @@ export default function Player():JSX.Element {
           <div className="player__controls">
             <div className="player__controls-row">
               <div className="player__time">
-                <progress className="player__progress" value={currentTime} max='100'></progress>
-                <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
+                <progress
+                  className="player__progress"
+                  value={currentTime}
+                  max={duration}
+                />
+                <div
+                  className="player__toggler"
+                  style={{ left: `${currentTime && duration ? (currentTime / duration) * 100 : 0}%` }}
+                >Toggler
+                </div>
+
               </div>
-              <div className="player__time-value">{duration && `${Math.floor(duration / 60)}:${Math.floor(duration % 60)}`}</div>
+              <div className="player__time-value">
+                {getFormattedTime(duration, currentTime)}
+              </div>
             </div>
 
             <div className="player__controls-row">
-
-              <button onClick={() => playVideo()} type="button" className="player__play">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref={isPlaying ? '#pause' : '#play-s'} />
-                </svg>
-                <span>Play</span>
-              </button>
+              <PlayBtn
+                current={videoRef.current}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+              />
               <div className="player__name">Transpotting</div>
-
-              <button onClick={() => fullScreen()} type="button" className="player__full-screen">
-                <svg viewBox="0 0 27 27" width="27" height="27">
-                  <use xlinkHref="#full-screen" />
-                </svg>
-                <span>Full screen</span>
-              </button>
+              <FullScreenBtn
+                current={videoRef.current}
+              />
             </div>
           </div>
         </>
