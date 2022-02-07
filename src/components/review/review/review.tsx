@@ -15,7 +15,7 @@ export default function AddReview(): JSX.Element {
   const selected: {id: string} = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const isSuccess = useSelector(({film}: RootState) => film.successSending);
+  const isFailed = useSelector(({film}: RootState) => film.sendingFailed);
   const [film] = useSelector(({movies}: RootState) => movies.films).filter(({id}) => id === +selected.id);
 
   const [text, setText] = useState('Review text');
@@ -29,13 +29,15 @@ export default function AddReview(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
     setDisabled(true);
     dispatch(postComment(selected.id, +rating, text));
 
-    if (isSuccess) {
-      history.push(`/films/${id}`);
+    if (isFailed) {
+      return;
     }
 
+    history.push(`/films/${id}`);
     setDisabled(false);
   };
 

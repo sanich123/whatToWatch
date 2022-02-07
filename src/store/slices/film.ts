@@ -18,12 +18,16 @@ export const film = createSlice({
     sendingFailed: (state) => {
       state.sendingFailed = true;
     },
+    clearAll: (state) => {
+      state.sendingFailed = false;
+      state.successSending = false;
+    },
     setFilmId: (state, action) => {
       state.filmId = action.payload;
     },
   },
 });
 
-export const { fetchComments, sendingFailed, setFilmId, sendingSuccess } = film.actions;
+export const { fetchComments, sendingFailed, setFilmId, sendingSuccess, clearAll } = film.actions;
 
 export default film.reducer;

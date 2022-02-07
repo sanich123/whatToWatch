@@ -1,6 +1,6 @@
 import { fetchFilms, setFavorites, setPromo } from '../slices/start';
 import { AuthInfoDTO, Film } from '../../types/types';
-import { fetchComments, sendingFailed, sendingSuccess } from '../slices/film';
+import { clearAll, fetchComments, sendingFailed, sendingSuccess } from '../slices/film';
 import { deleteData, getData, postData } from '../../utils/fetch-api';
 import { AuthorizationStatus, errors, serverPath, warnings } from '../../utils/const';
 import { checkStatus, getAvatar, successAuth } from '../slices/authorization';
@@ -126,6 +126,7 @@ export const setFavorite = async (id: number, isFavorite: boolean) => {
 
 export const postComment = (id: string, rating: number, comment: string) =>
   async (dispatch: (arg: { payload?: Comment[]; type: string; }) => void) => {
+    dispatch(clearAll());
     try {
       const response = await (await postData(`${serverPath.comments}/${id}`, {
         rating: rating,
