@@ -1,4 +1,3 @@
-import { getToken } from '../store/async/token';
 import { Comment } from '../types/types';
 
 export const AppRoute = {
@@ -62,17 +61,6 @@ export const errors = {
   noAuth: 401,
   wrongData: 400,
 };
-
-export const getData = (url: string) => fetch(`${rootUrl}${url}`, {
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-    'x-token': getToken(),
-  },
-});
-
-export const deleteData = (url: string) => fetch(`${rootUrl}${url}`, {
-  method: 'DELETE',
-});
 
 export const warnings = {
   network: 'Неполадки с сетью или вы неправильно ввели адрес',

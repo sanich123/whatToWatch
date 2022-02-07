@@ -1,46 +1,40 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { getToken } from '../store/async/token';
-import { Film, FilmDTO } from '../types/types';
+import { Film } from '../types/types';
 import { rootUrl, serverPath, warnings } from '../utils/const';
-import { adaptFilm } from '../utils/utils';
+import { adaptFilm, getAdaptedFilms, getData } from '../utils/utils';
 
 export const useSimilarFilms = (id: string) => {
   const [films, setFilms] = useState<Film[]>([]);
 
   useEffect(() => {
-    (fetch(`${rootUrl}${serverPath.films}/${id}/${serverPath.similar}`)
-      .then((response) => response.json())
-      .then((data) => setFilms(data.map((film: FilmDTO) => adaptFilm(film)))));
+    (async () => {
+      try {
+        const movies = await (await getData(`${serverPath.films}/${id}/${serverPath.similar}`)).json();
+        setFilms(getAdaptedFilms(movies));
+      }
+      catch {
+        toast.error(warnings.server404);
+      }
+    })();
   }, [id]);
 
   return films;
 };
 
-export const useFilm = (id: string) => {
-  const [selectedFilm, setSelectedMovie] = useState<Film>();
-
-  useEffect(() => {
-    fetch(`${rootUrl}${serverPath.films}/${id}`)
-      .then((response) => response.json())
-      .then((film) => setSelectedMovie(adaptFilm(film)));
-  }, [id]);
-
-  return selectedFilm;
-};
-
 export const useFavorites = () => {
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<Film[]>([]);
 
   useEffect(() => {
-    fetch(`${rootUrl}${serverPath.favorite}`, {
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'x-token': getToken(),
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => setFavorites(data.map((film: FilmDTO) => adaptFilm(film))));
+    (async () => {
+      try {
+        const films = await (await getData(serverPath.favorite)).json();
+        setFavorites(getAdaptedFilms(films));
+      }
+      catch {
+        toast.error(warnings.server404);
+      }
+    })();
   }, []);
 
   return favorites;
@@ -68,4 +62,23 @@ export const useComments = (id: number) => {
 
   return comments;
 };
+
+export const useFilm = (id: string) => {
+  const [selectedFilm, setSelectedMovie] = useState<Film>();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const film = await (await getData(`${serverPath.films}/${id}`)).json();
+        setSelectedMovie(adaptFilm(film));
+      }
+      catch {
+        toast.error(warnings.server404);
+      }
+    })();
+  }, [id]);
+
+  return selectedFilm;
+};
+
 

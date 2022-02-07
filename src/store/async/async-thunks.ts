@@ -1,45 +1,16 @@
-/* eslint-disable no-console */
 import { fetchFilms, setFavorites, setPromo } from '../slices/start';
 import { AuthInfoDTO, Film } from '../../types/types';
 import { fetchComments, sendingFailed } from '../slices/film';
-import { adaptFilm, getAdaptedFilms } from '../../utils/utils';
-import { AuthorizationStatus, deleteData, errors, getData, httpMethods, rootUrl, serverPath, warnings } from '../../utils/const';
+import { adaptFilm, deleteData, getAdaptedFilms, getData, postData } from '../../utils/utils';
+import { AuthorizationStatus, errors, rootUrl, serverPath, warnings } from '../../utils/const';
 import { checkStatus, getAvatar, successAuth } from '../slices/authorization';
 import { deleteToken, getToken, saveToken } from './token';
 import { toast } from 'react-toastify';
 
-interface AuthType {
-  email: string,
-  password: string,
-}
-
-const postData = (url: string, data?: AuthType) => {
-  if (data) {
-    return  fetch(`${rootUrl}${url}`, {
-      method: httpMethods.post,
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'x-token': getToken(),
-      },
-      body: JSON.stringify(data),
-    });
-  } else {
-    return fetch(`${rootUrl}${url}`, {
-      method: httpMethods.post,
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'x-token': getToken(),
-      },
-    });
-  }};
-
-
 export const loadFilms = () =>
   async (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
-
     try {
       const response = await getData(serverPath.films);
-
       if (response.status === errors.wrongAddress) {
         toast.error(warnings.server404);
       } else {
@@ -47,7 +18,6 @@ export const loadFilms = () =>
         dispatch(fetchFilms(getAdaptedFilms(films)));
       }
     }
-
     catch {
       toast.warn(warnings.network);
     }
@@ -105,7 +75,6 @@ export const postAuthInfo = (email: string, password: string) =>
         dispatch(getAvatar(data['avatar_url']));
       }
     }
-
     catch {
       toast.warn(warnings.network);
     }

@@ -1,5 +1,6 @@
-import { Comment, Film, FilmDTO } from '../types/types';
-import { genres } from './const';
+import { getToken } from '../store/async/token';
+import { AuthType, Comment, Film, FilmDTO } from '../types/types';
+import { genres, httpMethods, rootUrl } from './const';
 
 export const adaptFilm = (film: FilmDTO): Film => ({
   backgroundColor: film['background_color'],
@@ -79,3 +80,34 @@ export const getFormattedTime = (duration?: number, currentTime?: number) => {
     }
   }
 };
+
+export const getData = (url: string) => fetch(`${rootUrl}${url}`, {
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+    'x-token': getToken(),
+  },
+});
+
+export const postData = (url: string, data?: AuthType) => {
+  if (data) {
+    return  fetch(`${rootUrl}${url}`, {
+      method: httpMethods.post,
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'x-token': getToken(),
+      },
+      body: JSON.stringify(data),
+    });
+  } else {
+    return fetch(`${rootUrl}${url}`, {
+      method: httpMethods.post,
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'x-token': getToken(),
+      },
+    });
+  }};
+
+export const deleteData = (url: string) => fetch(`${rootUrl}${url}`, {
+  method: 'DELETE',
+});

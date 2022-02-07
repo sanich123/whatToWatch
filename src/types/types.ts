@@ -96,4 +96,9 @@ export interface AuthInfo {
   token: string
 }
 
+export interface AuthType {
+  email: string,
+  password: string,
+}
+
 
