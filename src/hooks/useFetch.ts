@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { getToken } from '../store/async/token';
 import { Film, FilmDTO } from '../types/types';
 import { rootUrl, serverPath, warnings } from '../utils/const';
-import { adaptFilm, getAdaptedFilms } from '../utils/utils';
+import { adaptFilm } from '../utils/utils';
 
 export const useSimilarFilms = (id: string) => {
   const [films, setFilms] = useState<Film[]>([]);
@@ -40,7 +40,7 @@ export const useFavorites = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => setFavorites(data.map(getAdaptedFilms)));
+      .then((data) => setFavorites(data.map((film: FilmDTO) => adaptFilm(film))));
   }, []);
 
   return favorites;

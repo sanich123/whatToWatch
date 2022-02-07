@@ -8,6 +8,11 @@ interface MoreFilmsBtnProps {
 
 export default function MoreFilmsBtn({setSlicingNum, slicingNum}: MoreFilmsBtnProps): JSX.Element {
   return (
-    <button onClick={() => setSlicingNum(slicingNum + numberOfFilms)} className='catalog__button' type="button">Show more</button>
+    <button
+      onClick={() => setSlicingNum(slicingNum + numberOfFilms)}
+      className='catalog__button'
+      type="button"
+    >Show more
+    </button>
   );
 }

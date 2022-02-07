@@ -12,7 +12,7 @@ export default function UserAuth({userAvatar}: {userAvatar: string}): JSX.Elemen
   const pathChanger = path === `/films/${id}/review` || path === AppRoute.Favorites ? AppRoute.Main : history.location;
 
   return (
-    <ul className="user-block">
+    <>
       <li className="user-block__item">
         <div className="user-block__avatar" onClick={() => history.push(AppRoute.Favorites)}>
           <img src={userAvatar} alt="User avatar" width="63" height="63" />
@@ -21,6 +21,7 @@ export default function UserAuth({userAvatar}: {userAvatar: string}): JSX.Elemen
       <li className="user-block__item" onClick={() => dispatch(logOut())}>
         <Link className="user-block__link" to={ pathChanger }>Sign out</Link>
       </li>
-    </ul>
+    </>
+
   );
 }

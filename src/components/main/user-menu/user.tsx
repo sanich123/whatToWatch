@@ -9,13 +9,11 @@ export default function UserMenu(): JSX.Element {
   const userAvatar = useSelector(({authorization}: RootState) => authorization.avatarUrl);
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
 
-  if (userAvatar && authStatus === AuthorizationStatus.Auth) {
-    return <UserAuth userAvatar={userAvatar} />;
-  }
-
   return (
     <div className="user-block">
-      <Link to={AppRoute.SignIn} className="user-block__link">Sign in</Link>
+      {(userAvatar && authStatus === AuthorizationStatus.Auth) ?
+        <UserAuth userAvatar={userAvatar} /> :
+        <Link to={AppRoute.SignIn} className="user-block__link">Sign in</Link>}
     </div>
   );
 }
