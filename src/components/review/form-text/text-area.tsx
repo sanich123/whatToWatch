@@ -13,7 +13,7 @@ export default function TextArea({setText, rating, text, disabled}: TextAreaProp
     <div className="add-review__text">
       <textarea
         className="add-review__textarea"
-        onFocus={() => setText('')}
+        onFocus={() => text === 'Review text' ? setText('') : setText(text)}
         onChange={({target}) => setText(target.value)}
         name="review-text"
         id="review-text"

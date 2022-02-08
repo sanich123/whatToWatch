@@ -38,9 +38,6 @@ export default function SignIn(): JSX.Element {
       return;
     }
     dispatch(postAuthInfo(email, password));
-    // if (authStatus === 'fullfilled') {
-    //   history.push(AppRoute.Main);
-    // }
   };
 
   return (

@@ -70,7 +70,6 @@ export const postAuthInfo = (email: string, password: string) =>
       if (response.status === errors.wrongData) {
         dispatch(isRejected());
         toast.warn(warnings.wrongData);
-        return;
       } else {
         const data = await response.json();
         dispatch(isFullFilled());

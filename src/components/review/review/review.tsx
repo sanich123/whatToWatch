@@ -33,11 +33,11 @@ export default function AddReview(): JSX.Element {
   if (!film) {
     return <Loader />;
   }
+
   const {backgroundImage, name, posterImage, id} = film;
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-
     setDisabled(true);
     dispatch(postComment(selected.id, +rating, text));
     setDisabled(false);
