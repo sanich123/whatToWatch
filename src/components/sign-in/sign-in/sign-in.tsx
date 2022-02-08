@@ -1,15 +1,15 @@
+/* eslint-disable no-console */
 import { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { postAuthInfo } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
-import { AppRoute, testingEmail, testingPassword } from '../../../utils/const';
+import { AppRoute, testingEmail, testingPassword, warnings } from '../../../utils/const';
 import LogoFooter from '../../main/logo-footer/footer';
 import Logo from '../../main/logo-footer/logo';
 import Svg from '../../svg/svg';
 import './sign-in-styles.css';
-
 
 export default function SignIn(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -17,7 +17,7 @@ export default function SignIn(): JSX.Element {
   const [wrongEmail, setWrongEmail] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const authStatus = useSelector(({authorization}: RootState) => authorization.successAuth);
+  const authStatus = useSelector(({authorization}: RootState) => authorization.status);
 
   const handleLogin = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -25,15 +25,12 @@ export default function SignIn(): JSX.Element {
       setWrongEmail(true);
       return;
     }
-
     if (!testingPassword.test(password)) {
-      toast.warn('Пароль должен состоять минимум из одной буквы и одной цифры');
+      toast.warn(warnings.wrongPassword);
       return;
     }
-
     dispatch(postAuthInfo(email, password));
-
-    if (authStatus) {
+    if (authStatus === 'fullfilled') {
       history.push(AppRoute.Main);
     }
   };

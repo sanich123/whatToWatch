@@ -1,9 +1,9 @@
 import { fetchFilms, setFavorites, setPromo } from '../slices/start';
 import { AuthInfoDTO, Film } from '../../types/types';
-import { clearAll, fetchComments, sendingFailed, sendingSuccess } from '../slices/film';
+import {  fetchComments, fullFilled, rejected, startPosting } from '../slices/film';
 import { deleteData, getData, postData } from '../../utils/fetch-api';
 import { AuthorizationStatus, errors, serverPath, warnings } from '../../utils/const';
-import { checkStatus, getAvatar, successAuth } from '../slices/authorization';
+import { checkStatus, getAvatar, isFullFilled, isRejected, startLoading } from '../slices/authorization';
 import { deleteToken, saveToken } from '../../utils/token';
 import { toast } from 'react-toastify';
 import { adaptFilm, getAdaptedFilms } from '../../utils/adapter';
@@ -59,6 +59,7 @@ export const getAuth = () =>
 
 export const postAuthInfo = (email: string, password: string) =>
   async (dispatch: (arg: { payload?: AuthInfoDTO; type: string; }) => void ) => {
+    dispatch(startLoading());
     try {
       const response = await postData(serverPath.login,
         {
@@ -67,16 +68,18 @@ export const postAuthInfo = (email: string, password: string) =>
         });
 
       if (response.status === errors.wrongData) {
+        dispatch(isRejected());
         toast.warn(warnings.wrongData);
         return;
       } else {
         const data = await response.json();
-        dispatch(successAuth());
+        dispatch(isFullFilled());
         saveToken(data.token);
         dispatch(getAvatar(data['avatar_url']));
       }
     }
     catch {
+      dispatch(isRejected());
       toast.warn(warnings.network);
     }
   };
@@ -126,7 +129,7 @@ export const setFavorite = async (id: number, isFavorite: boolean) => {
 
 export const postComment = (id: string, rating: number, comment: string) =>
   async (dispatch: (arg: { payload?: Comment[]; type: string; }) => void) => {
-    dispatch(clearAll());
+    dispatch(startPosting());
     try {
       const response = await (await postData(`${serverPath.comments}/${id}`, {
         rating: rating,
@@ -134,7 +137,7 @@ export const postComment = (id: string, rating: number, comment: string) =>
       }));
       if (response.status === 404) {
         toast.warn(warnings.server404);
-        dispatch(sendingFailed());
+        dispatch(rejected());
       }
       if (response.status === 400) {
         toast.error(warnings.serverReview400);
@@ -142,11 +145,11 @@ export const postComment = (id: string, rating: number, comment: string) =>
       else {
         const comments = await response.json();
         dispatch(fetchComments(comments));
-        dispatch(sendingSuccess());
+        dispatch(fullFilled());
       }
     }
     catch {
       toast.warn(warnings.network);
-      dispatch(sendingFailed());
+      dispatch(rejected());
     }
   };

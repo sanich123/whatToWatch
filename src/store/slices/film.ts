@@ -4,30 +4,28 @@ export const film = createSlice({
   name: 'film',
   initialState: {
     comments: [],
-    sendingFailed: false,
-    successSending: false,
+    status: 'idle',
     filmId: '',
   },
   reducers: {
     fetchComments: (state, action) => {
       state.comments = action.payload;
     },
-    sendingSuccess: (state) => {
-      state.successSending = true;
-    },
-    sendingFailed: (state) => {
-      state.sendingFailed = true;
-    },
-    clearAll: (state) => {
-      state.sendingFailed = false;
-      state.successSending = false;
-    },
     setFilmId: (state, action) => {
       state.filmId = action.payload;
+    },
+    startPosting: (state) => {
+      state.status = 'pending';
+    },
+    fullFilled: (state) => {
+      state.status = 'fullfilled';
+    },
+    rejected: (state) => {
+      state.status = 'rejected';
     },
   },
 });
 
-export const { fetchComments, sendingFailed, setFilmId, sendingSuccess, clearAll } = film.actions;
+export const { fetchComments, setFilmId, startPosting, fullFilled, rejected  } = film.actions;
 
 export default film.reducer;

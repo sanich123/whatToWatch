@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -15,9 +16,8 @@ export default function AddReview(): JSX.Element {
   const selected: {id: string} = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const isFailed = useSelector(({film}: RootState) => film.sendingFailed);
+  const status = useSelector(({film}: RootState) => film.status);
   const [film] = useSelector(({movies}: RootState) => movies.films).filter(({id}) => id === +selected.id);
-
   const [text, setText] = useState('Review text');
   const [rating, setRating] = useState('');
   const [disabled, setDisabled] = useState(false);
@@ -32,13 +32,13 @@ export default function AddReview(): JSX.Element {
 
     setDisabled(true);
     dispatch(postComment(selected.id, +rating, text));
-
-    if (isFailed) {
-      return;
+    console.log(status);
+    if (status === 'rejected') {
+      setDisabled(false);
+    } else if (status === 'fullfilled') {
+      history.push(`/films/${id}`);
+      setDisabled(false);
     }
-
-    history.push(`/films/${id}`);
-    setDisabled(false);
   };
 
   return (

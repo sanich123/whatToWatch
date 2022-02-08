@@ -68,6 +68,7 @@ export const warnings = {
   haveToAuth: 'Не забудьте авторизоваться',
   wrongAddedFavorites: 'Не удалось добавить в избранное',
   wrongAccess: 'Добавлять в избранное могут только авторизованные пользователи',
+  wrongPassword: 'Пароль должен состоять минимум из одной буквы и одной цифры',
 };
 
 export const promoFilmId = 25;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PreviewPlayer from '../common/video-player/player';
 import {debounce} from 'lodash';
 import './card-styles.css';
+import PreviewPlayer from '../common/video-player/player';
 
 interface CardProps {
   name: string,

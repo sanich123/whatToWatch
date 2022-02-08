@@ -7,9 +7,9 @@ export const getFormattedTime = (duration?: number, currentTime?: number) => {
     const secs = Math.floor((duration - currentTime - (hours * 3600) - (minutes * 60)));
 
     if (duration >= 3600) {
-      return `${zeroMaker(hours)}:${zeroMaker(minutes)}:${zeroMaker(secs)}`;
+      return `- ${zeroMaker(hours)}:${zeroMaker(minutes)}:${zeroMaker(secs)}`;
     } else {
-      return `${zeroMaker(minutes)}:${zeroMaker(secs)}`;
+      return `- ${zeroMaker(minutes)}:${zeroMaker(secs)}`;
     }
   }
 };

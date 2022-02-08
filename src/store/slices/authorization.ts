@@ -6,7 +6,7 @@ export const auth = createSlice({
   initialState: {
     authStatus: AuthorizationStatus.Unknown,
     avatarUrl: '',
-    successAuth: false,
+    status: 'idle',
   },
   reducers: {
     checkStatus: (state, action) => {
@@ -16,12 +16,21 @@ export const auth = createSlice({
       state.avatarUrl = action.payload;
       state.authStatus = AuthorizationStatus.Auth;
     },
-    successAuth: (state) => {
-      state.successAuth = true;
+    isInitial: (state) => {
+      state.status = 'idle';
+    },
+    startLoading: (state) => {
+      state.status = 'loading';
+    },
+    isFullFilled: (state) => {
+      state.status = 'fullfilled';
+    },
+    isRejected: (state) => {
+      state.status = 'rejected';
     },
   },
 });
 
-export const { checkStatus, getAvatar, successAuth } = auth.actions;
+export const { checkStatus, getAvatar, startLoading, isFullFilled, isRejected, isInitial } = auth.actions;
 
 export default auth.reducer;

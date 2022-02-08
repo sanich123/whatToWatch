@@ -53,7 +53,7 @@ export interface RootState {
   authorization: {
     authStatus: string,
     avatarUrl: string,
-    successAuth: boolean,
+    status: 'idle' | 'loading' | 'fullfilled' | 'rejected',
   }
   movies: {
     filter: string,
@@ -63,8 +63,7 @@ export interface RootState {
   }
   film: {
     comments: Comment[],
-    successSending: boolean,
-    sendingFailed: boolean,
+    status: 'idle' | 'pending' | 'fullfilled' | 'rejected',
     filmId: string,
   }
 }
