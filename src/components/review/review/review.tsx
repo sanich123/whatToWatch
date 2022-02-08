@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { postComment } from '../../../store/async/async-with-thunks';
+import { clearAll } from '../../../store/slices/film';
 import { RootState } from '../../../types/types';
 import Loader from '../../common/loader/loader';
 import Logo from '../../main/logo-footer/logo';
@@ -22,6 +23,13 @@ export default function AddReview(): JSX.Element {
   const [rating, setRating] = useState('');
   const [disabled, setDisabled] = useState(false);
 
+  useEffect(() => {
+    if (status === 'fullfilled') {
+      history.push(`/films/${selected.id}`);
+      dispatch(clearAll());
+    }
+  }, [status, history, selected.id, dispatch]);
+
   if (!film) {
     return <Loader />;
   }
@@ -32,13 +40,7 @@ export default function AddReview(): JSX.Element {
 
     setDisabled(true);
     dispatch(postComment(selected.id, +rating, text));
-    console.log(status);
-    if (status === 'rejected') {
-      setDisabled(false);
-    } else if (status === 'fullfilled') {
-      history.push(`/films/${id}`);
-      setDisabled(false);
-    }
+    setDisabled(false);
   };
 
   return (

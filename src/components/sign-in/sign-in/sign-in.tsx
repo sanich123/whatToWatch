@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { postAuthInfo } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
 import { AppRoute, testingEmail, testingPassword, warnings } from '../../../utils/const';
+import { isInitial } from '../../../store/slices/authorization';
 import LogoFooter from '../../main/logo-footer/footer';
 import Logo from '../../main/logo-footer/logo';
 import Svg from '../../svg/svg';
@@ -19,6 +20,13 @@ export default function SignIn(): JSX.Element {
   const history = useHistory();
   const authStatus = useSelector(({authorization}: RootState) => authorization.status);
 
+  useEffect(() => {
+    if (authStatus === 'fullfilled') {
+      history.push(AppRoute.Main);
+      dispatch(isInitial());
+    }
+  }, [authStatus, history, dispatch]);
+
   const handleLogin = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (!testingEmail.test(email)) {
@@ -30,9 +38,9 @@ export default function SignIn(): JSX.Element {
       return;
     }
     dispatch(postAuthInfo(email, password));
-    if (authStatus === 'fullfilled') {
-      history.push(AppRoute.Main);
-    }
+    // if (authStatus === 'fullfilled') {
+    //   history.push(AppRoute.Main);
+    // }
   };
 
   return (

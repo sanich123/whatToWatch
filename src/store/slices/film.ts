@@ -11,6 +11,9 @@ export const film = createSlice({
     fetchComments: (state, action) => {
       state.comments = action.payload;
     },
+    clearAll: (state) => {
+      state.status = 'idle';
+    },
     setFilmId: (state, action) => {
       state.filmId = action.payload;
     },
@@ -26,6 +29,6 @@ export const film = createSlice({
   },
 });
 
-export const { fetchComments, setFilmId, startPosting, fullFilled, rejected  } = film.actions;
+export const { fetchComments, setFilmId, startPosting, fullFilled, rejected, clearAll } = film.actions;
 
 export default film.reducer;
