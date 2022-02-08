@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { postComment } from '../../../store/async/async-with-thunks';
 import { clearAll } from '../../../store/slices/film';
 import { RootState } from '../../../types/types';
+import { asyncConditions } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
 import Logo from '../../main/logo-footer/logo';
 import UserMenu from '../../main/user-menu/user';
@@ -24,7 +25,7 @@ export default function AddReview(): JSX.Element {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    if (status === 'fullfilled') {
+    if (status === asyncConditions.fullfilled) {
       history.push(`/films/${selected.id}`);
       dispatch(clearAll());
     }

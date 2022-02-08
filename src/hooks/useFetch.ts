@@ -7,7 +7,6 @@ import { getData } from '../utils/fetch-api';
 
 export const useSimilarFilms = (id: string) => {
   const [films, setFilms] = useState<Film[]>([]);
-
   useEffect(() => {
     (async () => {
       try {
@@ -19,13 +18,11 @@ export const useSimilarFilms = (id: string) => {
       }
     })();
   }, [id]);
-
   return films;
 };
 
 export const useFavorites = () => {
   const [favorites, setFavorites] = useState<Film[]>([]);
-
   useEffect(() => {
     (async () => {
       try {
@@ -37,13 +34,11 @@ export const useFavorites = () => {
       }
     })();
   }, []);
-
   return favorites;
 };
 
 export const useComments = (id: number) => {
   const [comments, getComments] = useState([]);
-
   useEffect(() => {
     (async () => {
       try {
@@ -60,7 +55,6 @@ export const useComments = (id: number) => {
       }
     })();
   }, [id]);
-
   return comments;
 };
 

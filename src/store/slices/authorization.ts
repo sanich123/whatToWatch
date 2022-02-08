@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../../utils/const';
+import { asyncConditions, AuthorizationStatus } from '../../utils/const';
 
 export const auth = createSlice({
   name: 'auth',
   initialState: {
     authStatus: AuthorizationStatus.Unknown,
     avatarUrl: '',
-    status: 'idle',
+    status: asyncConditions.idle,
   },
   reducers: {
     checkStatus: (state, action) => {
@@ -17,16 +17,16 @@ export const auth = createSlice({
       state.authStatus = AuthorizationStatus.Auth;
     },
     isInitial: (state) => {
-      state.status = 'idle';
+      state.status = asyncConditions.idle;
     },
     startLoading: (state) => {
-      state.status = 'loading';
+      state.status = asyncConditions.pending;
     },
     isFullFilled: (state) => {
-      state.status = 'fullfilled';
+      state.status = asyncConditions.fullfilled;
     },
     isRejected: (state) => {
-      state.status = 'rejected';
+      state.status = asyncConditions.rejected;
     },
   },
 });

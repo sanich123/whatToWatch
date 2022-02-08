@@ -1,8 +1,15 @@
 import React from 'react';
-import { FilmDescProps } from '../../../../types/types';
 import './details-styles.css';
 
-export default function Details({released, genre, director, runTime, starring}: Omit<FilmDescProps, 'description' | 'id' | 'rating' | 'comments'>): JSX.Element {
+interface DetailsProps {
+  released: number,
+  genre: string,
+  director: string,
+  runTime: number,
+  starring: string[],
+}
+
+export default function Details({released, genre, director, runTime, starring}: DetailsProps): JSX.Element {
 
   return (
     <div className="film-card__text film-card__row">

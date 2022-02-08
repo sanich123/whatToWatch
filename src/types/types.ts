@@ -53,7 +53,7 @@ export interface RootState {
   authorization: {
     authStatus: string,
     avatarUrl: string,
-    status: 'idle' | 'loading' | 'fullfilled' | 'rejected',
+    status: 'idle' | 'pending' | 'fullfilled' | 'rejected',
   }
   movies: {
     filter: string,

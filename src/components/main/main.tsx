@@ -13,11 +13,13 @@ import PromoFilm from './promo-film/promo-film';
 import UserMenu from './user-menu/user';
 import './main-styles.css';
 import Loader from '../common/loader/loader';
+import Copyright from '../common/copyright/copyright';
 
 export default function Main(): JSX.Element {
   const chosenFilter = useSelector(({movies}: RootState) => movies.filter);
+  const movie = useSelector(({movies}: RootState) => movies.promoFilm);
   const movies = useSelector((state: RootState) => state.movies.films);
-  const movie = useSelector((state: RootState) => state.movies.promoFilm);
+
   const [slicingNum, setSlicingNum] = useState(numberOfFilms);
   const films = filterChanger(chosenFilter, movies);
   const slicedFilms = films.slice(startOfSlice, slicingNum);
@@ -34,39 +36,26 @@ export default function Main(): JSX.Element {
         <div className="film-card__bg">
           <img src={backgroundImage} alt={name} />
         </div>
-
         <h1 className="visually-hidden">WTW</h1>
-
         <header className="page-header film-card__head">
-
           <Logo />
-
           <UserMenu />
-
         </header>
         {<PromoFilm movie={movie} />}
       </section>
-
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
           <ul className="catalog__genres-list">
-            {Object.entries(genres).map(([key, value]) => <Filter filter={chosenFilter} key={key} name={key} title={value} />)}
+            {Object.entries(genres).map(([genre, value]) => <Filter filter={chosenFilter} key={genre} name={genre} title={value} />)}
           </ul>
-
           <FilmsList films={slicedFilms} />
           {slicingNum <= slicedFilms.length &&
           <MoreFilmsBtn setSlicingNum={setSlicingNum} slicingNum={slicingNum} />}
         </section>
-
         <footer>
-
           <LogoFooter />
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
+          <Copyright />
         </footer>
       </div>
     </>

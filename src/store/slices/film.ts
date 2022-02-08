@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { asyncConditions } from '../../utils/const';
 
 export const film = createSlice({
   name: 'film',
   initialState: {
     comments: [],
-    status: 'idle',
+    status: asyncConditions.idle,
     filmId: '',
   },
   reducers: {
@@ -12,19 +13,19 @@ export const film = createSlice({
       state.comments = action.payload;
     },
     clearAll: (state) => {
-      state.status = 'idle';
+      state.status = asyncConditions.idle;
     },
     setFilmId: (state, action) => {
       state.filmId = action.payload;
     },
     startPosting: (state) => {
-      state.status = 'pending';
+      state.status = asyncConditions.pending;
     },
     fullFilled: (state) => {
-      state.status = 'fullfilled';
+      state.status = asyncConditions.fullfilled;
     },
     rejected: (state) => {
-      state.status = 'rejected';
+      state.status = asyncConditions.rejected;
     },
   },
 });

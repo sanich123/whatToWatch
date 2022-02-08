@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadFavorites, setFavorite } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
+import { AuthorizationStatus } from '../../../utils/const';
 
 export default function FavoriteBtn({id}: {id: number}): JSX.Element {
   const dispatch = useDispatch();
   const favorites = useSelector(({movies}: RootState) => movies.favorites);
+  const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
   const [isFavorite, setIsFavorite] = useState(false);
   const [click, setClick] = useState(false);
 
@@ -17,13 +19,14 @@ export default function FavoriteBtn({id}: {id: number}): JSX.Element {
   }, [click, dispatch]);
 
   useEffect(() => {
-    if (favorites.some((favorite) => favorite.id === id)) {
+    if (favorites.some((favorite) => favorite.id === id)
+    && authStatus === AuthorizationStatus.Auth) {
       setIsFavorite(true);
     }
     else {
       setIsFavorite(false);
     }
-  }, [dispatch, favorites, id]);
+  }, [dispatch, favorites, id, authStatus]);
 
   return (
     <button

@@ -5,23 +5,24 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { postAuthInfo } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
-import { AppRoute, testingEmail, testingPassword, warnings } from '../../../utils/const';
+import { AppRoute, asyncConditions, testingEmail, testingPassword, warnings } from '../../../utils/const';
 import { isInitial } from '../../../store/slices/authorization';
 import LogoFooter from '../../main/logo-footer/footer';
 import Logo from '../../main/logo-footer/logo';
 import Svg from '../../svg/svg';
 import './sign-in-styles.css';
+import Copyright from '../../common/copyright/copyright';
 
 export default function SignIn(): JSX.Element {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [wrongEmail, setWrongEmail] = useState(false);
-  const dispatch = useDispatch();
-  const history = useHistory();
   const authStatus = useSelector(({authorization}: RootState) => authorization.status);
 
   useEffect(() => {
-    if (authStatus === 'fullfilled') {
+    if (authStatus === asyncConditions.fullfilled) {
       history.push(AppRoute.Main);
       dispatch(isInitial());
     }
@@ -52,7 +53,7 @@ export default function SignIn(): JSX.Element {
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={handleLogin}>
             <div className="sign-in__message" style={wrongEmail ? {display: 'block'} : {display: 'none'}}>
-              <p>{wrongEmail && 'Please enter a valid email address'}</p>
+              <p>{wrongEmail && warnings.wrongEmail}</p>
             </div>
             <div className="sign-in__fields">
               <div className="sign-in__field">
@@ -88,9 +89,7 @@ export default function SignIn(): JSX.Element {
 
         <footer>
           <LogoFooter />
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
+          <Copyright />
         </footer>
       </div>
     </>

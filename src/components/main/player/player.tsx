@@ -18,7 +18,7 @@ export default function Player():JSX.Element {
   const [currentTime, setCurrentTime] = useState<number | undefined>(0);
 
   const duration = videoRef.current?.duration;
-
+  const position = `${currentTime && duration ? (currentTime / duration) * 100 : 0}%`;
   setInterval(
     ()=> {
       setCurrentTime(videoRef.current?.currentTime);
@@ -80,7 +80,7 @@ export default function Player():JSX.Element {
                 />
                 <div
                   className="player__toggler"
-                  style={{ left: `${currentTime && duration ? (currentTime / duration) * 100 : 0}%` }}
+                  style={{ left: position }}
                 >Toggler
                 </div>
 

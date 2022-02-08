@@ -21,14 +21,9 @@ export default function FilmDesc({description, rating, director, runTime, starri
           ))}
         </ul>
       </nav>
-
       {activeTab === tabs.overView && <Overview description={description} rating={rating} director={director} runTime={runTime} starring={starring} />}
-
       {activeTab === tabs.details && <Details released={released} genre={genre} director={director} runTime={runTime} starring={starring} />}
-
       {activeTab === tabs.reviews &&  <Reviews id={id} />}
-
     </div>
-
   );
 }

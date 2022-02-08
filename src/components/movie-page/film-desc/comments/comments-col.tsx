@@ -21,8 +21,6 @@ export default function CommentCol({reviews}: {reviews: Comment[]}): JSX.Element
           </div>
         </React.Fragment>
       ))}
-
-
     </div>
   );
 }

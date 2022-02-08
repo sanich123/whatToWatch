@@ -69,8 +69,16 @@ export const warnings = {
   wrongAddedFavorites: 'Не удалось добавить в избранное',
   wrongAccess: 'Добавлять в избранное могут только авторизованные пользователи',
   wrongPassword: 'Пароль должен состоять минимум из одной буквы и одной цифры',
+  wrongEmail: 'Please enter a valid email address',
 };
 
 export const promoFilmId = 25;
+
+export const asyncConditions = {
+  idle: 'idle',
+  pending: 'pending',
+  fullfilled: 'fullfilled',
+  rejected: 'rejected',
+};
 
 

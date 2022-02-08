@@ -1,3 +1,7 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../utils/const';
+import Copyright from '../common/copyright/copyright';
+import LogoFooter from '../main/logo-footer/footer';
 import Logo from '../main/logo-footer/logo';
 import Svg from '../svg/svg';
 import './../sign-in/sign-in/sign-in-styles.css';
@@ -8,10 +12,7 @@ export default function Page404(): JSX.Element {
       <Svg />
       <div className="user-page">
         <header className="page-header user-page__head">
-          <div className="logo">
-            <Logo />
-          </div>
-
+          <Logo />
           <h1 className="page-title user-page__title visually-hidden">Page 404</h1>
         </header>
 
@@ -23,19 +24,14 @@ export default function Page404(): JSX.Element {
               </div>
             </div>
             <div className="sign-in__submit">
-              <a className="sign-in__btn" href='/'>Перейти на главную страницу</a>
+              <Link className="sign-in__btn" to={AppRoute.Main}>Перейти на главную страницу</Link>
             </div>
           </div>
         </div>
 
         <footer className="page-footer">
-          <div className="logo">
-
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
+          <LogoFooter />
+          <Copyright />
         </footer>
       </div>
     </>

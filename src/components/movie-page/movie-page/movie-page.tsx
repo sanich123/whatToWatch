@@ -14,6 +14,7 @@ import FilmDesc from '../film-desc/film-desc';
 import SimilarFilms from '../similar-films/similar-films';
 import FavoriteBtn from '../../common/favorite-btn/favorite-btn';
 import './movie-page-styles.css';
+import Copyright from '../../common/copyright/copyright';
 
 export default function MoviePage(): JSX.Element {
   const selected: {id: string} = useParams();
@@ -89,12 +90,8 @@ export default function MoviePage(): JSX.Element {
       <div className="page-content">
         <SimilarFilms id={id} />
         <footer>
-
           <LogoFooter />
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
+          <Copyright />
         </footer>
       </div>
     </>

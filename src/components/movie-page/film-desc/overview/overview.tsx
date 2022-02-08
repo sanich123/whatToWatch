@@ -1,8 +1,15 @@
-import { FilmDescProps } from '../../../../types/types';
 import { markChanger } from '../../../../utils/formatters';
 import './overview-styles.css';
 
-export default function Overview({description, rating, director, runTime, starring}: Omit<FilmDescProps, 'id' | 'released' | 'genre' | 'comments'>): JSX.Element {
+interface OverviewProps {
+  description: string,
+  rating: number,
+  director: string,
+  runTime: number,
+  starring: string[],
+}
+
+export default function Overview({description, rating, director, runTime, starring}: OverviewProps): JSX.Element {
 
   return (
     <>

@@ -23,7 +23,7 @@ export default function TextArea({setText, rating, text, disabled}: TextAreaProp
       <div className="add-review__submit">
         <button
           className="add-review__btn"
-          disabled={text.length < 4 || text.length > 500 || !rating}
+          disabled={text.length < 40 || text.length > 500 || !rating}
           type="submit"
         >Post
         </button>

@@ -14,7 +14,7 @@ export default function Filter({name, filter, title}: FilterProps): JSX.Element 
   const dispatch = useDispatch();
 
   return (
-    <li className={`catalog__genres-item ${filter === title ? 'catalog__genres-item--active' : ''}`}>
+    <li className={`catalog__genres-item ${filter === title && 'catalog__genres-item--active'}`}>
       <Link
         title={name}
         onClick={() => dispatch(changer(title))}
