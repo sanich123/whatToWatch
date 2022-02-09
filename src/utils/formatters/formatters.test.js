@@ -1,4 +1,4 @@
-import { markChanger, getFormattedTime, dateChanger } from '../formatters';
+import { markChanger, getFormattedTime, dateChanger } from './formatters';
 
 test('if value equals to 3.5, return Normal', () => {
   expect(markChanger(3.5)).toBe('Normal');

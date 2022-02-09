@@ -1,4 +1,4 @@
-import { markChanger } from '../../../../utils/formatters';
+import { markChanger } from '../../../../utils/formatters/formatters';
 import './overview-styles.css';
 
 interface OverviewProps {

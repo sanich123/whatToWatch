@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Film } from '../types/types';
-import { adaptFilm, getAdaptedFilms } from '../utils/adapter';
+import { adaptFilm, getAdaptedFilms } from '../utils/adapter/adapter';
 import { serverPath, warnings } from '../utils/const';
 import { getData } from '../utils/fetch-api';
 

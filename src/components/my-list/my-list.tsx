@@ -27,7 +27,7 @@ export default function Favorites(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <div className="catalog__films-list">
-            {favorites.length > 0 && favorites.map(({id, name, previewImage}) => <Card name={name} previewImage={previewImage} id={id} key={id} />)}
+            {favorites.length > 0 && favorites.map(({id, name, previewImage, videoLink, posterImage}) => <Card name={name} previewImage={previewImage} id={id} key={id} videoLink={videoLink} posterImage={posterImage} />)}
           </div>
         </section>
 

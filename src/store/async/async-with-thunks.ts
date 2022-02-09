@@ -6,7 +6,7 @@ import { AuthorizationStatus, errors, serverPath, warnings } from '../../utils/c
 import { checkStatus, getAvatar, isFullFilled, isRejected, startLoading } from '../slices/authorization';
 import { deleteToken, saveToken } from '../../utils/token';
 import { toast } from 'react-toastify';
-import { adaptFilm, getAdaptedFilms } from '../../utils/adapter';
+import { adaptFilm, getAdaptedFilms } from '../../utils/adapter/adapter';
 
 export const loadFilms = () =>
   async (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {

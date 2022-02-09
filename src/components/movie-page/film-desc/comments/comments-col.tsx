@@ -1,6 +1,6 @@
 import { Comment } from '../../../../types/types';
 import React from 'react';
-import { dateChanger } from '../../../../utils/formatters';
+import { dateChanger } from '../../../../utils/formatters/formatters';
 
 export default function CommentCol({reviews}: {reviews: Comment[]}): JSX.Element {
 

@@ -1,0 +1,77 @@
+import { adaptFilm } from './../adapter/adapter';
+
+export const mockFilms = [
+  {
+    'name': 'Johnny English',
+    'poster_image': 'https://8.react.pages.academy/static/film/poster/Johnny_English.jpg',
+    'preview_image': 'https://8.react.pages.academy/static/film/preview/johnny-english.jpg',
+    'background_image': 'https://8.react.pages.academy/static/film/background/Johnny_English.jpg',
+    'background_color': '#F0DBA2',
+    'description': 'After a sudden attack on the MI5, Johnny English, Britain\'s most confident yet unintelligent spy, becomes Britain\'s only spy.',
+    'rating': 10,
+    'scores_count': 136843,
+    'director': 'Peter Howitt',
+    'starring': [
+      'Rowan Atkinson',
+      'John Malkovich',
+      'Natalie Imbruglia',
+    ],
+    'run_time': 88,
+    'genre': 'Comedy',
+    'released': 2003,
+    'id': 3,
+    'is_favorite': false,
+    'video_link': 'http://media.xiph.org/mango/tears_of_steel_1080p.webm',
+    'preview_video_link': 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+  },
+  {
+    'name': 'Snatch',
+    'poster_image': 'https://8.react.pages.academy/static/film/poster/Snatch.jpg',
+    'preview_image': 'https://8.react.pages.academy/static/film/preview/snatch.jpg',
+    'background_image': 'https://8.react.pages.academy/static/film/background/Snatch.jpg',
+    'background_color': '#FDFDFC',
+    'description': 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.',
+    'rating': 0.2,
+    'scores_count': 716577,
+    'director': 'Guy Ritchie',
+    'starring': [
+      'Jason Statham',
+      'Brad Pitt',
+      'Benicio Del Toro',
+    ],
+    'run_time': 104,
+    'genre': 'Comedy',
+    'released': 2000,
+    'id': 12,
+    'is_favorite': false,
+    'video_link': 'http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4',
+    'preview_video_link': 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+  },
+  {
+    'name': 'What We Do in the Shadows',
+    'poster_image': 'https://8.react.pages.academy/static/film/poster/What-We-Do-in-the-Shadows.jpg',
+    'preview_image': 'https://8.react.pages.academy/static/film/preview/what-we-do-in-the-shadows.jpg',
+    'background_image': 'https://8.react.pages.academy/static/film/background/What-We-Do-in-the-Shadows.jpg',
+    'background_color': '#A39E81',
+    'description': 'A look into the daily (or rather, nightly) lives of three vampires who\'ve lived together for over 100 years, in Staten Island.',
+    'rating': 7.2,
+    'scores_count': 6173,
+    'director': 'Jemaine Clement',
+    'starring': [
+      'Kayvan Novak',
+      'Matt Berry',
+      'Natasia Demetriou',
+    ],
+    'run_time': 30,
+    'genre': 'Comedy',
+    'released': 2019,
+    'id': 20,
+    'is_favorite': false,
+    'video_link': 'http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4',
+    'preview_video_link': 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+  },
+];
+
+export const rightFilm = adaptFilm(mockFilms[0]);
+
+export const rightFilms = mockFilms.map((film) => adaptFilm(film));

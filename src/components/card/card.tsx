@@ -8,8 +8,8 @@ interface CardProps {
   name: string,
   previewImage: string,
   id: number,
-  videoLink?: string,
-  posterImage?: string,
+  videoLink: string,
+  posterImage: string,
 }
 
 export default function Card({name, previewImage, id, videoLink, posterImage}: CardProps): JSX.Element {

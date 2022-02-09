@@ -1,4 +1,4 @@
-import { Film, FilmDTO } from '../types/types';
+import { Film, FilmDTO } from '../../types/types';
 
 export const adaptFilm = (film: FilmDTO): Film => ({
   backgroundColor: film['background_color'],

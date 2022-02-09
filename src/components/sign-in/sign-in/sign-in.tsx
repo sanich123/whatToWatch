@@ -1,17 +1,17 @@
-/* eslint-disable no-console */
 import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { postAuthInfo } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
-import { AppRoute, asyncConditions, testingEmail, testingPassword, warnings } from '../../../utils/const';
+import { AppRoute, asyncConditions, warnings } from '../../../utils/const';
 import { isInitial } from '../../../store/slices/authorization';
 import LogoFooter from '../../main/logo-footer/footer';
 import Logo from '../../main/logo-footer/logo';
 import Svg from '../../svg/svg';
 import './sign-in-styles.css';
 import Copyright from '../../common/copyright/copyright';
+import { testingEmail, testingPassword } from '../../../utils/regexps/regexps';
 
 export default function SignIn(): JSX.Element {
   const dispatch = useDispatch();
