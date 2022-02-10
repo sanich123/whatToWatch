@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { postAuthInfo } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
 import { AppRoute, asyncConditions, warnings } from '../../../utils/const';
-import { isInitial } from '../../../store/slices/authorization';
+import { isInitial } from '../../../store/slices/authorization/authorization';
 import LogoFooter from '../../main/logo-footer/footer';
 import Logo from '../../main/logo-footer/logo';
 import Svg from '../../svg/svg';

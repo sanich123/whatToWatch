@@ -1,9 +1,9 @@
-import { fetchFilms, setFavorites, setPromo } from '../slices/start';
+import { fetchFilms, setFavorites, setPromo } from '../slices/start/start';
 import { AuthInfoDTO, Film } from '../../types/types';
-import {  fetchComments, fullFilled, rejected, startPosting } from '../slices/film';
+import {  fetchComments, fullFilled, rejected, startPosting } from '../slices/film/film';
 import { deleteData, getData, postData } from '../../utils/fetch-api';
 import { AuthorizationStatus, errors, serverPath, warnings } from '../../utils/const';
-import { checkStatus, getAvatar, isFullFilled, isRejected, startLoading } from '../slices/authorization';
+import { checkStatus, getAvatar, isFullFilled, isRejected, startLoading } from '../slices/authorization/authorization';
 import { deleteToken, saveToken } from '../../utils/token';
 import { toast } from 'react-toastify';
 import { adaptFilm, getAdaptedFilms } from '../../utils/adapter/adapter';

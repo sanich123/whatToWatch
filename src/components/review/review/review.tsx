@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { postComment } from '../../../store/async/async-with-thunks';
-import { clearAll } from '../../../store/slices/film';
+import { clearAll } from '../../../store/slices/film/film';
 import { RootState } from '../../../types/types';
 import { asyncConditions } from '../../../utils/const';
 import Loader from '../../common/loader/loader';

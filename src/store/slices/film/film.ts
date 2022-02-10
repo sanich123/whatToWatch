@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { asyncConditions } from '../../utils/const';
+import { asyncConditions } from '../../../utils/const';
 
 export const film = createSlice({
   name: 'film',

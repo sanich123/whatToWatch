@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useFilm } from '../../../hooks/useFetch';
-import { setFilmId } from '../../../store/slices/film';
+import { setFilmId } from '../../../store/slices/film/film';
 import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';

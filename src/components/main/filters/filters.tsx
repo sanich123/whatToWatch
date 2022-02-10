@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { changer } from '../../../store/slices/start';
+import { changer } from '../../../store/slices/start/start';
 import { AppRoute } from '../../../utils/const';
 import './filters-styles.css';
 

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { asyncConditions, AuthorizationStatus } from '../../utils/const';
+import { asyncConditions, AuthorizationStatus } from '../../../utils/const';
 
 export const auth = createSlice({
   name: 'auth',
