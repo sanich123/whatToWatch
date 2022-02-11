@@ -6,7 +6,7 @@ import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
 import PlayButton from '../../common/play-btn/play-btn';
-import LogoFooter from '../../main/logo-footer/footer';
+import LogoFooter from '../../main/logo-footer/footer/footer';
 import Logo from '../../main/logo-footer/logo';
 import UserMenu from '../../main/user-menu/user';
 import Svg from '../../svg/svg';

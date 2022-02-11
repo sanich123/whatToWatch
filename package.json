@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
     "@reduxjs/toolkit": "^1.7.1",
     "axios": "^0.21.4",
     "history": "^4.10.1",
@@ -44,7 +47,7 @@
   },
   "devDependencies": {
     "@jedmao/redux-mock-store": "^3.0.5",
-    "@testing-library/jest-dom": "^5.11.0",
+    "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^11.2.7",
     "@testing-library/react-hooks": "^5.1.0",
     "@testing-library/user-event": "^12.8.0",

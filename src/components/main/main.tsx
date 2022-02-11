@@ -6,7 +6,7 @@ import { filterChanger } from '../../utils/utils';
 import Svg from '../svg/svg';
 import FilmsList from './films-list/films-list';
 import Filter from './filters/filters';
-import LogoFooter from './logo-footer/footer';
+import LogoFooter from './logo-footer/footer/footer';
 import Logo from './logo-footer/logo';
 import MoreFilmsBtn from './more-films-btn/more-films-btn';
 import PromoFilm from './promo-film/promo-film';

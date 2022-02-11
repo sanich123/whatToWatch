@@ -2,7 +2,7 @@ import { useFavorites } from '../../hooks/useFetch';
 import Card from '../card/card';
 import Copyright from '../common/copyright/copyright';
 import Loader from '../common/loader/loader';
-import LogoFooter from '../main/logo-footer/footer';
+import LogoFooter from '../main/logo-footer/footer/footer';
 import Logo from '../main/logo-footer/logo';
 import UserMenu from '../main/user-menu/user';
 import Svg from '../svg/svg';
