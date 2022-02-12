@@ -12,6 +12,8 @@ import Svg from '../../svg/svg';
 import './sign-in-styles.css';
 import Copyright from '../../common/copyright/copyright';
 import { testingEmail, testingPassword } from '../../../utils/regexps/regexps';
+import EmailInput from './emailInput/email-input';
+import PasswordInput from './password-input/password-input';
 
 export default function SignIn(): JSX.Element {
   const dispatch = useDispatch();
@@ -56,30 +58,8 @@ export default function SignIn(): JSX.Element {
               <p>{wrongEmail && warnings.wrongEmail}</p>
             </div>
             <div className="sign-in__fields">
-              <div className="sign-in__field">
-                <input
-                  className="sign-in__input"
-                  type="email"
-                  placeholder="Email address"
-                  name="user-email"
-                  id="user-email"
-                  value={email}
-                  onChange={({target}) => setEmail(target.value)}
-                />
-                <label className="visually-hidden" htmlFor="user-email">Email address</label>
-              </div>
-              <div className="sign-in__field">
-                <input
-                  className="sign-in__input"
-                  type="password"
-                  placeholder="Password"
-                  name="user-password"
-                  id="user-password"
-                  value={password}
-                  onChange={({target}) => setPassword(target.value)}
-                />
-                <label className="visually-hidden" htmlFor="user-password">Password</label>
-              </div>
+              <EmailInput email={email} setEmail={setEmail} />
+              <PasswordInput password={password} setPassword={setPassword} />
             </div>
             <div>
               <button className="sign-in__btn" type="submit">Sign in</button>
