@@ -4,7 +4,7 @@ import Copyright from '../common/copyright/copyright';
 import Loader from '../common/loader/loader';
 import LogoFooter from '../main/logo-footer/footer/footer';
 import Logo from '../main/logo-footer/logo';
-import UserMenu from '../main/user-menu/user';
+import UserMenu from '../main/user-menu/user-menu/user';
 import Svg from '../svg/svg';
 import './my-list-styles.css';
 

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { logOut } from '../../../store/async/async-with-thunks';
-import { RootState } from '../../../types/types';
-import { AppRoute } from '../../../utils/const';
+import { logOut } from '../../../../store/async/async-with-thunks';
+import { RootState } from '../../../../types/types';
+import { AppRoute } from '../../../../utils/const';
 
 export default function UserAuth({userAvatar}: {userAvatar: string}): JSX.Element {
   const history = useHistory();

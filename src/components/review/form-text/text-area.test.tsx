@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import TextArea from './text-area';
 
 const setText = jest.fn();
-
 describe('textArea component', () => {
   it('renders with props correctly', () => {
     render(
