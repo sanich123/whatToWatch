@@ -10,7 +10,7 @@ import LogoFooter from '../../main/logo-footer/footer/footer';
 import Logo from '../../main/logo-footer/logo';
 import UserMenu from '../../main/user-menu/user';
 import Svg from '../../svg/svg';
-import FilmDesc from '../film-desc/film-desc';
+import FilmDesc from '../film-desc/film-description/film-desc';
 import SimilarFilms from '../similar-films/similar-films';
 import FavoriteBtn from '../../common/favorite-btn/favorite-btn';
 import './movie-page-styles.css';

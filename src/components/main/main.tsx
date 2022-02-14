@@ -24,8 +24,7 @@ export default function Main(): JSX.Element {
   const films = filterChanger(chosenFilter, movies);
   const slicedFilms = films.slice(startOfSlice, slicingNum);
   const {name, backgroundImage} = movie;
-  // eslint-disable-next-line no-console
-  console.log(movies);
+
   if (movies.length === 0 || !movie) {
     return <Loader />;
   }

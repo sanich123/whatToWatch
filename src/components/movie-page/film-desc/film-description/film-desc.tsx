@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { tabs } from '../../../utils/const';
-import Details from './details/details';
-import Overview from './overview/overview';
-import Reviews from './comments/comments';
+import { tabs } from '../../../../utils/const';
+import Details from '../details/details';
+import Overview from '../overview/overview';
+import Reviews from '../comments/comments';
 import './film-desc-styles.css';
-import { FilmDescProps } from '../../../types/types';
+import { FilmDescProps } from '../../../../types/types';
 
 export default function FilmDesc({description, rating, director, runTime, starring, id, released, genre}: FilmDescProps): JSX.Element {
   const [activeTab, setActiveTab] = useState(tabs.overView);

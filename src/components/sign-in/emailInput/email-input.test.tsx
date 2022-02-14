@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import EmailInput from './email-input';
 import userEvent from '@testing-library/user-event';
 
-
 describe('Email-input component', () => {
   const setEmail = jest.fn();
 

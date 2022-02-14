@@ -6,6 +6,7 @@
     "@babel/cli": "^7.17.0",
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
     "@reduxjs/toolkit": "^1.7.1",
     "axios": "^0.21.4",
     "history": "^4.10.1",
@@ -24,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
-    "eslint": "eslint --ext .tsx --ext .ts src/"
+    "eslint": "eslint --ext .tsx --ext .ts src/",
+    "jestrunner.jestCommand": "npm run test --"
   },
   "eslintConfig": {
     "extends": [

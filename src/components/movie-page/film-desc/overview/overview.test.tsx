@@ -1,4 +1,3 @@
-/* eslint-disable testing-library/no-debugging-utils */
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 import Overview from './overview';

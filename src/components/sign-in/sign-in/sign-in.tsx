@@ -12,8 +12,8 @@ import Svg from '../../svg/svg';
 import './sign-in-styles.css';
 import Copyright from '../../common/copyright/copyright';
 import { testingEmail, testingPassword } from '../../../utils/regexps/regexps';
-import EmailInput from './emailInput/email-input';
-import PasswordInput from './password-input/password-input';
+import EmailInput from '../emailInput/email-input';
+import PasswordInput from '../password-input/password-input';
 
 export default function SignIn(): JSX.Element {
   const dispatch = useDispatch();
