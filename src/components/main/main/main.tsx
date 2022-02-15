@@ -1,21 +1,19 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../types/types';
-import { genres, numberOfFilms, startOfSlice } from '../../utils/const';
-import { filterChanger } from '../../utils/utils';
-import Svg from '../svg/svg';
-import FilmsList from './films-list/films-list';
-import Filter from './filters/filters';
-import LogoFooter from './logo-footer/footer/footer';
-import Logo from './logo-footer/logo';
-import MoreFilmsBtn from './more-films-btn/more-films-btn';
-import PromoFilm from './promo-film/promo-film';
-import UserMenu from './user-menu/user-menu/user';
+import { RootState } from '../../../types/types';
+import { genres, numberOfFilms, startOfSlice } from '../../../utils/const';
+import { filterChanger } from '../../../utils/utils';
+import Svg from '../../svg/svg';
+import FilmsList from '../films-list/films-list';
+import Filter from '../filters/filters';
+import LogoFooter from '../logo-footer/footer/footer';
+import Logo from '../logo-footer/logo';
+import MoreFilmsBtn from '../more-films-btn/more-films-btn';
+import PromoFilm from '../promo-film/promo-film';
+import UserMenu from '../user-menu/user-menu/user';
 import './main-styles.css';
-import Loader from '../common/loader/loader';
-import Copyright from '../common/copyright/copyright';
-import {configureMockStore} from '@jedmao/redux-mock-store';
-import { mockFilms } from '../../mocks/mocks';
+import Loader from '../../common/loader/loader';
+import Copyright from '../../common/copyright/copyright';
 
 export default function Main(): JSX.Element {
   const chosenFilter = useSelector(({movies}: RootState) => movies.filter);
@@ -26,18 +24,6 @@ export default function Main(): JSX.Element {
   const films = filterChanger(chosenFilter, movies);
   const slicedFilms = films.slice(startOfSlice, slicingNum);
   const {name, backgroundImage} = movie;
-  const mockStore = configureMockStore();
-  const store = mockStore({
-    film: {
-      status: 'fullfilled',
-    },
-    movies: {
-      films: mockFilms,
-    },
-  });
-
-  // eslint-disable-next-line no-console
-  console.log(store.getState());
 
   if (movies.length === 0 || !movie) {
     return <Loader />;

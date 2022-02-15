@@ -1,4 +1,4 @@
-import { FullScreenBtnProps } from './full-screen-btn';
+import { FullScreenBtnProps } from '../full-screen-btn/full-screen-btn';
 import styled from 'styled-components';
 
 const StyledBtn = styled.button`display: block;

@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { RootState } from '../../../types/types';
-import { getFormattedTime } from '../../../utils/formatters/formatters';
-import Loader from '../../common/loader/loader';
-import FullScreenBtn from './full-screen-btn';
-import PlayBtn from './play-btn';
+import { RootState } from '../../../../types/types';
+import { getFormattedTime } from '../../../../utils/formatters/formatters';
+import Loader from '../../../common/loader/loader';
+import FullScreenBtn from '../full-screen-btn/full-screen-btn';
+import PlayBtn from '../play-btn/play-btn';
 import './player-styles.css';
 
 export default function Player():JSX.Element {
