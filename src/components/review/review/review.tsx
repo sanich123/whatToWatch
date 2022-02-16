@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import React, { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { postComment } from '../../../store/async/async-with-thunks';
@@ -7,7 +6,7 @@ import { clearAll } from '../../../store/slices/film/film';
 import { RootState } from '../../../types/types';
 import { asyncConditions } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
-import Logo from '../../main/logo-footer/logo';
+import Logo from '../../main/logo/logo/logo';
 import UserMenu from '../../main/user-menu/user-menu/user';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import FormRating from '../form-rating/form-rating';
