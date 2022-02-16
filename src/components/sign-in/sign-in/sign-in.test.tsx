@@ -1,9 +1,8 @@
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { Route, Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import SignIn from './sign-in';
-import {createMemoryHistory} from 'history';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import { AuthorizationStatus } from '../../../utils/const';
 
@@ -17,11 +16,9 @@ describe('Sign-in component', () => {
   it('component should render correctly', () => {
     render(
       <Provider store={store}>
-        <Router history={createMemoryHistory()}>
-          <Route>
-            <SignIn />
-          </Route>
-        </Router>
+        <MemoryRouter>
+          <SignIn />
+        </MemoryRouter>
       </Provider>,
     );
     expect(screen.getByRole('button')).toBeInTheDocument();

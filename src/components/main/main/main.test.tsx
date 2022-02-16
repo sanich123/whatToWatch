@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
-import {createMemoryHistory} from 'history';
+import { MemoryRouter } from 'react-router-dom';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import Main from './main';
 import { mockFilm, mockFilms } from '../../../mocks/mocks';
@@ -25,9 +24,9 @@ describe('MainComponent', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <Main />
-        </Router>
+        </MemoryRouter>
       </Provider> );
   });
 });

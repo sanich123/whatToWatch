@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs component should render correctly 1`] = `
+<div>
+  <nav
+    class="breadcrumbs"
+  >
+    <ul
+      class="breadcrumbs__list"
+    >
+      <li
+        class="breadcrumbs__item"
+      >
+        <a
+          class="breadcrumbs__link"
+          href="/films/23"
+        >
+          Калина красная
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__item"
+      >
+        <a
+          class="breadcrumbs__link"
+          href="/films/23/review"
+        >
+          Add review
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

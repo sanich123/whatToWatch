@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Copyright comonent should render correctly 1`] = `
+<div>
+  <div
+    class="copyright"
+  >
+    <p>
+      © 2019 What to watch Ltd.
+    </p>
+  </div>
+</div>
+`;

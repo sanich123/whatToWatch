@@ -1,9 +1,8 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { AuthorizationStatus } from '../../utils/const';
 import Favorites from './my-list';
 
@@ -15,12 +14,12 @@ describe('MyList component', () => {
       authStatus: AuthorizationStatus.NoAuth,
     },
   });
-  it('should render correctly', () => {
+  it('should render correctly', async () => {
     render(
       <Provider store={store}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <Favorites />
-        </Router>
+        </MemoryRouter>
       </Provider>,
     );
   });

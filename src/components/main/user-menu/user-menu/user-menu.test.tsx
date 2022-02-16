@@ -2,9 +2,8 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import UserMenu from './user';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import {createMemoryHistory} from 'history';
 import { AuthorizationStatus } from '../../../../utils/const';
 
 const mockStore = configureMockStore();
@@ -22,9 +21,9 @@ describe('UserMenu', () => {
 
     render(
       <Provider store={store}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <UserMenu />
-        </Router>
+        </MemoryRouter>
       </Provider>,
     );
     expect(screen.getByText('Sign in')).toBeInTheDocument();
@@ -43,9 +42,9 @@ describe('UserMenu', () => {
 
     render(
       <Provider store={store}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <UserMenu />
-        </Router>
+        </MemoryRouter>
       </Provider>,
     );
     expect(screen.getByText('Sign out')).toBeInTheDocument();

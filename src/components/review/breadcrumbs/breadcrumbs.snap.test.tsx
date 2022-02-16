@@ -1,18 +1,17 @@
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import Breadcrumbs from './breadcrumbs';
 
 describe('Breadcrumbs component', () => {
   it('should render correctly', () => {
-    render(
-      <BrowserRouter>
-        <Route>
-          <Breadcrumbs id={23} name='Калина красная'/>
-        </Route>
-      </BrowserRouter>,
+    const {container} = render(
+      <MemoryRouter>
+        <Breadcrumbs id={23} name='Калина красная'/>
+      </MemoryRouter>,
     );
     expect(screen.getByRole('list')).toBeInTheDocument();
     expect(screen.getByText('Add review')).toBeInTheDocument();
+    expect(container).toMatchSnapshot();
   });
 });

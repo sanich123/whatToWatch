@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { mockFilm } from '../../../../mocks/mocks';
 import FilmDesc from './film-desc';
 
@@ -9,11 +9,9 @@ describe('FilmDesc component', () => {
 
   it('renders successfully', () => {
     render(
-      <BrowserRouter>
-        <Route>
-          <FilmDesc description={description} rating={rating} director={director} runTime={runTime} starring={starring} id={id} released={released} genre={genre} />
-        </Route>
-      </BrowserRouter>,
+      <MemoryRouter>
+        <FilmDesc description={description} rating={rating} director={director} runTime={runTime} starring={starring} id={id} released={released} genre={genre} />
+      </MemoryRouter>,
     );
     expect(screen.getByRole('list')).toBeInTheDocument();
   });
