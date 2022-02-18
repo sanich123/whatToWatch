@@ -33,6 +33,7 @@ export default function Card({name, previewImage, id, videoLink, posterImage}: C
         debounced.cancel();
       }}
       onMouseEnter={debounced}
+      test-id='article'
     >
       <div className="small-film-card__image">
         {preview ?

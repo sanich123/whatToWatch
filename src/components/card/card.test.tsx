@@ -13,5 +13,6 @@ describe('Card', () => {
       </MemoryRouter>,
     );
     expect(screen.getByRole('link')).toBeInTheDocument();
+    expect(screen.getByRole('img')).toBeInTheDocument();
   });
 });
