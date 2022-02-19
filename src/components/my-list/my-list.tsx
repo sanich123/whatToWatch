@@ -2,7 +2,7 @@ import { useFavorites } from '../../hooks/useFetch';
 import Card from '../card/card';
 import Copyright from '../common/copyright/copyright';
 import Loader from '../common/loader/loader';
-import Logo from '../main/logo/logo/logo';
+import Logo from '../common/logo/logo/logo';
 import UserMenu from '../main/user-menu/user-menu/user';
 import Svg from '../svg/svg';
 import './my-list-styles.css';

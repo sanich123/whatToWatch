@@ -6,7 +6,7 @@ import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
 import PlayButton from '../../common/play-btn/play-btn';
-import Logo from '../../main/logo/logo/logo';
+import Logo from '../../common/logo/logo/logo';
 import UserMenu from '../../main/user-menu/user-menu/user';
 import Svg from '../../svg/svg';
 import FilmDesc from '../film-desc/film-description/film-desc';

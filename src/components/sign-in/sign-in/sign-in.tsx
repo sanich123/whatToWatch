@@ -12,7 +12,7 @@ import Copyright from '../../common/copyright/copyright';
 import { testingEmail, testingPassword } from '../../../utils/regexps/regexps';
 import EmailInput from '../emailInput/email-input';
 import PasswordInput from '../password-input/password-input';
-import Logo from '../../main/logo/logo/logo';
+import Logo from '../../common/logo/logo/logo';
 
 export default function SignIn(): JSX.Element {
   const dispatch = useDispatch();

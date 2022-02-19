@@ -1,5 +1,5 @@
 import Main from '../main/main/main';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignIn from '../sign-in/sign-in/sign-in';
 import AddReview from '../review/review/review';
 import Player from '../main/player/player/player';
@@ -14,7 +14,7 @@ export default function App(): JSX.Element {
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
 
   return (
-    <BrowserRouter>
+    <Router>
       <Switch>
         <Route component={Main} path={AppRoute.Main} exact />
         <Route component={SignIn} path={AppRoute.SignIn} exact />
@@ -24,6 +24,6 @@ export default function App(): JSX.Element {
         <PrivateRoute path={AppRoute.Favorites} authorizationStatus={authStatus} exact />
         <Route component={Page404} />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }

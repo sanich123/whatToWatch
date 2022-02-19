@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../utils/const';
 import Copyright from '../common/copyright/copyright';
-import Logo from '../main/logo/logo/logo';
+import Logo from '../common/logo/logo/logo';
 import Svg from '../svg/svg';
 import './../sign-in/sign-in/sign-in-styles.css';
 

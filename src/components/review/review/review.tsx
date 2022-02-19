@@ -6,7 +6,7 @@ import { clearAll } from '../../../store/slices/film/film';
 import { RootState } from '../../../types/types';
 import { asyncConditions } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
-import Logo from '../../main/logo/logo/logo';
+import Logo from '../../common/logo/logo/logo';
 import UserMenu from '../../main/user-menu/user-menu/user';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import FormRating from '../form-rating/form-rating';

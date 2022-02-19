@@ -6,7 +6,7 @@ import { filterChanger } from '../../../utils/utils';
 import Svg from '../../svg/svg';
 import FilmsList from '../films-list/films-list';
 import Filter from '../filters/filters';
-import Logo from '../logo/logo/logo';
+import Logo from '../../common/logo/logo/logo';
 import MoreFilmsBtn from '../more-films-btn/more-films-btn';
 import PromoFilm from '../promo-film/promo-film';
 import UserMenu from '../user-menu/user-menu/user';
