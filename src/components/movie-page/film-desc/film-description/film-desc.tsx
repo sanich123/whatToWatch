@@ -7,7 +7,7 @@ import Reviews from '../comments/comments';
 import './film-desc-styles.css';
 import { FilmDescProps } from '../../../../types/types';
 
-export default function FilmDesc({description, rating, director, runTime, starring, id, released, genre}: FilmDescProps): JSX.Element {
+export default function FilmDesc({description, rating, director, runTime, starring, id, released, genre}: FilmDescProps) {
   const [activeTab, setActiveTab] = useState(tabs.overView);
 
   return (

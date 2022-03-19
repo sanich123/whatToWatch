@@ -1,7 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { useFilm } from '../../../hooks/useFetch';
-import { setFilmId } from '../../../store/slices/film/film';
 import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
@@ -14,19 +12,18 @@ import SimilarFilms from '../similar-films/similar-films';
 import FavoriteBtn from '../../common/favorite-btn/favorite-btn';
 import './movie-page-styles.css';
 import Copyright from '../../common/copyright/copyright';
+import { useGetFilmsQuery } from '../../../store';
 
 export default function MoviePage(): JSX.Element {
   const selected: {id: string} = useParams();
-  const dispatch = useDispatch();
-  dispatch(setFilmId(selected.id));
+  const { data, isLoading } = useGetFilmsQuery(`9.react.pages.academy/wtw/films/${selected.id}`);
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
-  const selectedFilm = useFilm(selected.id);
 
-  if (!selectedFilm) {
+  if (isLoading) {
     return <Loader />;
   }
 
-  const {backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id} = selectedFilm;
+  const {backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id} = data;
 
   return (
     <>

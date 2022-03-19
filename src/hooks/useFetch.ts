@@ -4,6 +4,7 @@ import { Film } from '../types/types';
 import { adaptFilm, getAdaptedFilms } from '../utils/adapter/adapter';
 import { serverPath, warnings } from '../utils/const';
 import { getData } from '../utils/fetch-api';
+import { getToken } from '../utils/token';
 
 export const useSimilarFilms = (id: string) => {
   const [films, setFilms] = useState<Film[]>([]);
@@ -74,6 +75,30 @@ export const useFilm = (id: string) => {
   }, [id]);
 
   return selectedFilm;
+};
+
+export const usePromoFilm = () => {
+  const [promoFilm, setPromoFilm] = useState<Film>();
+
+  useEffect(() => {
+    if (!promoFilm) {
+      (async () => {
+        try {
+          const promo = await(await fetch(`https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`, {
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+              'x-token': getToken(),
+            },
+          })).json();
+          setPromoFilm(adaptFilm(promo));
+        }
+        catch {
+          toast.error(warnings.server404);
+        }
+      })();
+    }
+  });
+  return promoFilm;
 };
 
 

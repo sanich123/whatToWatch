@@ -1,8 +1,9 @@
-import { FormEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { postComment } from '../../../store/async/async-with-thunks';
 import { clearAll } from '../../../store/slices/film/film';
+import { useGetFilmsQuery } from '../../../store/slices/films-api/films-api';
 import { RootState } from '../../../types/types';
 import { asyncConditions } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
@@ -18,7 +19,8 @@ export default function AddReview(): JSX.Element {
   const history = useHistory();
   const dispatch = useDispatch();
   const status = useSelector(({film}: RootState) => film.status);
-  const [film] = useSelector(({movies}: RootState) => movies.films).filter(({id}) => id === +selected.id);
+  const { data, isLoading } = useGetFilmsQuery(`9.react.pages.academy/wtw/films/${selected.id}`);
+
   const [text, setText] = useState('Review text');
   const [rating, setRating] = useState('');
   const [disabled, setDisabled] = useState(false);
@@ -29,14 +31,11 @@ export default function AddReview(): JSX.Element {
       dispatch(clearAll());
     }
   }, [status, history, selected.id, dispatch]);
+  if (isLoading) {return <Loader/>;}
 
-  if (!film) {
-    return <Loader />;
-  }
+  const {backgroundImage, name, posterImage, id} = data;
 
-  const {backgroundImage, name, posterImage, id} = film;
-
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
     setDisabled(true);
     dispatch(postComment(selected.id, +rating, text));

@@ -9,11 +9,12 @@ import { Provider } from 'react-redux';
 describe('FiltersComponent', () => {
   const mockStore = configureMockStore();
   const store = mockStore({});
+  const setFilter = jest.fn();
   it ('should render correctly', () => {
     render(
       <Provider store={store}>
         <MemoryRouter>
-          <Filter name={mockFilm.name} filter='Drama' title='Drama'/>
+          <Filter name={mockFilm.name} filter='Drama' title='Drama' setFilter={setFilter} />
         </MemoryRouter>,
       </Provider>,
     );

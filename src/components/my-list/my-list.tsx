@@ -1,4 +1,6 @@
-import { useFavorites } from '../../hooks/useFetch';
+import { useGetFilmsQuery } from '../../store';
+import { Film, FilmDTO } from '../../types/types';
+import { adaptFilm } from '../../utils/adapter/adapter';
 import Card from '../card/card';
 import Copyright from '../common/copyright/copyright';
 import Loader from '../common/loader/loader';
@@ -7,12 +9,14 @@ import UserMenu from '../main/user-menu/user-menu/user';
 import Svg from '../svg/svg';
 import './my-list-styles.css';
 
-export default function Favorites(): JSX.Element {
-  const favorites = useFavorites();
+export default function Favorites() {
+  const { data, isLoading } = useGetFilmsQuery('https://9.react.pages.academy/wtw/favorite');
 
-  if (!favorites) {
+  if (isLoading) {
     return <Loader />;
   }
+
+  const favorites = data ? data.map((film: FilmDTO) => adaptFilm(film)) : [];
 
   return (
     <>
@@ -26,7 +30,7 @@ export default function Favorites(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <div className="catalog__films-list">
-            {favorites.length > 0 && favorites.map(({id, name, previewImage, videoLink, posterImage}) => <Card name={name} previewImage={previewImage} id={id} key={id} videoLink={videoLink} posterImage={posterImage} />)}
+            {favorites.length > 0 && favorites.map(({id, ...rest}: Film) => <Card id={id} key={id} {...rest}/>)}
           </div>
         </section>
 
