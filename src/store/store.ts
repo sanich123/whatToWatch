@@ -11,5 +11,7 @@ export default configureStore({
     film: filmReducer,
     authorization: authReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(filmsApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false,
+  }).concat(filmsApi.middleware),
 });

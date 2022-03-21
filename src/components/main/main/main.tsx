@@ -15,7 +15,7 @@ import { useGetFilmsQuery } from '../../../store/slices/films-api/films-api';
 import PromoBackImg from '../promo-background-img/promo-background-img';
 
 export default function Main(): JSX.Element {
-  const {data, isLoading} = useGetFilmsQuery('9.react.pages.academy/wtw/films');
+  const {data, isLoading} = useGetFilmsQuery('8.react.pages.academy/wtw/films');
   const [filter, setFilter] = useState('All genres');
   const [slicingNum, setSlicingNum] = useState(numberOfFilms);
 

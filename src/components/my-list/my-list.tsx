@@ -1,6 +1,7 @@
 import { useGetFilmsQuery } from '../../store';
 import { Film, FilmDTO } from '../../types/types';
 import { adaptFilm } from '../../utils/adapter/adapter';
+import { errorHandler } from '../../utils/utils';
 import Card from '../card/card';
 import Copyright from '../common/copyright/copyright';
 import Loader from '../common/loader/loader';
@@ -10,13 +11,14 @@ import Svg from '../svg/svg';
 import './my-list-styles.css';
 
 export default function Favorites() {
-  const { data, isLoading } = useGetFilmsQuery('https://9.react.pages.academy/wtw/favorite');
+  const { data: films, isLoading, error } = useGetFilmsQuery('8.react.pages.academy/wtw/favorite');
 
   if (isLoading) {
     return <Loader />;
   }
+  error && errorHandler(error);
 
-  const favorites = data ? data.map((film: FilmDTO) => adaptFilm(film)) : [];
+  const favorites = films ? films.map((film: FilmDTO) => adaptFilm(film)) : [];
 
   return (
     <>

@@ -1,5 +1,9 @@
+import { SerializedError } from '@reduxjs/toolkit';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query/react';
+import { toast } from 'react-toastify';
+import Page404 from '../components/page404/page404';
 import { Comment, Film } from '../types/types';
-import { genres } from './const';
+import { errors, genres, warnings } from './const';
 
 export const filterChanger =
 (filter: string, array: Film[]) =>
@@ -29,3 +33,15 @@ export const reviewsReducer = (reviews: Comment[]) => {
   return result;
 };
 
+export const normalizedError = (error: SerializedError | FetchBaseQueryError) => JSON.parse(JSON.stringify(error));
+
+export const errorHandler = (error: SerializedError | FetchBaseQueryError) => {
+  const info = normalizedError(error);
+  if (info.status === errors.wrongAddress) {
+    return <Page404/>;
+  } else if (info.status === errors.noAuth) {
+    toast.warn(warnings.haveToAuth);
+  } else {
+    toast.warn(`${info.status} ${info.error} ${warnings.network}`);
+  }
+};

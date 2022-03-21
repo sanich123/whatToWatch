@@ -1,11 +1,12 @@
-import { FormEvent, useEffect, useState } from 'react';
+/* eslint-disable no-console */
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { postAuthInfo } from '../../../store/async/async-with-thunks';
+// import { postAuthInfo } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
 import { AppRoute, asyncConditions, warnings } from '../../../utils/const';
-import { isInitial } from '../../../store/slices/authorization/authorization';
+import { getAvatar, isInitial } from '../../../store/slices/authorization/authorization';
 import Svg from '../../svg/svg';
 import './sign-in-styles.css';
 import Copyright from '../../common/copyright/copyright';
@@ -13,6 +14,8 @@ import { testingEmail, testingPassword } from '../../../utils/regexps/regexps';
 import EmailInput from '../emailInput/email-input';
 import PasswordInput from '../password-input/password-input';
 import Logo from '../../common/logo/logo/logo';
+import { usePostAuthMutation } from '../../../store';
+import { saveToken } from '../../../utils/token';
 
 export default function SignIn(): JSX.Element {
   const dispatch = useDispatch();
@@ -21,15 +24,22 @@ export default function SignIn(): JSX.Element {
   const [password, setPassword] = useState('');
   const [wrongEmail, setWrongEmail] = useState(false);
   const authStatus = useSelector(({authorization}: RootState) => authorization.status);
+  const [loginPassSender, { data: response }] = usePostAuthMutation();
 
   useEffect(() => {
+    if (response) {
+      saveToken(response.token);
+      dispatch(getAvatar(response['avatar_url']));
+      history.push(AppRoute.Main);
+    }
     if (authStatus === asyncConditions.fullfilled) {
       history.push(AppRoute.Main);
       dispatch(isInitial());
     }
-  }, [authStatus, history, dispatch]);
+  }, [authStatus, history, dispatch, response]);
 
-  const handleLogin = (evt: FormEvent<HTMLFormElement>) => {
+
+  const handleLogin = async (evt: React.FormEvent) => {
     evt.preventDefault();
     if (!testingEmail.test(email)) {
       setWrongEmail(true);
@@ -39,7 +49,10 @@ export default function SignIn(): JSX.Element {
       toast.warn(warnings.wrongPassword);
       return;
     }
-    dispatch(postAuthInfo(email, password));
+    await loginPassSender({
+      email: email,
+      password: password,
+    }).unwrap();
   };
 
   return (
