@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-// import { postAuthInfo } from '../../../store/async/async-with-thunks';
 import { RootState } from '../../../types/types';
-import { AppRoute, asyncConditions, warnings } from '../../../utils/const';
-import { getAvatar, isInitial } from '../../../store/slices/authorization/authorization';
+import { AppRoute, warnings } from '../../../utils/const';
+import { getAvatar } from '../../../store/slices/authorization/authorization';
 import Svg from '../../svg/svg';
 import './sign-in-styles.css';
 import Copyright from '../../common/copyright/copyright';
@@ -16,6 +15,7 @@ import PasswordInput from '../password-input/password-input';
 import Logo from '../../common/logo/logo/logo';
 import { usePostAuthMutation } from '../../../store';
 import { saveToken } from '../../../utils/token';
+import { errorHandler } from '../../../utils/utils';
 
 export default function SignIn(): JSX.Element {
   const dispatch = useDispatch();
@@ -24,19 +24,16 @@ export default function SignIn(): JSX.Element {
   const [password, setPassword] = useState('');
   const [wrongEmail, setWrongEmail] = useState(false);
   const authStatus = useSelector(({authorization}: RootState) => authorization.status);
-  const [loginPassSender, { data: response }] = usePostAuthMutation();
+  const [loginPassSender, { error, data: response }] = usePostAuthMutation();
 
   useEffect(() => {
+    error && errorHandler(error);
     if (response) {
       saveToken(response.token);
       dispatch(getAvatar(response['avatar_url']));
       history.push(AppRoute.Main);
     }
-    if (authStatus === asyncConditions.fullfilled) {
-      history.push(AppRoute.Main);
-      dispatch(isInitial());
-    }
-  }, [authStatus, history, dispatch, response]);
+  }, [authStatus, history, dispatch, response, error]);
 
 
   const handleLogin = async (evt: React.FormEvent) => {

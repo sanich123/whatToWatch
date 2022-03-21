@@ -17,11 +17,6 @@ export const filmsApi = createApi({
   endpoints: (builder) => ({
     getFilms: builder.query({
       query: (endPoint = '') => `${endPoint}`,
-      providesTags: (result) => result ?
-        [...result.map(({ id }: {id: number}) =>
-          ({ type: 'Films', id })),
-        { type: 'Films', id: 'LIST' }] :
-        [{ type: 'Films', id: 'LIST' }],
     }),
     postAuth: builder.mutation({
       query: (body) => ({
@@ -30,7 +25,6 @@ export const filmsApi = createApi({
         body,
       }),
       transformResponse: (response: AuthInfoDTO) => response,
-      invalidatesTags: [{type: 'Films', id: 'LIST'}],
     }),
   }),
 });
