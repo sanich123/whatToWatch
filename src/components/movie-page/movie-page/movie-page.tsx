@@ -13,17 +13,17 @@ import FavoriteBtn from '../../common/favorite-btn/favorite-btn';
 import './movie-page-styles.css';
 import Copyright from '../../common/copyright/copyright';
 import { useGetFilmsQuery } from '../../../store';
+import { errorHandler } from '../../../utils/utils';
 
 export default function MoviePage(): JSX.Element {
   const selected: {id: string} = useParams();
-  const { data, isLoading } = useGetFilmsQuery(`9.react.pages.academy/wtw/films/${selected.id}`);
+  const { data: film, isLoading, error } = useGetFilmsQuery(`8.react.pages.academy/wtw/films/${selected.id}`);
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  if (isLoading) {return <Loader />;}
+  error && errorHandler(error);
 
-  const {backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id} = data;
+  const {backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id} = film;
 
   return (
     <>

@@ -18,6 +18,7 @@ export default function Filter({name, filter, title, setFilter}: FilterProps) {
         onClick={() => setFilter(title)}
         to={AppRoute.Main}
         className="catalog__genres-link"
+        tabIndex={0}
       >{name}
       </Link>
     </li>

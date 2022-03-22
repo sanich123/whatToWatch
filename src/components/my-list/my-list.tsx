@@ -18,7 +18,7 @@ export default function Favorites() {
   }
   error && errorHandler(error);
 
-  const favorites = films ? films.map((film: FilmDTO) => adaptFilm(film)) : [];
+  const favorites = films.map((film: FilmDTO) => adaptFilm(film)) || [];
 
   return (
     <>

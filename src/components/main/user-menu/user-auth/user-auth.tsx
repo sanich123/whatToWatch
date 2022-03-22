@@ -4,6 +4,7 @@ import { useDeleteAuthMutation } from '../../../../store';
 import { checkStatus } from '../../../../store/slices/authorization/authorization';
 import { RootState } from '../../../../types/types';
 import { AppRoute, AuthorizationStatus } from '../../../../utils/const';
+import { deleteToken } from '../../../../utils/token';
 import { errorHandler } from '../../../../utils/utils';
 
 export default function UserAuth({userAvatar}: {userAvatar: string}) {
@@ -35,6 +36,7 @@ export default function UserAuth({userAvatar}: {userAvatar: string}) {
         className="user-block__item"
         onClick={async () => {
           await logout('').unwrap();
+          deleteToken();
           dispatch(checkStatus(AuthorizationStatus.NoAuth));
         }}
       >

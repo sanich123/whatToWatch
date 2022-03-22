@@ -7,10 +7,10 @@ import Loader from '../../common/loader/loader';
 import './similar-films-styles.css';
 
 export default function SimilarFilms({id}: {id: number}): JSX.Element {
-  const { data, isLoading } = useGetFilmsQuery(`https://8.react.pages.academy/wtw/${serverPath.films}/${id}/${serverPath.similar}`);
+  const { data: similarFilms, isLoading } = useGetFilmsQuery(`https://8.react.pages.academy/wtw/${serverPath.films}/${id}/${serverPath.similar}`);
   if (isLoading) {return <Loader/>;}
 
-  const films = data.map((film: FilmDTO) => adaptFilm(film));
+  const films = similarFilms.map((film: FilmDTO) => adaptFilm(film));
   const BEGIN_SLICING = 0;
   const END_SLICING = 4;
 

@@ -2,13 +2,9 @@ import { promoFilmId } from '../../../utils/const';
 import PlayButton from '../../common/play-btn/play-btn';
 import FavoriteBtn from '../../common/favorite-btn/favorite-btn';
 import './promo-film-styles.css';
-import { usePromoFilm } from '../../../hooks/useFetch';
-import Loader from '../../common/loader/loader';
+import { Film } from '../../../types/types';
 
-export default function PromoFilm(): JSX.Element {
-  const promoFilm = usePromoFilm();
-
-  if (!promoFilm) {return <Loader/>;}
+export default function PromoFilm({promoFilm}: {promoFilm: Film}): JSX.Element {
   const { name, genre, released, posterImage, id } = promoFilm;
 
   return (

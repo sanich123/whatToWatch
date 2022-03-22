@@ -1,29 +1,10 @@
-import { AuthInfoDTO, Film } from '../../types/types';
-import { deleteData, getData, postData } from '../../utils/fetch-api';
-import { AuthorizationStatus, errors, serverPath, warnings } from '../../utils/const';
-import { deleteToken, saveToken } from '../../utils/token';
+import { Film } from '../../types/types';
+import { getData, postData } from '../../utils/fetch-api';
+import { errors, serverPath, warnings } from '../../utils/const';
 import { toast } from 'react-toastify';
-import { fetchFilms, setFavorites, setPromo } from '../slices/start/start';
+import { setFavorites, setPromo } from '../slices/start/start';
 import { adaptFilm, getAdaptedFilms } from '../../utils/adapter/adapter';
-import { checkStatus, getAvatar, isFullFilled, isRejected, startLoading } from '../slices/authorization/authorization';
 import { fetchComments, fullFilled, rejected, startPosting } from '../slices/film/film';
-
-
-export const loadFilms = () =>
-  async (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {
-    try {
-      const response = await getData(serverPath.films);
-      if (response.status === errors.wrongAddress) {
-        toast.error(warnings.server404);
-      } else {
-        const films = await response.json();
-        dispatch(fetchFilms(getAdaptedFilms(films)));
-      }
-    }
-    catch {
-      toast.warn(warnings.network);
-    }
-  };
 
 export const loadPromoFilm = () =>
   async (dispatch: (arg: { payload: Film; type: string; }) => void) => {
@@ -35,61 +16,6 @@ export const loadPromoFilm = () =>
         const film = await response.json();
         dispatch(setPromo(adaptFilm(film)));
       }
-    }
-    catch {
-      toast.warn(warnings.network);
-    }
-  };
-
-export const getAuth = () =>
-  async (dispatch: (arg: { payload: string; type: string; }) => void) => {
-    try {
-      const response = await getData(serverPath.login);
-      if (response.status === errors.noAuth) {
-        toast.warn(warnings.haveToAuth);
-      } else {
-        const authData = await response.json();
-        saveToken(authData.token);
-        dispatch(getAvatar(authData['avatar_url']));
-      }
-    }
-    catch {
-      toast.warn(warnings.network);
-    }
-  };
-
-export const postAuthInfo = (email: string, password: string) =>
-  async (dispatch: (arg: { payload?: AuthInfoDTO; type: string; }) => void ) => {
-    dispatch(startLoading());
-    try {
-      const response = await postData(serverPath.login,
-        {
-          email: email,
-          password: password,
-        });
-
-      if (response.status === errors.wrongData) {
-        dispatch(isRejected());
-        toast.warn(warnings.wrongData);
-      } else {
-        const data = await response.json();
-        dispatch(isFullFilled());
-        saveToken(data.token);
-        dispatch(getAvatar(data['avatar_url']));
-      }
-    }
-    catch {
-      dispatch(isRejected());
-      toast.warn(warnings.network);
-    }
-  };
-
-export const logOut = () =>
-  async (dispatch: (arg: { payload: string; type: string; }) => void) => {
-    try {
-      await deleteData(serverPath.logout);
-      deleteToken();
-      dispatch(checkStatus(AuthorizationStatus.NoAuth));
     }
     catch {
       toast.warn(warnings.network);

@@ -37,7 +37,10 @@ export default function Card({name, previewImage, id, videoLink, posterImage}: C
     >
       <div className="small-film-card__image">
         {preview ?
-          <PreviewPlayer videoLink={videoLink} posterImage={posterImage} /> :
+          <PreviewPlayer
+            videoLink={videoLink}
+            posterImage={posterImage}
+          /> :
           <img src={previewImage} alt={name} width="280" height="175" />}
       </div>
       <h3 className="small-film-card__title">

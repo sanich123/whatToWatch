@@ -1,9 +1,6 @@
-import { usePromoFilm } from '../../../hooks/useFetch';
-import Loader from '../../common/loader/loader';
+import { Film } from '../../../types/types';
 
-export default function PromoBackImg() {
-  const promoFilm = usePromoFilm();
-  if (!promoFilm) {return <Loader/>;}
+export default function PromoBackImg({promoFilm}: {promoFilm: Film}) {
   const {backgroundImage, name} = promoFilm;
 
   return (
