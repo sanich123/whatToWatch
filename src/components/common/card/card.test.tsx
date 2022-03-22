@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen }  from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { mockFilm } from '../../mocks/mocks';
+import { mockFilm } from '../../../mocks/mocks';
 import Card from './card';
 
 describe('Card', () => {

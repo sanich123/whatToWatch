@@ -5,7 +5,6 @@ import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
 import PlayButton from '../../common/play-btn/play-btn';
 import Logo from '../../common/logo/logo/logo';
-import UserMenu from '../../main/user-menu/user-menu/user';
 import Svg from '../../svg/svg';
 import FilmDesc from '../film-desc/film-description/film-desc';
 import SimilarFilms from '../similar-films/similar-films';
@@ -15,45 +14,36 @@ import Copyright from '../../common/copyright/copyright';
 import { useGetFilmQuery } from '../../../store';
 import { errorHandler } from '../../../utils/utils';
 import { adaptFilm } from '../../../utils/adapter/adapter';
+import Header from '../../common/header/header';
+import BackgroundImg from '../../main/background-img/background-img';
+import Poster from '../../common/poster/poster';
+import FilmInfo from '../../common/film-info/film-info';
 
-export default function MoviePage(): JSX.Element {
+export default function MoviePage() {
   const selected: {id: string} = useParams();
   const { data: film, isLoading, error } = useGetFilmQuery(selected.id);
 
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
 
   if (isLoading) {return <Loader />;}
-  error && errorHandler(error);
+  if (error) { errorHandler(error);}
 
-  const {backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id} = adaptFilm(film);
+  const {backgroundColor, name, posterImage, released, id, genre} = adaptFilm(film);
 
   return (
     <>
       <Svg />
-
       <section
         className="film-card--full"
         style={{backgroundColor: backgroundColor}}
       >
         <div className="film-card__hero">
-          <div className="film-card__bg">
-            <img src={backgroundImage} alt={name} />
-          </div>
-
-          <h1 className="visually-hidden">WTW</h1>
-
-          <header className="page-header film-card__head">
-            <Logo />
-            <UserMenu />
-          </header>
+          <BackgroundImg film={adaptFilm(film)} />
+          <Header/>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{name}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span>{released}</span>
-              </p>
+              <FilmInfo name={name} genre={genre} released={released} />
 
               <div className="film-card__buttons">
                 <PlayButton id={id} />
@@ -69,20 +59,8 @@ export default function MoviePage(): JSX.Element {
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
-            <div className="film-card__poster film-card__poster--big">
-              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
-            </div>
-
-            <FilmDesc
-              description={description}
-              director={director}
-              runTime={runTime}
-              starring={starring}
-              rating={rating}
-              id={id}
-              released={released}
-              genre={genre}
-            />
+            <Poster moviePage name={name} posterImage={posterImage} />
+            <FilmDesc id={id} film={adaptFilm(film)} />
           </div>
         </div>
       </section>

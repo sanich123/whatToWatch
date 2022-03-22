@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
+import { mockFilm } from '../../../../mocks/mocks';
 import Overview from './overview';
 
 describe('Component overview testing', () => {
   it('successfully renders with props', () => {
-    render(<Overview description='Some description' rating={8} director='Tom Cruze' runTime={123} starring={['Angelina Jolie']} />);
+    render(<Overview film={mockFilm} />);
     expect(screen.getByText(/Angelina/i)).toBeInTheDocument();
     expect(screen.queryByText('jlkj')).not.toBeInTheDocument();
   });

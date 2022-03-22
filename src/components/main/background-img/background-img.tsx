@@ -1,7 +1,7 @@
 import { Film } from '../../../types/types';
 
-export default function PromoBackImg({promoFilm}: {promoFilm: Film}) {
-  const {backgroundImage, name} = promoFilm;
+export default function BackgroundImg({film}: {film: Film}) {
+  const {backgroundImage, name} = film;
 
   return (
     <div className="film-card__bg">

@@ -68,17 +68,6 @@ export interface RootState {
   }
 }
 
-export interface FilmDescProps {
-  description: string,
-  rating: number,
-  director: string,
-  runTime: number,
-  starring: string[],
-  id: number,
-  released: number,
-  genre: string,
-}
-
 export interface AuthInfoDTO {
   id: number,
   email: string,

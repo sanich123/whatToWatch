@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useGetFilmsQuery } from '../../../../store';
-import { RootState } from '../../../../types/types';
+import { Film, RootState } from '../../../../types/types';
 import { serverPath } from '../../../../utils/const';
 import { reviewsReducer } from '../../../../utils/utils';
 import Loader from '../../../common/loader/loader';
@@ -9,8 +9,9 @@ import './comments-styles.css';
 
 const NUMBER_SLICE = 6;
 
-export default function Reviews({id}: {id: number}) {
-  const { data, isLoading } = useGetFilmsQuery(`https://8.react.pages.academy/wtw/${serverPath.comments}/${id}`);
+export default function Reviews({movie}: {movie: Film}) {
+  const {id} = movie;
+  const { data, isLoading } = useGetFilmsQuery(`${serverPath.comments}/${id}`);
   const reviews = useSelector(({ film }: RootState) => film.comments);
 
   if (isLoading) {return <Loader/>;}

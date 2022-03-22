@@ -1,5 +1,5 @@
 import { Film } from '../../../types/types';
-import Card from '../../card/card';
+import Card from '../../common/card/card';
 import './films-list-styles.css';
 
 export default function FilmsList({films}: {films: Film[]}): JSX.Element {

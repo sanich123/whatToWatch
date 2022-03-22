@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../../../../types/types';
 import { AppRoute, AuthorizationStatus } from '../../../../utils/const';
 import UserAuth from '../user-auth/user-auth';
-import './../user-menu-styles.css';
+import '../user-menu-styles.css';
 
 export default function UserMenu(): JSX.Element {
   const userAvatar = useSelector(({authorization}: RootState) => authorization.avatarUrl);

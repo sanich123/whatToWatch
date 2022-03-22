@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { RootState } from '../../../../types/types';
+import { useGetFilmQuery } from '../../../../store';
+import { adaptFilm } from '../../../../utils/adapter/adapter';
 import { getFormattedTime } from '../../../../utils/formatters/formatters';
+import { errorHandler } from '../../../../utils/utils';
 import Loader from '../../../common/loader/loader';
 import FullScreenBtn from '../full-screen-btn/full-screen-btn';
 import PlayBtn from '../play-btn/play-btn';
 import './player-styles.css';
 
-export default function Player():JSX.Element {
-  const films = useSelector((state: RootState) => state.movies.films);
+export default function Player() {
   const selected: {id: string} = useParams();
+  const { data: film, isLoading, error } = useGetFilmQuery(selected.id);
   const history = useHistory();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -19,10 +20,16 @@ export default function Player():JSX.Element {
 
   const duration = videoRef.current?.duration;
   const position = `${currentTime && duration ? (currentTime / duration) * 100 : 0}%`;
-  setInterval(
-    ()=> {
+
+  useEffect(() => {
+    const id = setInterval(() => {
       setCurrentTime(videoRef.current?.currentTime);
     }, 1000);
+
+    return () => {
+      clearInterval(id);
+    };
+  });
 
   useEffect(() => {
     const onKeyDownEsc =
@@ -32,28 +39,18 @@ export default function Player():JSX.Element {
         history.goBack();
       }
     };
-    const onKeyDownWhiteSpace =
-    (evt: KeyboardEvent) => {
-      if (evt.key === 'Space') {
-        evt.preventDefault();
-        videoRef.current?.play();
-      }
-    };
     document.addEventListener('keydown', onKeyDownEsc);
-    document.addEventListener('keydown', onKeyDownWhiteSpace);
-
     return () => {
       document.removeEventListener('keydown', onKeyDownEsc);
-      document.removeEventListener('keydown', onKeyDownWhiteSpace);
     };
-
   }, [history]);
 
-  if (films.length === 0) {
+  if (isLoading) {
     return <Loader />;
   }
+  error && errorHandler(error);
 
-  const [{videoLink, posterImage}] = films.filter(({id}) => id === +selected.id);
+  const {videoLink, posterImage} = adaptFilm(film);
 
   return (
     <div className="player">

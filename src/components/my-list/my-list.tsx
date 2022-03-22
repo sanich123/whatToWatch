@@ -2,11 +2,11 @@ import { useGetFavoritesQuery } from '../../store';
 import { Film, FilmDTO } from '../../types/types';
 import { adaptFilm } from '../../utils/adapter/adapter';
 import { errorHandler } from '../../utils/utils';
-import Card from '../card/card';
+import Card from '../common/card/card';
 import Copyright from '../common/copyright/copyright';
 import Loader from '../common/loader/loader';
 import Logo from '../common/logo/logo/logo';
-import UserMenu from '../main/user-menu/user-menu/user';
+import UserMenu from '../common/authorization/user-menu/user';
 import Svg from '../svg/svg';
 import './my-list-styles.css';
 

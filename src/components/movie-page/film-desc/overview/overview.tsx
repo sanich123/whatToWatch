@@ -1,15 +1,9 @@
+import { Film } from '../../../../types/types';
 import { markChanger } from '../../../../utils/formatters/formatters';
 import './overview-styles.css';
 
-interface OverviewProps {
-  description: string,
-  rating: number,
-  director: string,
-  runTime: number,
-  starring: string[],
-}
-
-export default function Overview({description, rating, director, runTime, starring}: OverviewProps): JSX.Element {
+export default function Overview({film}: {film: Film}) {
+  const {rating, runTime, description, director, starring} = film;
 
   return (
     <>
@@ -22,8 +16,14 @@ export default function Overview({description, rating, director, runTime, starri
       </div>
 
       <div className="film-card__text">{description}
-        <p className="film-card__director"><strong>Director: {director}</strong></p>
-        <p className="film-card__starring"><strong>Starring: {starring.map((actor) => actor).join(', ')} and other</strong></p>
+        <p className="film-card__director">
+          <strong>Director: {director}</strong>
+        </p>
+        <p className="film-card__starring">
+          <strong>Starring:
+            {starring.map((actor) => actor).join(', ')} and other
+          </strong>
+        </p>
       </div>
     </>
   );

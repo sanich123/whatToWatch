@@ -2,7 +2,7 @@ import { useGetFilmsQuery } from '../../../store';
 import { Film, FilmDTO } from '../../../types/types';
 import { adaptFilm } from '../../../utils/adapter/adapter';
 import { serverPath } from '../../../utils/const';
-import Card from '../../card/card';
+import Card from '../../common/card/card';
 import Loader from '../../common/loader/loader';
 import './similar-films-styles.css';
 

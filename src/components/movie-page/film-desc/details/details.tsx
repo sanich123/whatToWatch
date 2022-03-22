@@ -1,15 +1,9 @@
 import React from 'react';
+import { Film } from '../../../../types/types';
 import './details-styles.css';
 
-interface DetailsProps {
-  released: number,
-  genre: string,
-  director: string,
-  runTime: number,
-  starring: string[],
-}
-
-export default function Details({released, genre, director, runTime, starring}: DetailsProps): JSX.Element {
+export default function Details({film}: {film: Film}) {
+  const {released, genre, director, runTime, starring} = film;
 
   return (
     <div className="film-card__text film-card__row">
