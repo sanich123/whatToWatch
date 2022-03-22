@@ -26,7 +26,13 @@ export const filmsApi = createApi({
       }),
       transformResponse: (response: AuthInfoDTO) => response,
     }),
+    deleteAuth: builder.mutation({
+      query: () => ({
+        url: '8.react.pages.academy/wtw/logout',
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useGetFilmsQuery, usePostAuthMutation } = filmsApi;
+export const { useGetFilmsQuery, usePostAuthMutation, useDeleteAuthMutation } = filmsApi;

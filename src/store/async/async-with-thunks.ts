@@ -1,12 +1,13 @@
-import { fetchFilms, setFavorites, setPromo } from '../slices/start/start';
 import { AuthInfoDTO, Film } from '../../types/types';
-import {  fetchComments, fullFilled, rejected, startPosting } from '../slices/film/film';
 import { deleteData, getData, postData } from '../../utils/fetch-api';
 import { AuthorizationStatus, errors, serverPath, warnings } from '../../utils/const';
-import { checkStatus, getAvatar, isFullFilled, isRejected, startLoading } from '../slices/authorization/authorization';
 import { deleteToken, saveToken } from '../../utils/token';
 import { toast } from 'react-toastify';
+import { fetchFilms, setFavorites, setPromo } from '../slices/start/start';
 import { adaptFilm, getAdaptedFilms } from '../../utils/adapter/adapter';
+import { checkStatus, getAvatar, isFullFilled, isRejected, startLoading } from '../slices/authorization/authorization';
+import { fetchComments, fullFilled, rejected, startPosting } from '../slices/film/film';
+
 
 export const loadFilms = () =>
   async (dispatch: (arg: { payload: Film[]; type: string; }) => void) => {

@@ -5,17 +5,17 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { RootState } from '../../../types/types';
 import { AppRoute, warnings } from '../../../utils/const';
-import { getAvatar } from '../../../store/slices/authorization/authorization';
 import Svg from '../../svg/svg';
 import './sign-in-styles.css';
 import Copyright from '../../common/copyright/copyright';
 import { testingEmail, testingPassword } from '../../../utils/regexps/regexps';
-import EmailInput from '../emailInput/email-input';
-import PasswordInput from '../password-input/password-input';
 import Logo from '../../common/logo/logo/logo';
 import { usePostAuthMutation } from '../../../store';
 import { saveToken } from '../../../utils/token';
 import { errorHandler } from '../../../utils/utils';
+import { getAvatar } from '../../../store/slices/authorization/authorization';
+import EmailInput from '../emailInput/email-input';
+import PasswordInput from '../password-input/password-input';
 
 export default function SignIn(): JSX.Element {
   const dispatch = useDispatch();
