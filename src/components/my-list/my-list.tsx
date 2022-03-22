@@ -1,4 +1,4 @@
-import { useGetFilmsQuery } from '../../store';
+import { useGetFavoritesQuery } from '../../store';
 import { Film, FilmDTO } from '../../types/types';
 import { adaptFilm } from '../../utils/adapter/adapter';
 import { errorHandler } from '../../utils/utils';
@@ -11,14 +11,13 @@ import Svg from '../svg/svg';
 import './my-list-styles.css';
 
 export default function Favorites() {
-  const { data: films, isLoading, error } = useGetFilmsQuery('8.react.pages.academy/wtw/favorite');
+  const { data: favorites, isLoading, error } = useGetFavoritesQuery('');
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  if (isLoading) {return <Loader />;}
+
   error && errorHandler(error);
 
-  const favorites = films.map((film: FilmDTO) => adaptFilm(film)) || [];
+  const myFilms = favorites ? favorites.map((film: FilmDTO) => adaptFilm(film)) : [];
 
   return (
     <>
@@ -32,7 +31,7 @@ export default function Favorites() {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <div className="catalog__films-list">
-            {favorites.length > 0 && favorites.map(({id, ...rest}: Film) => <Card id={id} key={id} {...rest}/>)}
+            {myFilms.length > 0 && myFilms.map(({id, ...rest}: Film) => <Card id={id} key={id} {...rest}/>)}
           </div>
         </section>
 

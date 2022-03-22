@@ -1,12 +1,13 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import { AuthInfoDTO } from '../../../types/types';
+import { serverPath } from '../../../utils/const';
 import { getToken } from '../../../utils/token';
 
 export const filmsApi = createApi({
   reducerPath: 'filmsApi',
   tagTypes: ['Films'],
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://',
+    baseUrl: 'https://8.react.pages.academy/wtw/',
     prepareHeaders: (headers) => {
       if (getToken()) {
         headers.set('x-token', `${getToken()}`);
@@ -18,21 +19,31 @@ export const filmsApi = createApi({
     getFilms: builder.query({
       query: (endPoint = '') => `${endPoint}`,
     }),
+
+    getFilm: builder.query({
+      query: (id = '') => `${serverPath.films}/${id}`,
+    }),
+
+    getFavorites: builder.query({
+      query: () => `${serverPath.favorite}`,
+    }),
+
     postAuth: builder.mutation({
       query: (body) => ({
-        url: '8.react.pages.academy/wtw/login',
+        url: `${serverPath.login}`,
         method: 'POST',
         body,
       }),
       transformResponse: (response: AuthInfoDTO) => response,
     }),
+
     deleteAuth: builder.mutation({
       query: () => ({
-        url: '8.react.pages.academy/wtw/logout',
+        url: `${serverPath.logout}`,
         method: 'DELETE',
       }),
     }),
   }),
 });
 
-export const { useGetFilmsQuery, usePostAuthMutation, useDeleteAuthMutation } = filmsApi;
+export const { useGetFilmsQuery, usePostAuthMutation, useDeleteAuthMutation, useGetFilmQuery, useGetFavoritesQuery } = filmsApi;

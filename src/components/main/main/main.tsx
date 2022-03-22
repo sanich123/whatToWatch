@@ -14,33 +14,40 @@ import Copyright from '../../common/copyright/copyright';
 import { useGetFilmsQuery } from '../../../store/slices/films-api/films-api';
 import PromoBackImg from '../promo-background-img/promo-background-img';
 import { adaptFilm } from '../../../utils/adapter/adapter';
+import { FilmDTO } from '../../../types/types';
+import { usePromoFilm } from '../../../hooks/useFetch';
 
 export default function Main(): JSX.Element {
-  const {data: movies, isLoading: moviesLoading, error: moviesError} = useGetFilmsQuery('8.react.pages.academy/wtw/films');
-  const {data: promoFilm, isLoading: promoLoading, error:promoError} =
-  useGetFilmsQuery(`6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`);
+  const {
+    data: movies,
+    isLoading: moviesLoading,
+    error: moviesError,
+  } = useGetFilmsQuery(serverPath.films);
+
+  const promoFilm = usePromoFilm('');
+
   const [filter, setFilter] = useState('All genres');
   const [slicingNum, setSlicingNum] = useState(numberOfFilms);
 
-  if (moviesLoading || promoLoading) {return <Loader />;}
+  if (moviesLoading || !promoFilm) {return <Loader />;}
 
   moviesError && errorHandler(moviesError);
-  promoError && errorHandler(promoError);
 
-  const films = filterChanger(filter, movies);
+  const adaptedFilms = movies.map((movie: FilmDTO) => adaptFilm(movie));
+  const films = filterChanger(filter, adaptedFilms);
   const slicedFilms = films.slice(startOfSlice, slicingNum);
 
   return (
     <>
       <Svg />
       <section className="film-card">
-        <PromoBackImg promoFilm={adaptFilm(promoFilm)} />
+        <PromoBackImg promoFilm={promoFilm} />
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
           <Logo />
           <UserMenu />
         </header>
-        <PromoFilm promoFilm={adaptFilm(promoFilm)} />
+        <PromoFilm promoFilm={promoFilm} />
       </section>
       <div className="page-content">
         <section className="catalog">

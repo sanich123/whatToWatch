@@ -60,4 +60,22 @@ export const useFilm = (id: string) => {
   return selectedFilm;
 };
 
+export const usePromoFilm = (id: string) => {
+  const [promoFilm, setSelectedMovie] = useState<Film>();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const film = await (await fetch(`https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`)).json();
+        setSelectedMovie(adaptFilm(film));
+      }
+      catch {
+        toast.error(warnings.server404);
+      }
+    })();
+  }, [id]);
+
+  return promoFilm;
+};
+
 

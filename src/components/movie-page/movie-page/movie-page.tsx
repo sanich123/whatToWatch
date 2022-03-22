@@ -12,18 +12,20 @@ import SimilarFilms from '../similar-films/similar-films';
 import FavoriteBtn from '../../common/favorite-btn/favorite-btn';
 import './movie-page-styles.css';
 import Copyright from '../../common/copyright/copyright';
-import { useGetFilmsQuery } from '../../../store';
+import { useGetFilmQuery } from '../../../store';
 import { errorHandler } from '../../../utils/utils';
+import { adaptFilm } from '../../../utils/adapter/adapter';
 
 export default function MoviePage(): JSX.Element {
   const selected: {id: string} = useParams();
-  const { data: film, isLoading, error } = useGetFilmsQuery(`8.react.pages.academy/wtw/films/${selected.id}`);
+  const { data: film, isLoading, error } = useGetFilmQuery(selected.id);
+
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
 
   if (isLoading) {return <Loader />;}
   error && errorHandler(error);
 
-  const {backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id} = film;
+  const {backgroundColor, backgroundImage, description, director, genre, name, posterImage, rating, released, runTime, starring, id} = adaptFilm(film);
 
   return (
     <>
@@ -56,8 +58,10 @@ export default function MoviePage(): JSX.Element {
               <div className="film-card__buttons">
                 <PlayButton id={id} />
                 <FavoriteBtn id={+selected.id} />
+
                 {authStatus === AuthorizationStatus.Auth
                 && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
+
               </div>
             </div>
           </div>
