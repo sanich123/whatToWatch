@@ -6,7 +6,7 @@ interface FormRatingProps {
   disabled: boolean,
 }
 
-export default function FormRating({setRating, disabled}: FormRatingProps): JSX.Element {
+export default function FormRating({setRating, disabled}: FormRatingProps) {
 
   return (
     <div className="rating">

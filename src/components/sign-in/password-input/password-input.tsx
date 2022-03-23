@@ -3,7 +3,7 @@ interface PasswordInputProps {
   setPassword: (arg: string) => void,
 }
 
-export default function PasswordInput({password, setPassword}: PasswordInputProps): JSX.Element {
+export default function PasswordInput({password, setPassword}: PasswordInputProps) {
   return (
     <div className="sign-in__field">
       <input

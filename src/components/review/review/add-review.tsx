@@ -8,14 +8,14 @@ import { RootState } from '../../../types/types';
 import { adaptFilm } from '../../../utils/adapter/adapter';
 import { asyncConditions } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
-import Logo from '../../common/logo/logo/logo';
+import Logo from '../../common/header/logo/logo';
 import UserMenu from '../../common/authorization/user-menu/user';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import FormRating from '../form-rating/form-rating';
 import TextArea from '../form-text/text-area';
 import './review-styles.css';
 
-export default function AddReview(): JSX.Element {
+export default function AddReview() {
   const selected: {id: string} = useParams();
   const history = useHistory();
   const dispatch = useDispatch();

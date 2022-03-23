@@ -7,7 +7,7 @@ interface TextAreaProps {
   disabled: boolean,
 }
 
-export default function TextArea({setText, rating, text, disabled}: TextAreaProps): JSX.Element {
+export default function TextArea({setText, rating, text, disabled}: TextAreaProps) {
 
   return (
     <div className="add-review__text">

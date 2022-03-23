@@ -4,20 +4,19 @@ import { errorHandler, filterChanger } from '../../../utils/utils';
 import Svg from '../../svg/svg';
 import FilmsList from '../films-list/films-list';
 import Filter from '../filters/filters';
-import Logo from '../../common/logo/logo/logo';
 import MoreFilmsBtn from '../more-films-btn/more-films-btn';
 import PromoFilm from '../promo-film/promo-film';
 import './main-styles.css';
 import Loader from '../../common/loader/loader';
-import Copyright from '../../common/copyright/copyright';
 import { useGetFilmsQuery } from '../../../store/slices/films-api/films-api';
 import { adaptFilm } from '../../../utils/adapter/adapter';
 import { FilmDTO } from '../../../types/types';
 import { usePromoFilm } from '../../../hooks/useFetch';
 import Header from '../../common/header/header';
 import BackgroundImg from '../background-img/background-img';
+import Footer from '../../common/footer/footer';
 
-export default function Main(): JSX.Element {
+export default function Main() {
   const {
     data: movies,
     isLoading: moviesLoading,
@@ -64,10 +63,7 @@ export default function Main(): JSX.Element {
           {slicingNum <= slicedFilms.length &&
           <MoreFilmsBtn setSlicingNum={setSlicingNum} slicingNum={slicingNum} />}
         </section>
-        <footer>
-          <Logo footer />
-          <Copyright />
-        </footer>
+        <Footer/>
       </div>
     </>
   );

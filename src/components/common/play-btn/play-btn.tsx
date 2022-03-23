@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import './play-styles.css';
 
-export default function PlayButton({id}: {id: number}): JSX.Element {
+export default function PlayButton({id}: {id: number}) {
   const history = useHistory();
 
   return (

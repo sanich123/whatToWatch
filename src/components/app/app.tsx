@@ -10,7 +10,7 @@ import PrivateRoute from '../../utils/private-route';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../types/types';
 
-export default function App(): JSX.Element {
+export default function App() {
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
 
   return (

@@ -2,7 +2,7 @@ import { Comment } from '../../../../types/types';
 import { commentLayoutMaker } from '../../../../utils/utils';
 import CommentCol from './comments-col';
 
-export default function CommentRow({reviews}: {reviews: Comment[]}): JSX.Element {
+export default function CommentRow({reviews}: {reviews: Comment[]}) {
 
   return (
     <div className="film-card__reviews film-card__row">

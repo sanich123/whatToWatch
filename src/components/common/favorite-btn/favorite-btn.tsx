@@ -4,7 +4,7 @@ import { loadFavorites, setFavorite } from '../../../store/async/async-with-thun
 import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 
-export default function FavoriteBtn({id}: {id: number}): JSX.Element {
+export default function FavoriteBtn({id}: {id: number}) {
   const dispatch = useDispatch();
   const favorites = useSelector(({movies}: RootState) => movies.favorites);
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);

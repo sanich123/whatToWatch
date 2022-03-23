@@ -4,13 +4,11 @@ import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
 import PlayButton from '../../common/play-btn/play-btn';
-import Logo from '../../common/logo/logo/logo';
 import Svg from '../../svg/svg';
 import FilmDesc from '../film-desc/film-description/film-desc';
 import SimilarFilms from '../similar-films/similar-films';
 import FavoriteBtn from '../../common/favorite-btn/favorite-btn';
 import './movie-page-styles.css';
-import Copyright from '../../common/copyright/copyright';
 import { useGetFilmQuery } from '../../../store';
 import { errorHandler } from '../../../utils/utils';
 import { adaptFilm } from '../../../utils/adapter/adapter';
@@ -18,6 +16,7 @@ import Header from '../../common/header/header';
 import BackgroundImg from '../../main/background-img/background-img';
 import Poster from '../../common/poster/poster';
 import FilmInfo from '../../common/film-info/film-info';
+import Footer from '../../common/footer/footer';
 
 export default function MoviePage() {
   const selected: {id: string} = useParams();
@@ -67,10 +66,7 @@ export default function MoviePage() {
 
       <div className="page-content">
         <SimilarFilms id={id} />
-        <footer>
-          <Logo footer />
-          <Copyright />
-        </footer>
+        <Footer/>
       </div>
     </>
   );

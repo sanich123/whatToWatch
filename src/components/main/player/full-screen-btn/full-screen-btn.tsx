@@ -2,7 +2,7 @@ export interface FullScreenBtnProps {
   current: HTMLVideoElement | null
 }
 
-export default function FullScreenBtn({current}: FullScreenBtnProps): JSX.Element {
+export default function FullScreenBtn({current}: FullScreenBtnProps) {
 
   const fullScreen = () =>
     !document.fullscreenElement ?

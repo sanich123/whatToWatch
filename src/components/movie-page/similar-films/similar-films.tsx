@@ -6,7 +6,7 @@ import Card from '../../common/card/card';
 import Loader from '../../common/loader/loader';
 import './similar-films-styles.css';
 
-export default function SimilarFilms({id}: {id: number}): JSX.Element {
+export default function SimilarFilms({id}: {id: number}) {
   const { data: similarFilms, isLoading } = useGetFilmsQuery(`https://8.react.pages.academy/wtw/${serverPath.films}/${id}/${serverPath.similar}`);
   if (isLoading) {return <Loader/>;}
 

@@ -3,7 +3,7 @@ interface EmailInputProps {
   setEmail: (arg: string) => void,
 }
 
-export default function EmailInput({email, setEmail}: EmailInputProps): JSX.Element {
+export default function EmailInput({email, setEmail}: EmailInputProps) {
 
   return (
     <div className="sign-in__field">

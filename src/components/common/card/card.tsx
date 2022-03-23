@@ -12,7 +12,7 @@ interface CardProps {
   posterImage: string,
 }
 
-export default function Card({name, previewImage, id, videoLink, posterImage}: CardProps): JSX.Element {
+export default function Card({name, previewImage, id, videoLink, posterImage}: CardProps) {
   const [mouseEnter, setIsMouseEnter] = useState(false);
   const [preview, setPreview] = useState(false);
 

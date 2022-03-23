@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './breadcrumbs-styles.css';
 
-export default function Breadcrumbs({id, name}: {id: number, name: string}): JSX.Element {
+export default function Breadcrumbs({id, name}: {id: number, name: string}) {
 
   return (
     <nav className="breadcrumbs">

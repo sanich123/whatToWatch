@@ -1,5 +1,5 @@
 import UserMenu from '../authorization/user-menu/user';
-import Logo from '../logo/logo/logo';
+import Logo from './logo/logo';
 
 export default function Header() {
 

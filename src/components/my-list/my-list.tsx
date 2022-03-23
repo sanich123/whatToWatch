@@ -3,12 +3,12 @@ import { Film, FilmDTO } from '../../types/types';
 import { adaptFilm } from '../../utils/adapter/adapter';
 import { errorHandler } from '../../utils/utils';
 import Card from '../common/card/card';
-import Copyright from '../common/copyright/copyright';
 import Loader from '../common/loader/loader';
-import Logo from '../common/logo/logo/logo';
 import UserMenu from '../common/authorization/user-menu/user';
 import Svg from '../svg/svg';
 import './my-list-styles.css';
+import Footer from '../common/footer/footer';
+import Logo from '../common/header/logo/logo';
 
 export default function Favorites() {
   const { data: favorites, isLoading, error } = useGetFavoritesQuery('');
@@ -35,10 +35,7 @@ export default function Favorites() {
           </div>
         </section>
 
-        <footer>
-          <Logo footer />
-          <Copyright />
-        </footer>
+        <Footer/>
       </div>
     </>
   );

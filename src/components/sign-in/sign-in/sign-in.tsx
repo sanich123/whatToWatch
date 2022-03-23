@@ -7,17 +7,17 @@ import { RootState } from '../../../types/types';
 import { AppRoute, warnings } from '../../../utils/const';
 import Svg from '../../svg/svg';
 import './sign-in-styles.css';
-import Copyright from '../../common/copyright/copyright';
 import { testingEmail, testingPassword } from '../../../utils/regexps/regexps';
-import Logo from '../../common/logo/logo/logo';
+import Logo from '../../common/header/logo/logo';
 import { usePostAuthMutation } from '../../../store';
 import { saveToken } from '../../../utils/token';
 import { errorHandler } from '../../../utils/utils';
 import { getAvatar } from '../../../store/slices/authorization/authorization';
 import EmailInput from '../emailInput/email-input';
 import PasswordInput from '../password-input/password-input';
+import Footer from '../../common/footer/footer';
 
-export default function SignIn(): JSX.Element {
+export default function SignIn() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -76,10 +76,7 @@ export default function SignIn(): JSX.Element {
           </form>
         </div>
 
-        <footer>
-          <Logo footer />
-          <Copyright />
-        </footer>
+        <Footer/>
       </div>
     </>
   );

@@ -12,7 +12,7 @@ interface PreviewPlayerProps {
   posterImage?: string,
 }
 
-export default function PreviewPlayer({videoLink, posterImage}: PreviewPlayerProps): JSX.Element {
+export default function PreviewPlayer({videoLink, posterImage}: PreviewPlayerProps) {
 
   return (
     <VideoPlayer src={videoLink} poster={posterImage} preload='' autoPlay muted />

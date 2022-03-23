@@ -5,7 +5,7 @@ import { AppRoute, AuthorizationStatus } from '../../../../utils/const';
 import UserAuth from '../user-auth/user-auth';
 import '../user-menu-styles.css';
 
-export default function UserMenu(): JSX.Element {
+export default function UserMenu() {
   const userAvatar = useSelector(({authorization}: RootState) => authorization.avatarUrl);
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
 

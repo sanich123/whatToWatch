@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../utils/const';
-import Copyright from '../common/copyright/copyright';
-import Logo from '../common/logo/logo/logo';
+import Footer from '../common/footer/footer';
+import Logo from '../common/header/logo/logo';
 import Svg from '../svg/svg';
 import './../sign-in/sign-in/sign-in-styles.css';
 
-export default function Page404(): JSX.Element {
+export default function Page404() {
   return (
     <>
       <Svg />
@@ -28,10 +28,7 @@ export default function Page404(): JSX.Element {
           </div>
         </div>
 
-        <footer className="page-footer">
-          <Logo footer />
-          <Copyright />
-        </footer>
+        <Footer/>
       </div>
     </>
   );

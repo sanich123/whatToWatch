@@ -19,7 +19,7 @@ interface PlayBtnProps extends FullScreenBtnProps {
   isPlaying: boolean,
 }
 
-export default function PlayBtn({isPlaying, setIsPlaying, current}: PlayBtnProps): JSX.Element {
+export default function PlayBtn({isPlaying, setIsPlaying, current}: PlayBtnProps) {
 
   const playVideo = (): void => {
     if (!isPlaying) {

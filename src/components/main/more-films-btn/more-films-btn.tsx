@@ -6,7 +6,7 @@ interface MoreFilmsBtnProps {
   slicingNum: number,
 }
 
-export default function MoreFilmsBtn({setSlicingNum, slicingNum}: MoreFilmsBtnProps): JSX.Element {
+export default function MoreFilmsBtn({setSlicingNum, slicingNum}: MoreFilmsBtnProps) {
   return (
     <button
       onClick={() => setSlicingNum(slicingNum + numberOfFilms)}

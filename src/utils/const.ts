@@ -78,4 +78,6 @@ export const asyncConditions = {
   rejected: 'rejected',
 };
 
+export const symbols = ['W', 'T', 'W'];
+
 
