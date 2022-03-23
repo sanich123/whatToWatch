@@ -5,7 +5,7 @@ import { getToken } from '../../../utils/token';
 
 export const filmsApi = createApi({
   reducerPath: 'filmsApi',
-  tagTypes: ['Comments'],
+  tagTypes: ['Favorites','Comments'],
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://8.react.pages.academy/wtw/',
     prepareHeaders: (headers) => {
@@ -26,6 +26,11 @@ export const filmsApi = createApi({
 
     getFavorites: builder.query({
       query: () => `${serverPath.favorite}`,
+      providesTags: (result) =>
+        result ?
+          [...result.map(({ id }: {id: number}) => ({ type: 'Favorites', id })),
+            { type: 'Favorites', id: 'FAVOR' }]
+          : [{ type: 'Favorites', id: 'FAVOR' }],
     }),
 
     getAuth: builder.query({
@@ -35,12 +40,10 @@ export const filmsApi = createApi({
     getComments: builder.query({
       query: (id = '') => `${serverPath.comments}/${id}`,
       providesTags: (result) =>
-        result
-          ? [
-            ...result.map(({ id }: {id: number}) => ({ type: 'Comments', id })),
-            { type: 'Comments', id: 'LIST' },
-          ]
-          : [{ type: 'Comments', id: 'LIST' }],
+        result ?
+          [...result.map(({ id }: {id: number}) => ({ type: 'Comments', id })),
+            { type: 'Comments', id: 'Comment' }]
+          : [{ type: 'Comments', id: 'Comment' }],
     }),
 
     postAuth: builder.mutation({
@@ -58,7 +61,15 @@ export const filmsApi = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: [{type: 'Comments', id: 'LIST'}],
+      invalidatesTags: [{type: 'Comments', id: 'Comment'}],
+    }),
+
+    postFavorite: builder.mutation({
+      query: ({id, isFavorite}) => ({
+        url: `${serverPath.favorite}/${id}/${isFavorite ? 0 : 1}`,
+        method: 'POST',
+      }),
+      invalidatesTags: [{type: 'Favorites', id: 'FAVOR'}],
     }),
 
     deleteAuth: builder.mutation({
@@ -79,4 +90,5 @@ export const {
   usePostAuthMutation,
   usePostCommentMutation,
   useDeleteAuthMutation,
+  usePostFavoriteMutation,
 } = filmsApi;

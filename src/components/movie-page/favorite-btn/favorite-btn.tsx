@@ -1,25 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadFavorites, setFavorite } from '../../../store/async/async-with-thunks';
-import { RootState } from '../../../types/types';
+import { useGetFavoritesQuery, usePostFavoriteMutation } from '../../../store';
+import { Film, RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
+import Loader from '../../common/loader/loader';
 
 export default function FavoriteBtn({id}: {id: number}) {
   const dispatch = useDispatch();
-  const favorites = useSelector(({movies}: RootState) => movies.favorites);
+  const {data: favorites, isLoading} = useGetFavoritesQuery('');
+  const [postIsFavorite] = usePostFavoriteMutation();
+
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [click, setClick] = useState(false);
 
   useEffect(() => {
-    if (click) {
-      dispatch(loadFavorites());
-    }
-    return () => setClick(false);
-  }, [click, dispatch]);
-
-  useEffect(() => {
-    if (favorites.some((favorite) => favorite.id === id)
+    if (favorites.some((favorite: Film) => favorite.id === id)
     && authStatus === AuthorizationStatus.Auth) {
       setIsFavorite(true);
     }
@@ -27,16 +22,13 @@ export default function FavoriteBtn({id}: {id: number}) {
       setIsFavorite(false);
     }
   }, [dispatch, favorites, id, authStatus]);
+  if (isLoading) {return <Loader/>;}
 
   return (
     <button
       className="btn btn--list film-card__button"
       type="button"
-      onClick={() => {
-        setFavorite(id, isFavorite);
-        setClick(true);
-        dispatch(loadFavorites());
-      }}
+      onClick={() => postIsFavorite({id, isFavorite})}
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
         <use xlinkHref={isFavorite ? '#in-list' : '#add'} />
