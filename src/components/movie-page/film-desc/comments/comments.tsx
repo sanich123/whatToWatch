@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
-import { useGetFilmsQuery } from '../../../../store';
-import { Film, RootState } from '../../../../types/types';
-import { serverPath } from '../../../../utils/const';
+import { useGetCommentsQuery } from '../../../../store';
+import { Film} from '../../../../types/types';
 import { reviewsReducer } from '../../../../utils/utils';
 import Loader from '../../../common/loader/loader';
 import CommentRow from './comments-row';
@@ -11,17 +9,14 @@ const NUMBER_SLICE = 6;
 
 export default function Reviews({movie}: {movie: Film}) {
   const {id} = movie;
-  const { data, isLoading } = useGetFilmsQuery(`${serverPath.comments}/${id}`);
-  const reviews = useSelector(({ film }: RootState) => film.comments);
+  const { data: comments, isLoading } = useGetCommentsQuery(id);
 
   if (isLoading) {return <Loader/>;}
+  const reviews = reviewsReducer(comments);
 
-  const comments = data;
-  const reviewComms = reviewsReducer([...reviews, ...comments]);
-
-  const slicedComments = reviewComms.length > NUMBER_SLICE ?
-    reviewComms.slice(reviewComms.length - NUMBER_SLICE, reviewComms.length) :
-    reviewComms;
+  const slicedComments = reviews.length > NUMBER_SLICE ?
+    reviews.slice(reviews.length - NUMBER_SLICE, reviews.length) :
+    reviews;
 
   return <CommentRow reviews={slicedComments} />;
 }

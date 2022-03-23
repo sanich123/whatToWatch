@@ -5,7 +5,7 @@ import { getToken } from '../../../utils/token';
 
 export const filmsApi = createApi({
   reducerPath: 'filmsApi',
-  tagTypes: ['Films'],
+  tagTypes: ['Comments'],
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://8.react.pages.academy/wtw/',
     prepareHeaders: (headers) => {
@@ -32,6 +32,17 @@ export const filmsApi = createApi({
       query: () => `${serverPath.login}`,
     }),
 
+    getComments: builder.query({
+      query: (id = '') => `${serverPath.comments}/${id}`,
+      providesTags: (result) =>
+        result
+          ? [
+            ...result.map(({ id }: {id: number}) => ({ type: 'Comments', id })),
+            { type: 'Comments', id: 'LIST' },
+          ]
+          : [{ type: 'Comments', id: 'LIST' }],
+    }),
+
     postAuth: builder.mutation({
       query: (body) => ({
         url: `${serverPath.login}`,
@@ -47,6 +58,7 @@ export const filmsApi = createApi({
         method: 'POST',
         body,
       }),
+      invalidatesTags: [{type: 'Comments', id: 'LIST'}],
     }),
 
     deleteAuth: builder.mutation({
@@ -60,10 +72,11 @@ export const filmsApi = createApi({
 
 export const {
   useGetFilmsQuery,
-  usePostAuthMutation,
-  useDeleteAuthMutation,
   useGetFilmQuery,
   useGetFavoritesQuery,
   useGetAuthQuery,
+  useGetCommentsQuery,
+  usePostAuthMutation,
   usePostCommentMutation,
+  useDeleteAuthMutation,
 } = filmsApi;
