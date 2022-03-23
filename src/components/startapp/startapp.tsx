@@ -26,8 +26,6 @@ export default function StartApp() {
   if (loginLoading || favoritesLoading) {
     return <Loader/>;
   }
-  // eslint-disable-next-line no-console
-  console.log(favorites);
 
   return <div/>;
 }
