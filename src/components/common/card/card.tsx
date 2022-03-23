@@ -17,10 +17,7 @@ export default function Card({name, previewImage, id, videoLink, posterImage}: C
   const [preview, setPreview] = useState(false);
 
   useEffect(() => {
-    if (mouseEnter) {
-      setPreview(true);
-    }
-    return () => setPreview(false);
+    mouseEnter ? setPreview(true) : setPreview(false);
   }, [mouseEnter]);
 
   const debounced = debounce(() => setIsMouseEnter(true), 1000);

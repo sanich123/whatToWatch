@@ -2,15 +2,17 @@ import { useGetFilmsQuery } from '../../../store';
 import { Film, FilmDTO } from '../../../types/types';
 import { adaptFilm } from '../../../utils/adapter/adapter';
 import { serverPath } from '../../../utils/const';
+import { errorHandler } from '../../../utils/utils';
 import Card from '../../common/card/card';
 import Loader from '../../common/loader/loader';
 import './similar-films-styles.css';
 
-export default function SimilarFilms({id}: {id: number}) {
-  const { data: similarFilms, isLoading } = useGetFilmsQuery(`https://8.react.pages.academy/wtw/${serverPath.films}/${id}/${serverPath.similar}`);
+export default function SimilarFilms({uniq}: {uniq: number}) {
+  const { data: similarFilms, isLoading, error } = useGetFilmsQuery(`${serverPath.films}/${uniq}/${serverPath.similar}`);
   if (isLoading) {return <Loader/>;}
+  if (error) {errorHandler(error);}
 
-  const films = similarFilms.map((film: FilmDTO) => adaptFilm(film));
+  const films: Film[] = similarFilms.map((film: FilmDTO) => adaptFilm(film));
   const BEGIN_SLICING = 0;
   const END_SLICING = 4;
 
@@ -19,17 +21,10 @@ export default function SimilarFilms({id}: {id: number}) {
       <h2 className="catalog__title">More like this</h2>
 
       <div className="catalog__films-list">
-        {films && films.slice(BEGIN_SLICING,END_SLICING).map((film: Film) =>
-          (
-            <Card
-              key={film.id}
-              name={film.name}
-              previewImage={film.previewImage}
-              id={film.id}
-              videoLink={film.videoLink}
-              posterImage={film.posterImage}
-            />
-          ))}
+        {films
+          .slice(BEGIN_SLICING,END_SLICING)
+          .map(({id, ...rest}) =>
+            <Card key={id} id={id} {...rest} />)}
       </div>
     </section>
   );

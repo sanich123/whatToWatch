@@ -28,6 +28,10 @@ export const filmsApi = createApi({
       query: () => `${serverPath.favorite}`,
     }),
 
+    getAuth: builder.query({
+      query: () => `${serverPath.login}`,
+    }),
+
     postAuth: builder.mutation({
       query: (body) => ({
         url: `${serverPath.login}`,
@@ -46,4 +50,4 @@ export const filmsApi = createApi({
   }),
 });
 
-export const { useGetFilmsQuery, usePostAuthMutation, useDeleteAuthMutation, useGetFilmQuery, useGetFavoritesQuery } = filmsApi;
+export const { useGetFilmsQuery, usePostAuthMutation, useDeleteAuthMutation, useGetFilmQuery, useGetFavoritesQuery, useGetAuthQuery } = filmsApi;

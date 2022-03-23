@@ -14,10 +14,11 @@ export default function Favorites() {
   const { data: favorites, isLoading, error } = useGetFavoritesQuery('');
 
   if (isLoading) {return <Loader />;}
-
+  // eslint-disable-next-line no-console
+  console.log(favorites);
   error && errorHandler(error);
 
-  const myFilms = favorites ? favorites.map((film: FilmDTO) => adaptFilm(film)) : [];
+  const myFilms: Film[] = favorites.length > 0 ? favorites.map((film: FilmDTO) => adaptFilm(film)) : [];
 
   return (
     <>
@@ -31,7 +32,7 @@ export default function Favorites() {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <div className="catalog__films-list">
-            {myFilms.length > 0 && myFilms.map(({id, ...rest}: Film) => <Card id={id} key={id} {...rest}/>)}
+            {myFilms.length > 0 && myFilms.map(({id, ...rest}) => <Card id={id} key={id} {...rest}/>)}
           </div>
         </section>
 

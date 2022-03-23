@@ -62,7 +62,7 @@ export default function MoviePage() {
       </section>
 
       <div className="page-content">
-        <SimilarFilms id={id} />
+        <SimilarFilms uniq={id} />
         <Footer/>
       </div>
     </>
