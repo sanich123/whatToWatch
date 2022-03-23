@@ -11,8 +11,7 @@ import Loader from '../common/loader/loader';
 
 export default function StartApp() {
   const dispatch = useDispatch();
-  const {data: auth, isLoading: loginLoading, error: loginError} = useGetAuthQuery('');
-
+  const { data: auth, isLoading: loginLoading, error: loginError} = useGetAuthQuery('');
   const { data: favorites, isLoading: favoritesLoading, error: favoritesError } = useGetFavoritesQuery('');
 
   useEffect(() => {

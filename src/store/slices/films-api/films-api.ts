@@ -41,6 +41,14 @@ export const filmsApi = createApi({
       transformResponse: (response: AuthInfoDTO) => response,
     }),
 
+    postComment: builder.mutation({
+      query: ({body, id}) => ({
+        url: `${serverPath.comments}/${id}`,
+        method: 'POST',
+        body,
+      }),
+    }),
+
     deleteAuth: builder.mutation({
       query: () => ({
         url: `${serverPath.logout}`,
@@ -50,4 +58,12 @@ export const filmsApi = createApi({
   }),
 });
 
-export const { useGetFilmsQuery, usePostAuthMutation, useDeleteAuthMutation, useGetFilmQuery, useGetFavoritesQuery, useGetAuthQuery } = filmsApi;
+export const {
+  useGetFilmsQuery,
+  usePostAuthMutation,
+  useDeleteAuthMutation,
+  useGetFilmQuery,
+  useGetFavoritesQuery,
+  useGetAuthQuery,
+  usePostCommentMutation,
+} = filmsApi;

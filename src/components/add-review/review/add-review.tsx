@@ -1,12 +1,10 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { postComment } from '../../../store/async/async-with-thunks';
-import { clearAll } from '../../../store/slices/film/film';
-import { useGetFilmQuery } from '../../../store/slices/films-api/films-api';
+import { useGetFilmQuery, usePostCommentMutation } from '../../../store/slices/films-api/films-api';
 import { RootState } from '../../../types/types';
 import { adaptFilm } from '../../../utils/adapter/adapter';
-import { asyncConditions } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
 import Logo from '../../common/header/logo/logo';
 import UserMenu from '../../common/authorization/user-menu/user';
@@ -14,33 +12,48 @@ import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import FormRating from '../form-rating/form-rating';
 import TextArea from '../form-text/text-area';
 import './review-styles.css';
+import { errorHandler } from '../../../utils/utils';
+import { serverPath } from '../../../utils/const';
 
 export default function AddReview() {
   const selected: {id: string} = useParams();
   const history = useHistory();
-  const dispatch = useDispatch();
   const status = useSelector(({film}: RootState) => film.status);
   const { data: film, isLoading } = useGetFilmQuery(selected.id);
+  const [sendComment, {isSuccess, error, isLoading: isCommentSending}] = usePostCommentMutation();
 
   const [text, setText] = useState('Review text');
   const [rating, setRating] = useState('');
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    if (status === asyncConditions.fullfilled) {
-      history.push(`/films/${selected.id}`);
-      dispatch(clearAll());
+    if (isCommentSending) {
+      setDisabled(true);
     }
-  }, [status, history, selected.id, dispatch]);
+    if (isSuccess) {
+      setDisabled(false);
+      history.push(`/${serverPath.films}/${selected.id}`);
+    }
+    if (error) {
+      setDisabled(false);
+      errorHandler(error);
+    }
+  }, [status, history, selected.id, isSuccess, isCommentSending, error]);
+
   if (isLoading) {return <Loader/>;}
 
   const {backgroundImage, name, posterImage, id} = adaptFilm(film);
 
-  const handleSubmit = (evt: React.FormEvent) => {
+  const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
     setDisabled(true);
-    dispatch(postComment(selected.id, +rating, text));
-    setDisabled(false);
+    await sendComment({
+      body: {
+        rating: +rating,
+        comment: text,
+      },
+      id: selected.id,
+    }).unwrap();
   };
 
   return (
