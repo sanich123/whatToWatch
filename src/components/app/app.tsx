@@ -2,7 +2,7 @@ import Main from '../main/main/main';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignIn from '../sign-in/sign-in/sign-in';
 import AddReview from '../review/review/add-review';
-import Player from '../main/player/player/player';
+import Player from '../player/player/player';
 import MoviePage from '../movie-page/movie-page/movie-page';
 import Page404 from '../page404/page404';
 import { AppRoute } from '../../utils/const';

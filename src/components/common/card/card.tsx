@@ -44,7 +44,7 @@ export default function Card({name, previewImage, id, videoLink, posterImage}: C
           <img src={previewImage} alt={name} width="280" height="175" />}
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${id}`}>{name}</Link>
+        <Link className="small-film-card__link" to={`/films/${id}`} tabIndex={0}>{name}</Link>
       </h3>
     </article>
   );

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../../utils/const';
-import './filters-styles.css';
+import { AppRoute } from '../../../../utils/const';
+import './filter-styles.css';
 
 interface FilterProps {
   name: string,

@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { mockFilm } from '../../../mocks/mocks';
-import Filter from './filters';
+import { mockFilm } from '../../../../mocks/mocks';
+import Filter from './filter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 

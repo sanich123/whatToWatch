@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useGetFilmQuery } from '../../../../store';
-import { adaptFilm } from '../../../../utils/adapter/adapter';
-import { getFormattedTime } from '../../../../utils/formatters/formatters';
-import { errorHandler } from '../../../../utils/utils';
-import Loader from '../../../common/loader/loader';
+import { useGetFilmQuery } from '../../../store';
+import { adaptFilm } from '../../../utils/adapter/adapter';
+import { getFormattedTime } from '../../../utils/formatters/formatters';
+import { errorHandler } from '../../../utils/utils';
+import Loader from '../../common/loader/loader';
 import FullScreenBtn from '../full-screen-btn/full-screen-btn';
 import PlayBtn from '../play-btn/play-btn';
 import './player-styles.css';
