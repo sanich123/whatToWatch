@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './form-rating-styles.css';
 
 interface FormRatingProps {
@@ -6,7 +6,7 @@ interface FormRatingProps {
   disabled: boolean,
 }
 
-export default function FormRating({setRating, disabled}: FormRatingProps) {
+function FormRating({setRating, disabled}: FormRatingProps) {
 
   return (
     <div className="rating">
@@ -28,3 +28,5 @@ export default function FormRating({setRating, disabled}: FormRatingProps) {
     </div>
   );
 }
+
+export default memo(FormRating, (prev, next) => prev.disabled === next.disabled);

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useGetFilmsQuery } from '../../../store';
 import { Film, FilmDTO } from '../../../types/types';
 import { adaptFilm } from '../../../utils/adapter/adapter';
@@ -7,7 +8,7 @@ import Card from '../../common/card/card';
 import Loader from '../../common/loader/loader';
 import './similar-films-styles.css';
 
-export default function SimilarFilms({uniq}: {uniq: number}) {
+function SimilarFilms({uniq}: {uniq: number}) {
   const { data: similarFilms, isLoading, error } = useGetFilmsQuery(`${serverPath.films}/${uniq}/${serverPath.similar}`);
   if (isLoading) {return <Loader/>;}
   if (error) {errorHandler(error);}
@@ -29,3 +30,5 @@ export default function SimilarFilms({uniq}: {uniq: number}) {
     </section>
   );
 }
+
+export default memo(SimilarFilms);

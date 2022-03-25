@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetFavoritesQuery, usePostFavoriteMutation } from '../../../store';
 import { Film, RootState } from '../../../types/types';
@@ -6,7 +6,7 @@ import { AuthorizationStatus } from '../../../utils/const';
 import { errorHandler } from '../../../utils/utils';
 import Loader from '../../common/loader/loader';
 
-export default function FavoriteBtn({id}: {id: number}) {
+function FavoriteBtn({id}: {id: number}) {
   const {data: favorites, isLoading} = useGetFavoritesQuery('');
   const [postIsFavorite, {error}] = usePostFavoriteMutation();
 
@@ -41,3 +41,5 @@ export default function FavoriteBtn({id}: {id: number}) {
     </button>
   );
 }
+
+export default memo(FavoriteBtn);

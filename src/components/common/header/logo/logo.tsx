@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, symbols } from '../../../../utils/const';
 import '../logo-footer-styles.css';
 
-export default function Logo({footer}: {footer?: boolean}) {
+function Logo({footer}: {footer?: boolean}) {
 
   return (
     <Link
@@ -15,3 +16,5 @@ export default function Logo({footer}: {footer?: boolean}) {
     </Link>
   );
 }
+
+export default memo(Logo);

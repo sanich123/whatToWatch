@@ -1,10 +1,12 @@
+import { memo } from 'react';
+
 interface PosterProps {
   name: string,
   posterImage: string,
   moviePage?: boolean
 }
 
-export default function Poster({name, posterImage, moviePage}: PosterProps) {
+function Poster({name, posterImage, moviePage}: PosterProps) {
   const activeClass = moviePage ? 'film-card__poster--big' : '';
 
   return (
@@ -18,3 +20,5 @@ export default function Poster({name, posterImage, moviePage}: PosterProps) {
     </div>
   );
 }
+
+export default memo(Poster);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { tabs } from '../../../../utils/const';
 import Details from '../details/details';
@@ -12,7 +12,7 @@ interface FilmDescProps {
   id: number
 }
 
-export default function FilmDesc({film, id}: FilmDescProps) {
+function FilmDesc({film, id}: FilmDescProps) {
   const [activeTab, setActiveTab] = useState(tabs.overView);
 
   return (
@@ -37,3 +37,5 @@ export default function FilmDesc({film, id}: FilmDescProps) {
     </div>
   );
 }
+
+export default memo(FilmDesc, (prev, next) => prev.film === next.film || prev.id === next.id);

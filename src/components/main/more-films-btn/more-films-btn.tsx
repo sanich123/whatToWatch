@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { numberOfFilms } from '../../../utils/const';
 import './more-films-btn-styles.css';
 
@@ -6,7 +7,7 @@ interface MoreFilmsBtnProps {
   slicingNum: number,
 }
 
-export default function MoreFilmsBtn({setSlicingNum, slicingNum}: MoreFilmsBtnProps) {
+function MoreFilmsBtn({setSlicingNum, slicingNum}: MoreFilmsBtnProps) {
   return (
     <button
       onClick={() => setSlicingNum(slicingNum + numberOfFilms)}
@@ -17,3 +18,5 @@ export default function MoreFilmsBtn({setSlicingNum, slicingNum}: MoreFilmsBtnPr
     </button>
   );
 }
+
+export default memo(MoreFilmsBtn, (prev, next) => prev.slicingNum === next.slicingNum);

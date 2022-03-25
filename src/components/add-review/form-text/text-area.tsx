@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import './text-area-styles.css';
 
 interface TextAreaProps {
@@ -7,7 +8,7 @@ interface TextAreaProps {
   disabled: boolean,
 }
 
-export default function TextArea({setText, rating, text, disabled}: TextAreaProps) {
+function TextArea({setText, rating, text, disabled}: TextAreaProps) {
 
   return (
     <div className="add-review__text">
@@ -31,3 +32,5 @@ export default function TextArea({setText, rating, text, disabled}: TextAreaProp
     </div>
   );
 }
+
+export default memo(TextArea);

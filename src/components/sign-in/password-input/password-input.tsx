@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
 interface PasswordInputProps {
   password: string,
   setPassword: (arg: string) => void,
 }
 
-export default function PasswordInput({password, setPassword}: PasswordInputProps) {
+function PasswordInput({password, setPassword}: PasswordInputProps) {
   return (
     <div className="sign-in__field">
       <input
@@ -19,3 +21,5 @@ export default function PasswordInput({password, setPassword}: PasswordInputProp
     </div>
   );
 }
+
+export default memo(PasswordInput, (prevProps, nextProps) => prevProps.password === nextProps.password);

@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
 interface EmailInputProps {
   email: string,
   setEmail: (arg: string) => void,
 }
 
-export default function EmailInput({email, setEmail}: EmailInputProps) {
+function EmailInput({email, setEmail}: EmailInputProps) {
 
   return (
     <div className="sign-in__field">
@@ -15,8 +17,11 @@ export default function EmailInput({email, setEmail}: EmailInputProps) {
         id="user-email"
         value={email}
         onChange={({target}) => setEmail(target.value)}
+        tabIndex={0}
       />
       <label className="visually-hidden" htmlFor="user-email">Email address</label>
     </div>
   );
 }
+
+export default memo(EmailInput, (prev, next) => prev.email === next.email);

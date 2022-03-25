@@ -4,11 +4,11 @@ import SignIn from '../sign-in/sign-in/sign-in';
 import AddReview from '../add-review/review/add-review';
 import Player from '../player/player/player';
 import MoviePage from '../movie-page/movie-page/movie-page';
-import Page404 from '../page404/page404';
 import { AppRoute } from '../../utils/const';
 import PrivateRoute from '../../utils/private-route';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../types/types';
+import Page404 from '../page404/page404';
 
 export default function App() {
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);

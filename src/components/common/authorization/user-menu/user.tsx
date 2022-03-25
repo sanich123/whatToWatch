@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../../../types/types';
@@ -5,7 +6,7 @@ import { AppRoute, AuthorizationStatus } from '../../../../utils/const';
 import UserAuth from '../user-auth/user-auth';
 import '../user-menu-styles.css';
 
-export default function UserMenu({id}: {id?: number}) {
+function UserMenu({id}: {id?: number}) {
   const userAvatar = useSelector(({authorization}: RootState) => authorization.avatarUrl);
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
 
@@ -17,3 +18,5 @@ export default function UserMenu({id}: {id?: number}) {
     </div>
   );
 }
+
+export default memo(UserMenu);

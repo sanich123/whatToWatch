@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { useHistory } from 'react-router-dom';
 import './play-styles.css';
 
-export default function PlayButton({id}: {id: number}) {
+function PlayButton({id}: {id: number}) {
   const history = useHistory();
 
   return (
@@ -21,3 +22,4 @@ export default function PlayButton({id}: {id: number}) {
     </button>
   );
 }
+export default memo(PlayButton);

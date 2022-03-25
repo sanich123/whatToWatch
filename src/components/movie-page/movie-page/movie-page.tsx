@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import Loader from '../../common/loader/loader';
@@ -17,6 +17,7 @@ import BackgroundImg from '../../main/background-img/background-img';
 import Poster from '../../common/poster/poster';
 import FilmInfo from '../film-info/film-info';
 import Footer from '../../common/footer/footer';
+import AddReviewBtn from '../add-review-btn/add-review-btn';
 
 export default function MoviePage() {
   const selected: {id: string} = useParams();
@@ -46,7 +47,7 @@ export default function MoviePage() {
                 <FavoriteBtn id={id} />
 
                 {authStatus === AuthorizationStatus.Auth
-                && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
+                && <AddReviewBtn id={id} />}
 
               </div>
             </div>

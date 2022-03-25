@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { Film } from '../../../types/types';
 
-export default function BackgroundImg({film}: {film: Film}) {
+function BackgroundImg({film}: {film: Film}) {
   const {backgroundImage, name} = film;
 
   return (
@@ -9,3 +10,5 @@ export default function BackgroundImg({film}: {film: Film}) {
     </div>
   );
 }
+
+export default memo(BackgroundImg);

@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { Film } from '../../../../types/types';
 import { markChanger } from '../../../../utils/formatters/formatters';
 import './overview-styles.css';
 
-export default function Overview({film}: {film: Film}) {
+function Overview({film}: {film: Film}) {
   const {rating, runTime, description, director, starring} = film;
 
   return (
@@ -28,3 +29,5 @@ export default function Overview({film}: {film: Film}) {
     </>
   );
 }
+
+export default memo(Overview, (prev, next) => prev.film === next.film);

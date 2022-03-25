@@ -1,10 +1,12 @@
+import { memo } from 'react';
+
 interface FilmInfoProps {
   name: string,
   genre: string,
   released: number
 }
 
-export default function FilmInfo({name, genre, released}: FilmInfoProps) {
+function FilmInfo({name, genre, released}: FilmInfoProps) {
 
   return (
     <>
@@ -16,3 +18,5 @@ export default function FilmInfo({name, genre, released}: FilmInfoProps) {
     </>
   );
 }
+
+export default memo(FilmInfo, (prev, next) => prev.name === next.name || prev.genre === next.genre || prev.released === next.released);
