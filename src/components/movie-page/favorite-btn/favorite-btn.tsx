@@ -1,27 +1,31 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useGetFavoritesQuery, usePostFavoriteMutation } from '../../../store';
 import { Film, RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
+import { errorHandler } from '../../../utils/utils';
 import Loader from '../../common/loader/loader';
 
 export default function FavoriteBtn({id}: {id: number}) {
-  const dispatch = useDispatch();
   const {data: favorites, isLoading} = useGetFavoritesQuery('');
-  const [postIsFavorite] = usePostFavoriteMutation();
+  const [postIsFavorite, {error}] = usePostFavoriteMutation();
 
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
+
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    if (favorites.some((favorite: Film) => favorite.id === id)
+    if (error) {
+      errorHandler(error);
+    }
+    if (favorites && favorites.some((favorite: Film) => favorite.id === id)
     && authStatus === AuthorizationStatus.Auth) {
       setIsFavorite(true);
     }
     else {
       setIsFavorite(false);
     }
-  }, [dispatch, favorites, id, authStatus]);
+  }, [favorites, id, authStatus, error]);
   if (isLoading) {return <Loader/>;}
 
   return (

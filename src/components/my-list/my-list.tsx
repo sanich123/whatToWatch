@@ -14,11 +14,12 @@ export default function Favorites() {
   const { data: favorites, isLoading, error } = useGetFavoritesQuery('');
 
   if (isLoading) {return <Loader />;}
-  // eslint-disable-next-line no-console
-  console.log(favorites);
-  error && errorHandler(error);
 
-  const myFilms: Film[] = favorites.length > 0 ? favorites.map((film: FilmDTO) => adaptFilm(film)) : [];
+  if (error) {
+    errorHandler(error);
+  }
+
+  const myFilms: Film[] = favorites ? favorites.map((film: FilmDTO) => adaptFilm(film)) : [];
 
   return (
     <>
