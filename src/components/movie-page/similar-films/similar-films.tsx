@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useGetFilmsQuery } from '../../../store';
+import { useGetFilmsQuery } from '../../../store/slices/films-api/films-api';
 import { Film, FilmDTO } from '../../../types/types';
 import { adaptFilm } from '../../../utils/adapter/adapter';
 import { serverPath } from '../../../utils/const';

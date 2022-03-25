@@ -1,4 +1,4 @@
-import { useGetCommentsQuery } from '../../../../store';
+import { useGetCommentsQuery } from '../../../../store/slices/films-api/films-api';
 import { Film} from '../../../../types/types';
 import { reviewsReducer } from '../../../../utils/utils';
 import Loader from '../../../common/loader/loader';

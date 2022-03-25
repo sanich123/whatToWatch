@@ -1,4 +1,3 @@
-import { useGetFavoritesQuery } from '../../store';
 import { Film, FilmDTO } from '../../types/types';
 import { adaptFilm } from '../../utils/adapter/adapter';
 import { errorHandler } from '../../utils/utils';
@@ -9,6 +8,7 @@ import Svg from '../svg/svg';
 import './my-list-styles.css';
 import Footer from '../common/footer/footer';
 import Logo from '../common/header/logo/logo';
+import { useGetFavoritesQuery } from '../../store/slices/films-api/films-api';
 
 export default function Favorites() {
   const { data: favorites, isLoading, error } = useGetFavoritesQuery('');

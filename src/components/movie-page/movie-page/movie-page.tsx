@@ -9,7 +9,6 @@ import FilmDesc from '../film-desc/film-description/film-desc';
 import SimilarFilms from '../similar-films/similar-films';
 import FavoriteBtn from '../favorite-btn/favorite-btn';
 import './movie-page-styles.css';
-import { useGetFilmQuery } from '../../../store';
 import { errorHandler } from '../../../utils/utils';
 import { adaptFilm } from '../../../utils/adapter/adapter';
 import Header from '../../common/header/header';
@@ -18,6 +17,7 @@ import Poster from '../../common/poster/poster';
 import FilmInfo from '../film-info/film-info';
 import Footer from '../../common/footer/footer';
 import AddReviewBtn from '../add-review-btn/add-review-btn';
+import { useGetFilmQuery } from '../../../store/slices/films-api/films-api';
 
 export default function MoviePage() {
   const selected: {id: string} = useParams();

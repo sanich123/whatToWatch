@@ -19,7 +19,7 @@ function SignInForm() {
   const [wrongEmail, setWrongEmail] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const authStatus = useSelector(({ authorization }: RootState) => authorization.status);
+  const authStatus = useSelector(({ authorization }: RootState) => authorization.authStatus);
 
   const [loginPassSender, { error, data: response }] = usePostAuthMutation();
 

@@ -53,18 +53,6 @@ export interface RootState {
   authorization: {
     authStatus: string,
     avatarUrl: string,
-    status: 'idle' | 'pending' | 'fullfilled' | 'rejected',
-  }
-  movies: {
-    filter: string,
-    films: Film[];
-    promoFilm: Film;
-    favorites: Film[],
-  }
-  film: {
-    comments: Comment[],
-    status: 'idle' | 'pending' | 'fullfilled' | 'rejected',
-    filmId: string,
   }
 }
 
@@ -74,24 +62,6 @@ export interface AuthInfoDTO {
   name: string,
   ['avatar_url']: string,
   token: string,
-}
-
-export interface AuthInfo {
-  id: number,
-  email: string,
-  name: string,
-  avatarUrl: string,
-  token: string
-}
-
-export interface AuthType {
-  email: string,
-  password: string,
-}
-
-export interface CommentType {
-  rating: number,
-  comment: string,
 }
 
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useGetFilmQuery } from '../../../store';
+import { useGetFilmQuery } from '../../../store/slices/films-api/films-api';
 import { adaptFilm } from '../../../utils/adapter/adapter';
 import { getFormattedTime } from '../../../utils/formatters/formatters';
 import { errorHandler } from '../../../utils/utils';

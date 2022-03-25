@@ -1,8 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { useDeleteAuthMutation } from '../../../../store';
 import { checkStatus } from '../../../../store/slices/authorization/authorization';
-
+import { useDeleteAuthMutation } from '../../../../store/slices/films-api/films-api';
 import { AppRoute, AuthorizationStatus, serverPath } from '../../../../utils/const';
 import { deleteToken } from '../../../../utils/token';
 import { errorHandler } from '../../../../utils/utils';

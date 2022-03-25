@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useGetFavoritesQuery, usePostFavoriteMutation } from '../../../store';
+import { useGetFavoritesQuery, usePostFavoriteMutation } from '../../../store/slices/films-api/films-api';
 import { Film, RootState } from '../../../types/types';
 import { AuthorizationStatus } from '../../../utils/const';
 import { errorHandler } from '../../../utils/utils';
