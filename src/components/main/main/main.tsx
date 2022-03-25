@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGetFilmsQuery } from '../../../store/slices/films-api/films-api';
-import { usePromoFilm } from '../../../hooks/useFetch';
+import { usePromoFilm } from '../../../hooks/usePromoFilm';
 import Svg from '../../svg/svg';
 import Loader from '../../common/loader/loader';
 import MoreFilmsBtn from '../more-films-btn/more-films-btn';

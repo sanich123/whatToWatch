@@ -1,9 +1,6 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useGetFilmQuery, usePostCommentMutation } from '../../../store/slices/films-api/films-api';
-import { RootState } from '../../../types/types';
 import { adaptFilm } from '../../../utils/adapter/adapter';
 import Loader from '../../common/loader/loader';
 import Logo from '../../common/header/logo/logo';
@@ -18,7 +15,6 @@ import { serverPath } from '../../../utils/const';
 export default function AddReview() {
   const selected: {id: string} = useParams();
   const history = useHistory();
-  const status = useSelector(({film}: RootState) => film.status);
   const { data: film, isLoading } = useGetFilmQuery(selected.id);
   const [sendComment, {isSuccess, error, isLoading: isCommentSending}] = usePostCommentMutation();
 
@@ -38,7 +34,7 @@ export default function AddReview() {
       setDisabled(false);
       errorHandler(error);
     }
-  }, [status, history, selected.id, isSuccess, isCommentSending, error]);
+  }, [history, selected.id, isSuccess, isCommentSending, error]);
 
   if (isLoading) {return <Loader/>;}
 
@@ -66,7 +62,7 @@ export default function AddReview() {
         <header className="page-header">
           <Logo />
           <Breadcrumbs id={id} name={name} />
-          <UserMenu />
+          <UserMenu id={id}/>
         </header>
 
         <div className="film-card__poster--small">

@@ -1,19 +1,24 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { useDeleteAuthMutation } from '../../../../store';
 import { checkStatus } from '../../../../store/slices/authorization/authorization';
-import { RootState } from '../../../../types/types';
-import { AppRoute, AuthorizationStatus } from '../../../../utils/const';
+
+import { AppRoute, AuthorizationStatus, serverPath } from '../../../../utils/const';
 import { deleteToken } from '../../../../utils/token';
 import { errorHandler } from '../../../../utils/utils';
 
-export default function UserAuth({userAvatar}: {userAvatar: string}) {
+interface UserAuthProps {
+  userAvatar: string,
+  id?: number
+}
+
+export default function UserAuth({userAvatar, id}: UserAuthProps) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [logout, {error: logoutError}] = useDeleteAuthMutation();
-  const id = useSelector(({film}: RootState) => film.filmId);
   const path = history.location.pathname;
-  const pathChanger = path === `/films/${id}/review` || path === AppRoute.Favorites ? AppRoute.Main : history.location;
+
+  const pathChanger = path === `/${serverPath.films}/${id}/review}` ? AppRoute.Main : history.location;
 
   logoutError && errorHandler(logoutError);
 
