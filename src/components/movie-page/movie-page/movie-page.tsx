@@ -26,7 +26,8 @@ export default function MoviePage() {
   const authStatus = useSelector(({authorization}: RootState) => authorization.authStatus);
 
   if (isLoading) {return <Loader />;}
-  if (error) { errorHandler(error);}
+  if (error) { return errorHandler(error);}
+
   const adaptedFilm = adaptFilm(film);
   const {backgroundColor, name, posterImage, released, id, genre} = adaptedFilm;
 

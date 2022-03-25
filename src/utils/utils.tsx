@@ -38,10 +38,20 @@ export const normalizedError = (error: SerializedError | FetchBaseQueryError) =>
 export const errorHandler = (error: SerializedError | FetchBaseQueryError) => {
   const info = normalizedError(error);
   if (info.status === errors.wrongAddress) {
-    return <Page404/>;
+    toast.warn(warnings.server404);
+    return <Page404 />;
   } else if (info.status === errors.noAuth) {
     toast.warn(warnings.haveToAuth);
+    return <h1>Пройдите авторизацию</h1>;
+  } else if (info.status === errors.wrongData) {
+    toast.warn(`${info.status} ${info.error}`);
+    return <h1>Неправильные данные</h1>;
   } else {
     toast.warn(`${info.status} ${info.error} ${warnings.network}`);
+    return (
+      <h1>
+      `${info.status} ${info.error} ${warnings.network}`
+      </h1>
+    );
   }
 };

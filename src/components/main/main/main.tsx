@@ -32,7 +32,7 @@ export default function Main() {
 
   moviesError && errorHandler(moviesError);
 
-  const adaptedFilms = movies.map((movie: FilmDTO) => adaptFilm(movie));
+  const adaptedFilms = movies ? movies.map((movie: FilmDTO) => adaptFilm(movie)) : [];
   const films = filterChanger(filter, adaptedFilms);
   const slicedFilms = films.slice(startOfSlice, slicingNum);
 
@@ -55,6 +55,8 @@ export default function Main() {
             {slicedFilms.map(({ id, ...rest }) => (
               <Card key={id} id={id} {...rest} />
             ))}
+            {moviesError &&
+            <h3>Не удалось получить список фильмов с сервера</h3>}
           </div>
 
           {slicingNum <= slicedFilms.length && (
