@@ -6,6 +6,6 @@ import Details from './details';
 describe('test Details component', () => {
   it('renders successfully with props', () => {
     render(<Details film={mockFilm} />);
-    expect(screen.getByText('Drama')).toBeInTheDocument();
+    expect(screen.getByText(/Cameron/i)).toBeInTheDocument();
   });
 });

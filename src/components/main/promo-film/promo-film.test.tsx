@@ -10,19 +10,16 @@ describe('PromoFilm', () => {
   const mockStore = configureMockStore();
   const promoFilm = mockFilm;
   const store = mockStore({
-    movies: {
-      favorites: [],
-    },
     authorization: {
       authStatus: AuthorizationStatus.NoAuth,
     },
   });
-  it('should render correctly', () => {
+  it('should render correctly', async () => {
     render(
       <Provider store={store}>
         <PromoFilm promoFilm={promoFilm} />
       </Provider>,
     );
-    expect(screen.getByText('My list')).toBeInTheDocument();
+    expect(await screen.findByText('My list')).toBeInTheDocument();
   });
 });
