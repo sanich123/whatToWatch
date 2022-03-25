@@ -18,6 +18,7 @@ function EmailInput({email, setEmail}: EmailInputProps) {
         value={email}
         onChange={({target}) => setEmail(target.value)}
         tabIndex={0}
+        autoComplete='true'
       />
       <label className="visually-hidden" htmlFor="user-email">Email address</label>
     </div>

@@ -38,4 +38,4 @@ function FilmDesc({film, id}: FilmDescProps) {
   );
 }
 
-export default memo(FilmDesc, (prev, next) => prev.film === next.film || prev.id === next.id);
+export default memo(FilmDesc);

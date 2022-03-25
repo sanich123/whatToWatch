@@ -20,6 +20,7 @@ function FormRating({setRating, disabled}: FormRatingProps) {
               type="radio" name="rating"
               onChange={({target}) => setRating(target.value)}
               value={number}
+              tabIndex={0}
             />
             <label className="rating__label" htmlFor={`star-${number}`}>Rating {number}</label>
           </React.Fragment>

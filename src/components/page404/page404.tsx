@@ -6,6 +6,7 @@ import Svg from '../svg/svg';
 import './../sign-in/sign-in/sign-in-styles.css';
 
 export default function Page404() {
+
   return (
     <>
       <Svg />

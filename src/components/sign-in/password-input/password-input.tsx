@@ -15,9 +15,13 @@ function PasswordInput({password, setPassword}: PasswordInputProps) {
         name="user-password"
         id="user-password"
         value={password}
-        onChange={({target}) => setPassword(target.value)}
+        onChange={({ target }) => setPassword(target.value)}
+        tabIndex={0}
+        autoComplete="true"
       />
-      <label className="visually-hidden" htmlFor="user-password">Password</label>
+      <label className="visually-hidden" htmlFor="user-password">
+        Password
+      </label>
     </div>
   );
 }

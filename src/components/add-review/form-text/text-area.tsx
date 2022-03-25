@@ -20,6 +20,7 @@ function TextArea({setText, rating, text, disabled}: TextAreaProps) {
         id="review-text"
         value={text}
         disabled={disabled}
+        tabIndex={0}
       />
       <div className="add-review__submit">
         <button
