@@ -1,5 +1,6 @@
 import { server } from './test/server';
-
+import fetchMock from 'jest-fetch-mock';
+import '@testing-library/jest-dom';
 // make debug output for TestingLibrary Errors larger
 process.env.DEBUG_PRINT_LIMIT = '15000';
 
@@ -8,3 +9,5 @@ process.env.DEBUG_PRINT_LIMIT = '15000';
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
+
+fetchMock.enableMocks();

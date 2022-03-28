@@ -1,36 +1,37 @@
-import { configureMockStore } from '@jedmao/redux-mock-store';
 import '@testing-library/jest-dom';
-import { render
-  // screen, waitFor
-} from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
-import { AuthorizationStatus } from '../../utils/const';
-import Favorites from './my-list';
-// import * as hooks from '../../hooks/useFetch';
-// import { mockFilm, mockFilms } from '../../mocks/mocks';
-// import { Film } from '../../types/types';
+import { useGetFavoritesQuery} from '../../store/slices/films-api/films-api';
+import {Provider} from 'react-redux';
+import fetchMock from 'jest-fetch-mock';
+import {ReactNode} from 'react';
+import {mockFilms} from '../../mocks/mocks';
+import { renderHook } from '@testing-library/react-hooks';
+import {testStore} from '../../store/store';
+import { createMemoryHistory } from 'history';
 
+beforeEach((): void => {
+  fetchMock.resetMocks();
+});
+
+type ProviderProps = {
+  children: ReactNode;
+};
+const store = testStore;
+createMemoryHistory();
+
+const wrapper = ({ children }: ProviderProps) => (
+  <Provider store={store}>{children}</Provider>
+);
 describe('MyList component', () => {
-  const mockStore = configureMockStore();
-  const store = mockStore({
-    authorization: {
-      avatarUrl: 'jlkjlkj',
-      authStatus: AuthorizationStatus.Auth,
-    },
-    film: {
-      filmId: '5',
-    },
-  });
+  it('useGetFavoritesQuery should work correctly', async () => {
+    const fakeResponse = mockFilms;
 
-  it('should render correctly', async () => {
-    // jest.spyOn(hooks, 'useFavorites').mockImplementation(() => Promise.resolve(mockFilms));
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Favorites />
-        </MemoryRouter>
-      </Provider>,
-    );
+    fetchMock.mockResponseOnce(JSON.stringify(fakeResponse));
+    const {result, waitForNextUpdate} = renderHook(
+      () => useGetFavoritesQuery(''), {wrapper});
+    expect(result.current.isLoading).toBe(true);
+    expect(result.current.currentData).toBe(undefined);
+
+    await waitForNextUpdate({timeout: 2000});
+    expect(result.current.currentData).toStrictEqual(fakeResponse);
   });
 });

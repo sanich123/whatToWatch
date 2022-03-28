@@ -1,23 +1,15 @@
-import { configureMockStore } from '@jedmao/redux-mock-store';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { mockFilm } from '../../../mocks/mocks';
-import { AuthorizationStatus } from '../../../utils/const';
+import { testStore } from '../../../store/store';
 import PromoFilm from './promo-film';
 
 describe('PromoFilm', () => {
-  const mockStore = configureMockStore();
-  const promoFilm = mockFilm;
-  const store = mockStore({
-    authorization: {
-      authStatus: AuthorizationStatus.NoAuth,
-    },
-  });
   it('should render correctly', async () => {
     render(
-      <Provider store={store}>
-        <PromoFilm promoFilm={promoFilm} />
+      <Provider store={testStore}>
+        <PromoFilm promoFilm={mockFilm} />
       </Provider>,
     );
     expect(await screen.findByText('My list')).toBeInTheDocument();

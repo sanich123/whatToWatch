@@ -3,19 +3,12 @@ import {render, screen} from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import SignIn from './sign-in';
-import {configureMockStore} from '@jedmao/redux-mock-store';
-import { AuthorizationStatus } from '../../../utils/const';
+import { testStore } from '../../../store/store';
 
 describe('Sign-in component', () => {
-  const mockStore = configureMockStore();
-  const store = mockStore({
-    authorization: {
-      status: AuthorizationStatus.Auth,
-    },
-  });
   it('component should render correctly', () => {
     render(
-      <Provider store={store}>
+      <Provider store={testStore}>
         <MemoryRouter>
           <SignIn />
         </MemoryRouter>
