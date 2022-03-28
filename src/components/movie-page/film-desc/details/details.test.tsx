@@ -7,5 +7,6 @@ describe('test Details component', () => {
   it('renders successfully with props', () => {
     render(<Details film={mockFilm} />);
     expect(screen.getByText(/Cameron/i)).toBeInTheDocument();
+    expect(screen.getByText(/genre/i)).toBeInTheDocument();
   });
 });

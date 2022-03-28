@@ -12,5 +12,6 @@ describe('Page404', () => {
     );
     expect(screen.getByText(/Запрошенная страница не существует/i)).toBeInTheDocument();
     expect(screen.getByText(/Перейти на главную страницу/i)).toBeInTheDocument();
+    expect(screen.getAllByRole('link')).toHaveLength(3);
   });
 });

@@ -5,6 +5,7 @@ interface FiltersListProps {
   setFilter: (arg: string) => void,
   filter: string
 }
+
 export default function FiltersList({ setFilter, filter }: FiltersListProps) {
 
   return (

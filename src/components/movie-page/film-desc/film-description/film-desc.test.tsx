@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
 import { mockFilm } from '../../../../mocks/mocks';
 import FilmDesc from './film-desc';

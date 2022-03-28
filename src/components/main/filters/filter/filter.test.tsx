@@ -1,22 +1,20 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { mockFilm } from '../../../../mocks/mocks';
 import Filter from './filter';
-import { configureMockStore } from '@jedmao/redux-mock-store';
-import { Provider } from 'react-redux';
 
-describe('FiltersComponent', () => {
-  const mockStore = configureMockStore();
-  const store = mockStore({});
+describe('FilterComponent', () => {
   const setFilter = jest.fn();
-  it ('should render correctly', () => {
+  it ('should call setFilter by clicking on link', () => {
     render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Filter name={mockFilm.name} filter='Drama' title='Drama' setFilter={setFilter} />
-        </MemoryRouter>,
-      </Provider>,
+      <MemoryRouter>
+        <Filter name={mockFilm.name} filter='Drama' title='Drama' setFilter={setFilter} />
+      </MemoryRouter>,
     );
+    expect(screen.getByRole('link')).toBeInTheDocument();
+    userEvent.click(screen.getByRole('link'));
+    expect(setFilter).toHaveBeenCalledTimes(1);
   });
 });
