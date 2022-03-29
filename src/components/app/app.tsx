@@ -1,7 +1,7 @@
 import Main from '../main/main/main';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignIn from '../sign-in/sign-in/sign-in';
-import AddReview from '../add-review/review/add-review';
+import AddReview from '../add-review/add-review/add-review';
 import Player from '../player/player/player';
 import MoviePage from '../movie-page/movie-page/movie-page';
 import { AppRoute } from '../../utils/const';
