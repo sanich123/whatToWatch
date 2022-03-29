@@ -1,5 +1,5 @@
-import UserMenu from '../authorization/user-menu/user';
-import Logo from './logo/logo';
+import UserMenu from '../../authorization/user-menu/user';
+import Logo from '../logo/logo';
 import {memo} from 'react';
 
 function Header() {

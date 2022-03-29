@@ -11,7 +11,7 @@ import FavoriteBtn from '../favorite-btn/favorite-btn';
 import './movie-page-styles.css';
 import { errorHandler } from '../../../utils/utils';
 import { adaptFilm } from '../../../utils/adapter/adapter';
-import Header from '../../common/header/header';
+import Header from '../../common/header/header/header';
 import BackgroundImg from '../../main/background-img/background-img';
 import Poster from '../../common/poster/poster';
 import FilmInfo from '../film-info/film-info';

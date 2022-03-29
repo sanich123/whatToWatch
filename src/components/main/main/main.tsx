@@ -5,7 +5,7 @@ import Svg from '../../svg/svg';
 import Loader from '../../common/loader/loader';
 import MoreFilmsBtn from '../more-films-btn/more-films-btn';
 import PromoFilm from '../promo-film/promo-film';
-import Header from '../../common/header/header';
+import Header from '../../common/header/header/header';
 import BackgroundImg from '../background-img/background-img';
 import Footer from '../../common/footer/footer';
 import Card from '../../common/card/card';
