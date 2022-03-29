@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 import { mockFilm } from '../../../../mocks/mocks';
 import Overview from './overview';

@@ -3,7 +3,7 @@ import Svg from '../../svg/svg';
 import './sign-in-styles.css';
 import Logo from '../../common/header/logo/logo';
 import Footer from '../../common/footer/footer';
-import SignInForm from '../form/sign-in-form';
+import SignInForm from '../sign-in-form/sign-in-form';
 
 export default function SignIn() {
 

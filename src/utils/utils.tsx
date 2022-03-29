@@ -18,21 +18,6 @@ export const commentLayoutMaker = (arr: Comment[]) => {
   return result.map((comments) => comments.filter(Boolean));
 };
 
-export const reviewsReducer = (reviews: Comment[]) => {
-  const result = [];
-
-  for (let i = 0; i < reviews.length; i++) {
-    if (result.length === 0) {
-      result.push(reviews[i]);
-    }
-    else if (!result.slice().map(({id}) => id).includes(reviews[i].id)) {
-      result.push(reviews[i]);
-    }
-  }
-
-  return result;
-};
-
 export const normalizedError = (error: SerializedError | FetchBaseQueryError) => JSON.parse(JSON.stringify(error));
 
 export const errorHandler = (error: SerializedError | FetchBaseQueryError) => {
@@ -55,3 +40,10 @@ export const errorHandler = (error: SerializedError | FetchBaseQueryError) => {
     );
   }
 };
+
+export const sortReviews = (comments: Comment[]) =>
+  comments
+    .slice()
+    .sort(
+      (dateA, dateB) => Date.parse(dateB.date) - Date.parse(dateA.date),
+    );

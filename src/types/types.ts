@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface FilmDTO {
   ['background_color']: string,
   ['background_image']: string,
@@ -63,5 +65,9 @@ export interface AuthInfoDTO {
   ['avatar_url']: string,
   token: string,
 }
+
+export type ProviderProps = {
+  children: ReactNode;
+};
 
 

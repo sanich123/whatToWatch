@@ -577,3 +577,15 @@ export const mockFilms = [
 ];
 
 export const mockFilm = mockFilms[0];
+export const mockComments = [
+  {
+    id: 1,
+    user: {
+      id: 11,
+      name: 'Jack',
+    },
+    rating: 1.5,
+    comment: 'A movie that will take you to another world full of emotions.',
+    date: '2022-02-02T14:13:06.531Z',
+  },
+];

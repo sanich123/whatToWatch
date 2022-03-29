@@ -11,7 +11,7 @@ import { saveToken } from '../../../utils/token';
 import { errorHandler } from '../../../utils/utils';
 import EmailInput from '../emailInput/email-input';
 import PasswordInput from '../password-input/password-input';
-import SignInBtn from './sign-in-btn';
+import SignInBtn from '../sign-in-btn/sign-in-btn';
 
 function SignInForm() {
   const [email, setEmail] = useState('');

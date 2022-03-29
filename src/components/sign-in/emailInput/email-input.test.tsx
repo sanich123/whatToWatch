@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import EmailInput from './email-input';
 import userEvent from '@testing-library/user-event';

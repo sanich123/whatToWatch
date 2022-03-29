@@ -1,8 +1,8 @@
-import { Comment } from '../../../../types/types';
+import { Comment } from '../../../../../types/types';
 import React from 'react';
-import { dateChanger } from '../../../../utils/formatters/formatters';
+import { dateChanger } from '../../../../../utils/formatters/formatters';
 
-export default function CommentCol({reviews}: {reviews: Comment[]}) {
+export default function Review({reviews}: {reviews: Comment[]}) {
 
   return (
     <div className="film-card__reviews-col">

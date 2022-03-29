@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -14,6 +13,7 @@ describe('Sign-in component', () => {
         </MemoryRouter>
       </Provider>,
     );
+    expect(screen.getAllByText(/sign in/i)).toHaveLength(2);
     expect(screen.getByRole('button')).toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();
     expect(screen.getByLabelText('Email address')).toBeInTheDocument();

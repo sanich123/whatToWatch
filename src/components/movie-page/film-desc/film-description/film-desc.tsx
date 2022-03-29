@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { tabs } from '../../../../utils/const';
 import Details from '../details/details';
 import Overview from '../overview/overview';
-import Reviews from '../comments/comments';
+import Reviews from '../comments/reviews/comments';
 import './film-desc-styles.css';
 import { Film } from '../../../../types/types';
 
