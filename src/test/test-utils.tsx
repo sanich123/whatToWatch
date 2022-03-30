@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 import type { AppStore, RootState } from '../store/store';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { setupStore } from '../store/store';
-import { MemoryRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store. For
@@ -15,13 +16,15 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>
   store?: AppStore
 }
+
+const history = createBrowserHistory();
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function wrapper({ children }: PropsWithChildren<{}>) {
   return (
     <Provider store={setupStore()}>
-      <MemoryRouter>
+      <Router history={history}>
         {children}
-      </MemoryRouter>
+      </Router>
     </Provider>
   );
 }

@@ -1,18 +1,12 @@
-import { Provider } from 'react-redux';
 import fetchMock from 'jest-fetch-mock';
 import { renderHook } from '@testing-library/react-hooks';
 import { useGetFilmQuery } from '../../../store/slices/films-api/films-api';
 import { mockFilm } from '../../../mocks/mocks';
-import { ProviderProps } from '../../../types/types';
-import { setupStore } from '../../../store/store';
+import { wrapper } from '../../../test/test-utils';
 
 beforeEach((): void => {
   fetchMock.resetMocks();
 });
-
-const wrapper = ({ children }: ProviderProps) => (
-  <Provider store={setupStore()}>{children}</Provider>
-);
 describe('AddReview component', () => {
   it('useGetFilmQuery should work correctly', async () => {
     fetchMock.mockResponseOnce(JSON.stringify(mockFilm));
