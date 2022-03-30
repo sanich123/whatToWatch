@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+  middleware: (gDFM) => gDFM({
     serializableCheck: false,
   }).concat(filmsApi.middleware),
   preloadedState,
