@@ -2,13 +2,13 @@ import {render, screen} from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { testStore } from '../../../../store/store';
+import { setupStore } from '../../../../store/store';
 import Header from './header';
 
 describe('Header component', () => {
   it('should render correctly', () => {
     render(
-      <Provider store={testStore}>
+      <Provider store={setupStore()}>
         <MemoryRouter>
           <Header />
         </MemoryRouter>

@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { testStore } from '../../../store/store';
+import { setupStore } from '../../../store/store';
 import { ReviewForm } from './form';
 
 describe('ReviewForm components', () => {
   it('should render properly', () => {
     render(
-      <Provider store={testStore}>
+      <Provider store={setupStore()}>
         <MemoryRouter>
           <ReviewForm />
         </MemoryRouter>

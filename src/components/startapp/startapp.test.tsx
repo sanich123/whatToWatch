@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import { useGetAuthQuery } from '../../store/slices/films-api/films-api';
-import { testStore } from '../../store/store';
+import { setupStore } from '../../store/store';
 import { ProviderProps } from '../../types/types';
 
 beforeEach((): void => {
@@ -9,7 +9,7 @@ beforeEach((): void => {
 });
 
 const wrapper = ({children}: ProviderProps) => (
-  <Provider store={testStore}>{children}</Provider>
+  <Provider store={setupStore()}>{children}</Provider>
 );
 
 describe('StartApp component', () => {

@@ -1,19 +1,20 @@
 import { useGetFavoritesQuery} from '../../store/slices/films-api/films-api';
-import {Provider} from 'react-redux';
 import fetchMock from 'jest-fetch-mock';
 import {mockFilms} from '../../mocks/mocks';
+import { screen } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
-import {testStore} from '../../store/store';
-import { ProviderProps } from '../../types/types';
+import Favorites from './my-list';
+import { renderWithProviders, wrapper } from '../../test/test-utils';
 
 beforeEach((): void => {
   fetchMock.resetMocks();
 });
 
-const wrapper = ({ children }: ProviderProps) => (
-  <Provider store={testStore}>{children}</Provider>
-);
 describe('MyList component', () => {
+  it('should renders correctly with hook', async () => {
+    renderWithProviders(<Favorites />);
+    expect(await screen.findByText(/my list/i)).toBeInTheDocument();
+  });
   it('useGetFavoritesQuery should work correctly',
     async () => {
       const fakeResponse = mockFilms;

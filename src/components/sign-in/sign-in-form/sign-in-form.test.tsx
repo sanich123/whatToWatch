@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
-import { testStore } from '../../../store/store';
+import { setupStore } from '../../../store/store';
 import SignInForm from './sign-in-form';
 describe('should correctly render', () => {
   it('have proper fields and labels', () => {
     render(
-      <Provider store={testStore}>
+      <Provider store={setupStore()}>
         <MemoryRouter>
           <SignInForm/>
         </MemoryRouter>

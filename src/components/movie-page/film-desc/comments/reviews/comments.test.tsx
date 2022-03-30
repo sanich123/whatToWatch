@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import { mockComments } from '../../../../../mocks/mocks';
 import { useGetCommentsQuery } from '../../../../../store/slices/films-api/films-api';
-import { testStore } from '../../../../../store/store';
+import { setupStore } from '../../../../../store/store';
 import { ProviderProps } from '../../../../../types/types';
 import { renderHook } from '@testing-library/react-hooks';
 
@@ -10,7 +10,7 @@ beforeEach((): void => {
 });
 
 const wrapper = ({ children }: ProviderProps) => (
-  <Provider store={testStore}>{children}</Provider>
+  <Provider store={setupStore()}>{children}</Provider>
 );
 
 describe('should render correctly', () => {

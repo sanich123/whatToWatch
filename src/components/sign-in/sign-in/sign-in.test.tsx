@@ -2,12 +2,12 @@ import {render, screen} from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import SignIn from './sign-in';
-import { testStore } from '../../../store/store';
+import { setupStore } from '../../../store/store';
 
 describe('Sign-in component', () => {
   it('component should render correctly', () => {
     render(
-      <Provider store={testStore}>
+      <Provider store={setupStore()}>
         <MemoryRouter>
           <SignIn />
         </MemoryRouter>
