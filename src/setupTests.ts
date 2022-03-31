@@ -1,6 +1,6 @@
 import { server } from './test/server';
 import fetchMock from 'jest-fetch-mock';
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
 // make debug output for TestingLibrary Errors larger
 process.env.DEBUG_PRINT_LIMIT = '15000';
 
