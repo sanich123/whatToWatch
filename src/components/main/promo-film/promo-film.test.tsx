@@ -1,16 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { mockFilm } from '../../../mocks/mocks';
-import { setupStore } from '../../../store/store';
+import { screen } from '@testing-library/react';
 import PromoFilm from './promo-film';
+import { mockFilm } from '../../../mocks/mocks';
+import { renderWithProviders } from '../../../test/test-utils';
 
 describe('PromoFilm', () => {
-  it('should render correctly', async () => {
-    render(
-      <Provider store={setupStore()}>
-        <PromoFilm promoFilm={mockFilm} />
-      </Provider>,
-    );
-    expect(await screen.findByText('My list')).toBeInTheDocument();
+  it('should render correctly', () => {
+    renderWithProviders(<PromoFilm promoFilm={mockFilm} />);
+    expect(screen.getByText(/gangs of new york/i)).toBeInTheDocument();
   });
 });
