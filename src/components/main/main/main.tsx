@@ -23,7 +23,7 @@ export default function Main() {
     error: moviesError,
   } = useGetFilmsQuery(serverPath.films);
 
-  const promoFilm = usePromoFilm('');
+  const promoFilm = usePromoFilm();
 
   const [filter, setFilter] = useState('All genres');
   const [slicingNum, setSlicingNum] = useState(numberOfFilms);
@@ -40,7 +40,7 @@ export default function Main() {
     <>
       <Svg />
       <section className="film-card">
-        <BackgroundImg film={promoFilm} />
+        <BackgroundImg />
         <h1 className="visually-hidden">WTW</h1>
         <Header />
         <PromoFilm promoFilm={promoFilm} />

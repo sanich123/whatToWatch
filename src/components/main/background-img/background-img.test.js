@@ -1,27 +1,32 @@
-import { render, screen } from '@testing-library/react';
-import { setupServer } from 'msw/lib/types/node/setupServer';
-import { rest } from 'msw/lib/types/rest';
-import { mockFilm } from '../../../mocks/mocks';
-import { serverPath } from '../../../utils/const';
+/* eslint-disable testing-library/no-unnecessary-act */
+import { render, screen, act } from '@testing-library/react';
+// import { setupServer } from 'msw/node';
+// import { rest } from 'msw';
+// import { serverPath } from '../../../utils/const';
 import BackgroundImg from './background-img';
 
-const promoResponse = rest.get(
-  `https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`,
-  (req, res, ctx) => res(ctx.json({name: 'Some name', backgrounImg: 'Some img'})),
-);
 
-const handlers = [promoResponse];
+// const promoResponse = rest.get(
+//   `https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`,
+//   (req, res, ctx) => res(ctx.json({name: 'Some name', backgroundImg: 'Some img'})),
+// );
 
-const server = setupServer(...handlers);
+// const handlers = [promoResponse];
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+// const server = setupServer(...handlers);
+
+// beforeAll(() => server.listen());
+// afterEach(() => server.resetHandlers());
+// afterAll(() => server.close());
+global.fetch = jest.fn(() => Promise({
+  json: () => Promise.resolve({
+    name: 'Some name', backgroundImg: 'Some img',
+  }),
+}));
 describe('should render correctly', () => {
-  it('should find img and alt', () => {
-    render(<BackgroundImg film={mockFilm} />);
-    expect(screen.getByRole('img')).toBeInTheDocument();
-    expect(screen.getByAltText(/gangs of new york/i)).toBeInTheDocument();
+  it('should find img and alt', async () => {
+    await act(async () => render(<BackgroundImg />));
+    expect(screen.getByText('some')).toBeInTheDocument();
   });
   // test('it should have the correct todo item clean room', async () => {
   //   render(<TodoList />);

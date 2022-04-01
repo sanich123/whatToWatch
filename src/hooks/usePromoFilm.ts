@@ -4,7 +4,7 @@ import { Film } from '../types/types';
 import { adaptFilm } from '../utils/adapter/adapter';
 import { serverPath, warnings } from '../utils/const';
 
-export const usePromoFilm = (id: string) => {
+export const usePromoFilm = () => {
   const [promoFilm, setSelectedMovie] = useState<Film>();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const usePromoFilm = (id: string) => {
         toast.error(warnings.server404);
       }
     })();
-  }, [id]);
+  }, []);
 
   return promoFilm;
 };

@@ -12,7 +12,6 @@ import './movie-page-styles.css';
 import { errorHandler } from '../../../utils/utils';
 import { adaptFilm } from '../../../utils/adapter/adapter';
 import Header from '../../common/header/header/header';
-import BackgroundImg from '../../main/background-img/background-img';
 import Poster from '../../common/poster/poster';
 import FilmInfo from '../film-info/film-info';
 import Footer from '../../common/footer/footer';
@@ -29,15 +28,20 @@ export default function MoviePage() {
   if (error) { return errorHandler(error);}
 
   const adaptedFilm = adaptFilm(film);
-  const {backgroundColor, name, posterImage, released, id, genre} = adaptedFilm;
+  const {backgroundColor, name, posterImage, released, id, genre, backgroundImage} = adaptedFilm;
 
   return (
     <>
       <Svg />
-      <section className="film-card--full" style={{backgroundColor: backgroundColor}}>
+      <section
+        className="film-card--full"
+        style={{ backgroundColor: backgroundColor }}
+      >
         <div className="film-card__hero">
-          <BackgroundImg film={adaptedFilm} />
-          <Header/>
+          <div className="film-card__bg">
+            <img src={backgroundImage} alt={name} />
+          </div>
+          <Header />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -47,9 +51,9 @@ export default function MoviePage() {
                 <PlayButton id={id} />
                 <FavoriteBtn id={id} />
 
-                {authStatus === AuthorizationStatus.Auth
-                && <AddReviewBtn id={id} />}
-
+                {authStatus === AuthorizationStatus.Auth && (
+                  <AddReviewBtn id={id} />
+                )}
               </div>
             </div>
           </div>
@@ -65,7 +69,7 @@ export default function MoviePage() {
 
       <div className="page-content">
         <SimilarFilms uniq={id} />
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
