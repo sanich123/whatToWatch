@@ -1,28 +1,13 @@
-import { Provider } from 'react-redux';
-import { mockComments } from '../../../../../mocks/mocks';
-import { useGetCommentsQuery } from '../../../../../store/slices/films-api/films-api';
-import { setupStore } from '../../../../../store/store';
-import { ProviderProps } from '../../../../../types/types';
-import { renderHook } from '@testing-library/react-hooks';
+import { mockFilm } from '../../../../../mocks/mocks';
+import { renderWithProviders } from '../../../../../test/test-utils';
+import Reviews from './comments';
+import {screen} from '@testing-library/react';
 
-beforeEach((): void => {
-  fetchMock.resetMocks();
-});
-
-const wrapper = ({ children }: ProviderProps) => (
-  <Provider store={setupStore()}>{children}</Provider>
-);
-
-describe('should render correctly', () => {
-  it('should renders correctly', async () => {
-    fetchMock.mockResponseOnce(JSON.stringify(mockComments));
-    const {result, waitForNextUpdate} = renderHook(
-      () => useGetCommentsQuery(5), {wrapper},
-    );
-    expect(result.current.isLoading).toBe(true);
-    expect(result.current.currentData).toBe(undefined);
-
-    await waitForNextUpdate({timeout: 2000});
-    expect(result.current.currentData).toStrictEqual(mockComments);
+describe('Comments component', () => {
+  it('should correctly renders with data from server', async () => {
+    renderWithProviders(<Reviews movie={mockFilm} />);
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    expect(await screen.findByText(/jack/i)).toBeInTheDocument();
+    expect(await screen.findByText(/A movie that will take you to another world full of emotions/i)).toBeVisible();
   });
 });

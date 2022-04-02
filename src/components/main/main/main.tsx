@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useGetFilmsQuery } from '../../../store/slices/films-api/films-api';
-import { usePromoFilm } from '../../../hooks/usePromoFilm';
 import Svg from '../../svg/svg';
 import Loader from '../../common/loader/loader';
 import MoreFilmsBtn from '../more-films-btn/more-films-btn';
@@ -23,12 +22,10 @@ export default function Main() {
     error: moviesError,
   } = useGetFilmsQuery(serverPath.films);
 
-  const promoFilm = usePromoFilm();
-
   const [filter, setFilter] = useState('All genres');
   const [slicingNum, setSlicingNum] = useState(numberOfFilms);
 
-  if (moviesLoading || !promoFilm) {return <Loader />;}
+  if (moviesLoading) {return <Loader />;}
 
   moviesError && errorHandler(moviesError);
 
@@ -43,7 +40,7 @@ export default function Main() {
         <BackgroundImg />
         <h1 className="visually-hidden">WTW</h1>
         <Header />
-        <PromoFilm promoFilm={promoFilm} />
+        <PromoFilm />
       </section>
       <div className="page-content">
         <section className="catalog">

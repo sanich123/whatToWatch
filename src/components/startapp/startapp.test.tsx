@@ -3,6 +3,9 @@ import { Provider } from 'react-redux';
 import { useGetAuthQuery } from '../../store/slices/films-api/films-api';
 import { setupStore } from '../../store/store';
 import { ProviderProps } from '../../types/types';
+import fetchMock from 'jest-fetch-mock';
+
+fetchMock.enableMocks();
 
 beforeEach((): void => {
   fetchMock.resetMocks();

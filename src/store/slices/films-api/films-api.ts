@@ -46,6 +46,10 @@ export const filmsApi = createApi({
           : [{ type: 'Comments', id: 'Comment' }],
     }),
 
+    getSimilarFilms: builder.query({
+      query: (id) => `${serverPath.films}/${id}/${serverPath.similar}`,
+    }),
+
     postAuth: builder.mutation({
       query: (body) => ({
         url: `${serverPath.login}`,
@@ -87,6 +91,7 @@ export const {
   useGetFavoritesQuery,
   useGetAuthQuery,
   useGetCommentsQuery,
+  useGetSimilarFilmsQuery,
   usePostAuthMutation,
   usePostCommentMutation,
   useDeleteAuthMutation,

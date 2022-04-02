@@ -4,6 +4,7 @@ import { useGetFilmQuery } from '../../../store/slices/films-api/films-api';
 import { mockFilm } from '../../../mocks/mocks';
 import { wrapper } from '../../../test/test-utils';
 
+fetchMock.enableMocks();
 beforeEach((): void => {
   fetchMock.resetMocks();
 });

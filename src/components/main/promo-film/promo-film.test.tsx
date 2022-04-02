@@ -1,11 +1,10 @@
 import { screen } from '@testing-library/react';
 import PromoFilm from './promo-film';
-import { mockFilm } from '../../../mocks/mocks';
 import { renderWithProviders } from '../../../test/test-utils';
-
-describe('PromoFilm', () => {
-  it('should render correctly', () => {
-    renderWithProviders(<PromoFilm promoFilm={mockFilm} />);
-    expect(screen.getByText(/gangs of new york/i)).toBeInTheDocument();
-  });
+describe('PromoFilm component', () => {
+  it('Should correctly handle with data from server',
+    async () => {
+      renderWithProviders(<PromoFilm />);
+      expect(await screen.findByText(/gangs of new york/i)).toBeInTheDocument();
+    });
 });

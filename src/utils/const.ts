@@ -35,7 +35,7 @@ export const numberOfFilms = 8;
 export const startOfSlice = 0;
 
 export const rootUrl = 'https://8.react.pages.academy/wtw/';
-
+export const promoUrl = 'https://6.react.pages.academy/wtw/films/promo';
 export const serverPath = {
   films: 'films',
   comments: 'comments',

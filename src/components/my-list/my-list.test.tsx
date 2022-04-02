@@ -3,7 +3,7 @@ import Favorites from './my-list';
 import { renderWithProviders} from '../../test/test-utils';
 
 describe('MyList component', () => {
-  it('renderWithProviders correctly', async () => {
+  it('correctly renders with data from server', async () => {
     renderWithProviders(<Favorites />);
     expect(screen.getByText(/loading../i)).toBeInTheDocument();
     expect(await screen.findByText(/my list/i)).toBeInTheDocument();
