@@ -1,20 +1,20 @@
 import { memo, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { mockFilm } from '../../../mocks/mocks';
 import { Film } from '../../../types/types';
 import { adaptFilm } from '../../../utils/adapter/adapter';
-import { serverPath, warnings } from '../../../utils/const';
+import { warnings } from '../../../utils/const';
+import Loader from '../../common/loader/loader';
+
+export const url = 'https://6.react.pages.academy/wtw/films/promo';
 
 function BackgroundImg() {
-  const [promoFilm, setSelectedMovie] = useState<Film>(mockFilm);
+  const [promoFilm, setSelectedMovie] = useState<Film>();
 
   useEffect(() => {
     const fetchPromo = async () => {
       try {
         const film = await (
-          await fetch(
-            `https://6.react.pages.academy/wtw/${serverPath.films}/${serverPath.promo}`,
-          )
+          await fetch(url)
         ).json();
         setSelectedMovie(adaptFilm(film));
       } catch {
@@ -23,6 +23,8 @@ function BackgroundImg() {
     };
     fetchPromo();
   }, []);
+
+  if (!promoFilm) {return <Loader/>;}
 
   const {backgroundImage, name} = promoFilm;
 

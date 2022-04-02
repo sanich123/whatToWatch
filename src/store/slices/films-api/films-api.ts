@@ -1,13 +1,13 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import { AuthInfoDTO } from '../../../types/types';
-import { serverPath } from '../../../utils/const';
+import { rootUrl, serverPath } from '../../../utils/const';
 import { getToken } from '../../../utils/token';
 
 export const filmsApi = createApi({
   reducerPath: 'filmsApi',
   tagTypes: ['Favorites','Comments'],
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://8.react.pages.academy/wtw/',
+    baseUrl: rootUrl,
     prepareHeaders: (headers) => {
       if (getToken()) {
         headers.set('x-token', `${getToken()}`);
