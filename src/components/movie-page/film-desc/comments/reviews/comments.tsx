@@ -1,6 +1,6 @@
 import { useGetCommentsQuery } from '../../../../../store/slices/films-api/films-api';
 import { Film} from '../../../../../types/types';
-import { commentLayoutMaker, sortReviews } from '../../../../../utils/utils';
+import { commentLayoutMaker, errorHandler, sortReviews } from '../../../../../utils/utils';
 import Loader from '../../../../common/loader/loader';
 import Review from '../review/review';
 import './comments-styles.css';
@@ -9,13 +9,15 @@ const NUMBER_SLICE = 6;
 
 export default function Reviews({movie}: {movie: Film}) {
   const {id} = movie;
-  const { data: comments, isLoading } = useGetCommentsQuery(id);
+  const { data: comments, isLoading, error } = useGetCommentsQuery(id);
 
   if (isLoading) {return <Loader/>;}
+  if (error) {errorHandler(error);}
 
-  const slicedComments = comments.length > NUMBER_SLICE ?
-    sortReviews(comments).slice(comments.length - NUMBER_SLICE, comments.length) :
-    comments;
+  const reviews = comments ? comments : [];
+  const slicedComments = reviews.length > NUMBER_SLICE ?
+    sortReviews(reviews).slice(reviews.length - NUMBER_SLICE, reviews.length) :
+    reviews;
 
   return (
     <div className="film-card__reviews film-card__row">

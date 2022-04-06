@@ -614,3 +614,12 @@ export const mockComments = [
     date: '2022-02-02T14:13:06.531Z',
   },
 ];
+
+export const specialMock = {
+  name: 'Не удалось загрузить данные о фильме',
+  genre: 'Не удалось загрузить данные о фильме',
+  released: 0,
+  posterImage: 'Не удалось загрузить данные о фильме',
+  id: 0,
+  backgroundImage: 'Не удалось загрузить данные о фильме',
+};

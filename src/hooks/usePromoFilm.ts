@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Film } from '../types/types';
+import { specialMock } from '../mocks/mocks';
 import { adaptFilm } from '../utils/adapter/adapter';
 import { serverPath, warnings } from '../utils/const';
 
 export const usePromoFilm = () => {
-  const [promoFilm, setSelectedMovie] = useState<Film>();
+  const [promoFilm, setSelectedMovie] = useState(specialMock);
 
   useEffect(() => {
     (async () => {

@@ -1,20 +1,21 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import EmailInput from './email-input';
 import userEvent from '@testing-library/user-event';
+import { renderWithProviders } from '../../../test/test-utils';
 
 describe('Email-input component', () => {
   const setEmail = jest.fn();
 
   it('should render correctly', () => {
-    render(
+    renderWithProviders(
       <EmailInput
         email=''
         setEmail={setEmail}
       />);
     expect(screen.getByLabelText('Email address')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Email address')).toBeInTheDocument();
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
-    userEvent.type(screen.getByRole('textbox'), 'ебучие тесты');
+    const textBox = screen.getByRole('textbox', {name: /Email address/i});
+    userEvent.type(textBox, 'ебучие тесты');
     expect(setEmail).toHaveBeenCalledTimes(11);
   });
 });
