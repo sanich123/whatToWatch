@@ -12,7 +12,7 @@ function SimilarFilms({uniq}: {uniq: string}) {
   if (isLoading) {return <Loader/>;}
   if (error) {errorHandler(error);}
 
-  const films: Film[] = similarFilms.map((film: FilmDTO) => adaptFilm(film));
+  const films: Film[] = similarFilms?.map((film: FilmDTO) => adaptFilm(film));
   const BEGIN_SLICING = 0;
   const END_SLICING = 4;
 

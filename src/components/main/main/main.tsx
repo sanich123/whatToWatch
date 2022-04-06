@@ -29,7 +29,7 @@ export default function Main() {
 
   moviesError && errorHandler(moviesError);
 
-  const adaptedFilms = movies ? movies.map((movie: FilmDTO) => adaptFilm(movie)) : [];
+  const adaptedFilms = movies?.map((movie: FilmDTO) => adaptFilm(movie));
   const films = filterChanger(filter, adaptedFilms);
   const slicedFilms = films.slice(startOfSlice, slicingNum);
 
@@ -49,7 +49,7 @@ export default function Main() {
           <FiltersList setFilter={setFilter} filter={filter}/>
 
           <div className="catalog__films-list">
-            {slicedFilms.map(({ id, ...rest }) => (
+            {slicedFilms?.map(({ id, ...rest }) => (
               <Card key={id} id={id} {...rest} />
             ))}
             {moviesError &&
