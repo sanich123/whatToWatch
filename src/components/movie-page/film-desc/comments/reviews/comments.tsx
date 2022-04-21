@@ -22,8 +22,8 @@ export default function Reviews({movie}: {movie: Film}) {
   return (
     <div className="film-card__reviews film-card__row">
       {slicedComments.length > 0 ?
-        commentLayoutMaker(slicedComments).map((review, index) => (
-          <Review key={index.toString()} reviews={review} />
+        commentLayoutMaker(slicedComments).map((review) => (
+          <Review key={review.toString()} reviews={review} />
         )) :
         <h3>There are no reviews to this movie</h3>}
     </div>

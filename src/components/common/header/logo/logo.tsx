@@ -11,7 +11,7 @@ function Logo({footer}: {footer?: boolean}) {
       to={AppRoute.Main}
     >
       {symbols.map((symbol, index) => (
-        <span key={index.toString()} className={`logo__letter logo__letter--${index + 1}`}>{symbol}</span>
+        <span key={symbol.toString()} className={`logo__letter logo__letter--${index + 1}`}>{symbol}</span>
       ))}
     </Link>
   );
