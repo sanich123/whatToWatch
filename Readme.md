@@ -4,17 +4,17 @@
 
 The application has three pages: a catalog of movies, a separate movie, a page of favorite movies.
 
-#### An application has following functionality:
+#### The application has the following functionality:
 
 1. There is an authentication here. 
 2. If you want to add a movie into your favorite list, you have to be authenticated.
 3. When you are authenticated, you are able to add comments.
-4. You need to be authenticated to follow favorites page, if you aren't, you will be redirected to authentication page.
+4. You need to be authenticated to follow the favorites page, if you aren't, you will be redirected to the authentication page.
 
-If you want to, you can:
+If you want, you can:
 
 clone this project ('git clone [name of repository]'),
-navigate into project's folder ('cd [folder's name]')
+navigate into the project's folder ('cd [folder's name]')
 install dependencies ('npm i'),
-and run the project with 'npm run start' script. 
+and run the project with the 'npm run start' script. 
 
