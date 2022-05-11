@@ -1,8 +1,8 @@
-##Link to the deployed project - https://what-to-watch-sanich123.vercel.app/
+Link to the deployed project - https://what-to-watch-sanich123.vercel.app/
 
-##This project was written when I studied at https://htmlacademy.ru/
+This project was written when I studied at https://htmlacademy.ru/
 
-I used ##React, ##React-Router, ##Redux(RTK Queries), ##TypeScript.
+I used React, React-Router, Redux(RTK Queries), TypeScript.
 
 The application has three pages: a catalog of movies, a separate movie, a page of favorite movies.
 
