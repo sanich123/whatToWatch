@@ -1,12 +1,12 @@
-# Link to the deployed project - https://what-to-watch-sanich123.vercel.app/
+#### Link to the deployed project - https://what-to-watch-sanich123.vercel.app/
 
 This project was written when I studied at https://htmlacademy.ru/
 
-# I used React, React-Router, Redux(RTK Queries), TypeScript.
+#### I used React, React-Router, Redux(RTK Queries), TypeScript.
 
 The application has three pages: a catalog of movies, a separate movie, a page of favorite movies.
 
-#### An application has following functionality:
+## An application has following functionality:
 
 1. There is an authentication here. 
 2. If you want to add a movie into your favorite list, you have to be authenticated.
