@@ -4,11 +4,7 @@
 
 *or launch locally:*
 
-copy ssh link to the project
-
-![image](https://user-images.githubusercontent.com/70276651/227766787-ee5aa6f7-e49a-4f8e-82cf-659bda8915f1.png)
-
-`git clone [ssh link] project`
+`git clone git@github.com:sanich123/whatToWatch.git project`
 
 `cd project`
 
