@@ -2,16 +2,9 @@
 
 **You can use deployed version:** [CLICK ME](https://what-to-watch-two.vercel.app)
 
-*or launch locally:*
+*or launch locally - copy and past into your code-editor command line:*
 
-`git clone git@github.com:sanich123/whatToWatch.git project`
-
-`cd project`
-
-`npm i`
-
-`npm start`
-
+`git clone git@github.com:sanich123/whatToWatch.git project&&cd project&&npm i&&npm start`
 
 ### Screenshots
 
